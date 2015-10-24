@@ -1,0 +1,410 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		147B73DF1BDB243D0060B1E0 /* Meal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147B73DD1BDB243D0060B1E0 /* Meal.swift */; settings = {ASSET_TAGS = (); }; };
+		147B73E01BDB243D0060B1E0 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147B73DE1BDB243D0060B1E0 /* User.swift */; settings = {ASSET_TAGS = (); }; };
+		147B73E21BDB24450060B1E0 /* Dish.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147B73E11BDB24450060B1E0 /* Dish.swift */; settings = {ASSET_TAGS = (); }; };
+		EC62E8F51BD0758E003718C2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC62E8F41BD0758E003718C2 /* AppDelegate.swift */; };
+		EC62E8FA1BD0758E003718C2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EC62E8F81BD0758E003718C2 /* Main.storyboard */; };
+		EC62E8FC1BD0758E003718C2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EC62E8FB1BD0758E003718C2 /* Assets.xcassets */; };
+		EC62E8FF1BD0758E003718C2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EC62E8FD1BD0758E003718C2 /* LaunchScreen.storyboard */; };
+		EC62E9071BD075BD003718C2 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC62E9061BD075BD003718C2 /* HomeViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		EC62E9091BD0779A003718C2 /* ServerWaitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC62E9081BD0779A003718C2 /* ServerWaitViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		EC62E90B1BD077B1003718C2 /* ClientJoinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC62E90A1BD077B1003718C2 /* ClientJoinViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		EC62E90D1BD08CB0003718C2 /* TypeOwnDishesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC62E90C1BD08CB0003718C2 /* TypeOwnDishesViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		EC62E90F1BD095F3003718C2 /* ServerTypeShareDishesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC62E90E1BD095F3003718C2 /* ServerTypeShareDishesViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		EC62E9111BD184F4003718C2 /* ClientWatchAllDishesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC62E9101BD184F4003718C2 /* ClientWatchAllDishesViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		EC62E9131BD186A7003718C2 /* ServerCheckSubtotalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC62E9121BD186A7003718C2 /* ServerCheckSubtotalViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		EC62E9151BD187D9003718C2 /* RemoveDishesDidNotEatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC62E9141BD187D9003718C2 /* RemoveDishesDidNotEatViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		EC62E9171BD188B0003718C2 /* ServerConfirmTotalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC62E9161BD188B0003718C2 /* ServerConfirmTotalViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		EC92FF1B1BDB448300D34576 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC92FF191BDB448300D34576 /* Bolts.framework */; settings = {ASSET_TAGS = (); }; };
+		EC92FF1C1BDB448300D34576 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC92FF1A1BDB448300D34576 /* Parse.framework */; settings = {ASSET_TAGS = (); }; };
+		ECAC022E1BDAF3BD0015EF50 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECAC022D1BDAF3BD0015EF50 /* AudioToolbox.framework */; };
+		ECAC02301BDAF3C40015EF50 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECAC022F1BDAF3C40015EF50 /* CFNetwork.framework */; };
+		ECAC02321BDAF3CA0015EF50 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECAC02311BDAF3CA0015EF50 /* CoreGraphics.framework */; };
+		ECAC02341BDAF3D10015EF50 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECAC02331BDAF3D10015EF50 /* CoreLocation.framework */; };
+		ECAC02361BDAF3D80015EF50 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECAC02351BDAF3D80015EF50 /* QuartzCore.framework */; };
+		ECAC02381BDAF3DD0015EF50 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECAC02371BDAF3DD0015EF50 /* Security.framework */; };
+		ECAC023A1BDAF3E30015EF50 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECAC02391BDAF3E30015EF50 /* StoreKit.framework */; };
+		ECAC023C1BDAF3ED0015EF50 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECAC023B1BDAF3ED0015EF50 /* SystemConfiguration.framework */; };
+		ECAC023E1BDAF3F50015EF50 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = ECAC023D1BDAF3F50015EF50 /* libz.tbd */; };
+		ECAC02401BDAF3FE0015EF50 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = ECAC023F1BDAF3FE0015EF50 /* libsqlite3.tbd */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		147B73DD1BDB243D0060B1E0 /* Meal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Meal.swift; sourceTree = "<group>"; };
+		147B73DE1BDB243D0060B1E0 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		147B73E11BDB24450060B1E0 /* Dish.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dish.swift; sourceTree = "<group>"; };
+		EC62E8F11BD0758E003718C2 /* SplitMe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SplitMe.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		EC62E8F41BD0758E003718C2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		EC62E8F91BD0758E003718C2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		EC62E8FB1BD0758E003718C2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		EC62E8FE1BD0758E003718C2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		EC62E9001BD0758E003718C2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EC62E9061BD075BD003718C2 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		EC62E9081BD0779A003718C2 /* ServerWaitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerWaitViewController.swift; sourceTree = "<group>"; };
+		EC62E90A1BD077B1003718C2 /* ClientJoinViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClientJoinViewController.swift; sourceTree = "<group>"; };
+		EC62E90C1BD08CB0003718C2 /* TypeOwnDishesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TypeOwnDishesViewController.swift; sourceTree = "<group>"; };
+		EC62E90E1BD095F3003718C2 /* ServerTypeShareDishesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerTypeShareDishesViewController.swift; sourceTree = "<group>"; };
+		EC62E9101BD184F4003718C2 /* ClientWatchAllDishesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClientWatchAllDishesViewController.swift; sourceTree = "<group>"; };
+		EC62E9121BD186A7003718C2 /* ServerCheckSubtotalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerCheckSubtotalViewController.swift; sourceTree = "<group>"; };
+		EC62E9141BD187D9003718C2 /* RemoveDishesDidNotEatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoveDishesDidNotEatViewController.swift; sourceTree = "<group>"; };
+		EC62E9161BD188B0003718C2 /* ServerConfirmTotalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerConfirmTotalViewController.swift; sourceTree = "<group>"; };
+		EC92FF191BDB448300D34576 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
+		EC92FF1A1BDB448300D34576 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
+		ECAC022D1BDAF3BD0015EF50 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		ECAC022F1BDAF3C40015EF50 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		ECAC02311BDAF3CA0015EF50 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		ECAC02331BDAF3D10015EF50 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		ECAC02351BDAF3D80015EF50 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		ECAC02371BDAF3DD0015EF50 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		ECAC02391BDAF3E30015EF50 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		ECAC023B1BDAF3ED0015EF50 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		ECAC023D1BDAF3F50015EF50 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		ECAC023F1BDAF3FE0015EF50 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		EC62E8EE1BD0758E003718C2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ECAC02401BDAF3FE0015EF50 /* libsqlite3.tbd in Frameworks */,
+				ECAC023E1BDAF3F50015EF50 /* libz.tbd in Frameworks */,
+				ECAC023C1BDAF3ED0015EF50 /* SystemConfiguration.framework in Frameworks */,
+				ECAC023A1BDAF3E30015EF50 /* StoreKit.framework in Frameworks */,
+				ECAC02381BDAF3DD0015EF50 /* Security.framework in Frameworks */,
+				ECAC02361BDAF3D80015EF50 /* QuartzCore.framework in Frameworks */,
+				ECAC02341BDAF3D10015EF50 /* CoreLocation.framework in Frameworks */,
+				ECAC02321BDAF3CA0015EF50 /* CoreGraphics.framework in Frameworks */,
+				EC92FF1B1BDB448300D34576 /* Bolts.framework in Frameworks */,
+				ECAC02301BDAF3C40015EF50 /* CFNetwork.framework in Frameworks */,
+				EC92FF1C1BDB448300D34576 /* Parse.framework in Frameworks */,
+				ECAC022E1BDAF3BD0015EF50 /* AudioToolbox.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		EC62E8E81BD0758E003718C2 = {
+			isa = PBXGroup;
+			children = (
+				EC62E8F31BD0758E003718C2 /* SplitMe */,
+				EC62E8F21BD0758E003718C2 /* Products */,
+				ECAC02411BDAF43B0015EF50 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		EC62E8F21BD0758E003718C2 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				EC62E8F11BD0758E003718C2 /* SplitMe.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		EC62E8F31BD0758E003718C2 /* SplitMe */ = {
+			isa = PBXGroup;
+			children = (
+				147B73E11BDB24450060B1E0 /* Dish.swift */,
+				147B73DD1BDB243D0060B1E0 /* Meal.swift */,
+				147B73DE1BDB243D0060B1E0 /* User.swift */,
+				EC62E8F41BD0758E003718C2 /* AppDelegate.swift */,
+				EC62E8F81BD0758E003718C2 /* Main.storyboard */,
+				EC62E9061BD075BD003718C2 /* HomeViewController.swift */,
+				EC62E9081BD0779A003718C2 /* ServerWaitViewController.swift */,
+				EC62E90A1BD077B1003718C2 /* ClientJoinViewController.swift */,
+				EC62E90C1BD08CB0003718C2 /* TypeOwnDishesViewController.swift */,
+				EC62E90E1BD095F3003718C2 /* ServerTypeShareDishesViewController.swift */,
+				EC62E9101BD184F4003718C2 /* ClientWatchAllDishesViewController.swift */,
+				EC62E9121BD186A7003718C2 /* ServerCheckSubtotalViewController.swift */,
+				EC62E9141BD187D9003718C2 /* RemoveDishesDidNotEatViewController.swift */,
+				EC62E9161BD188B0003718C2 /* ServerConfirmTotalViewController.swift */,
+				EC62E8FB1BD0758E003718C2 /* Assets.xcassets */,
+				EC62E8FD1BD0758E003718C2 /* LaunchScreen.storyboard */,
+				EC62E9001BD0758E003718C2 /* Info.plist */,
+			);
+			path = SplitMe;
+			sourceTree = "<group>";
+		};
+		ECAC02411BDAF43B0015EF50 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				EC92FF191BDB448300D34576 /* Bolts.framework */,
+				EC92FF1A1BDB448300D34576 /* Parse.framework */,
+				ECAC023F1BDAF3FE0015EF50 /* libsqlite3.tbd */,
+				ECAC023D1BDAF3F50015EF50 /* libz.tbd */,
+				ECAC023B1BDAF3ED0015EF50 /* SystemConfiguration.framework */,
+				ECAC02391BDAF3E30015EF50 /* StoreKit.framework */,
+				ECAC02371BDAF3DD0015EF50 /* Security.framework */,
+				ECAC02351BDAF3D80015EF50 /* QuartzCore.framework */,
+				ECAC02331BDAF3D10015EF50 /* CoreLocation.framework */,
+				ECAC02311BDAF3CA0015EF50 /* CoreGraphics.framework */,
+				ECAC022F1BDAF3C40015EF50 /* CFNetwork.framework */,
+				ECAC022D1BDAF3BD0015EF50 /* AudioToolbox.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		EC62E8F01BD0758E003718C2 /* SplitMe */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EC62E9031BD0758E003718C2 /* Build configuration list for PBXNativeTarget "SplitMe" */;
+			buildPhases = (
+				EC62E8ED1BD0758E003718C2 /* Sources */,
+				EC62E8EE1BD0758E003718C2 /* Frameworks */,
+				EC62E8EF1BD0758E003718C2 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SplitMe;
+			productName = SplitMe;
+			productReference = EC62E8F11BD0758E003718C2 /* SplitMe.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		EC62E8E91BD0758E003718C2 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0700;
+				ORGANIZATIONNAME = "Shan Lu";
+				TargetAttributes = {
+					EC62E8F01BD0758E003718C2 = {
+						CreatedOnToolsVersion = 7.0.1;
+						DevelopmentTeam = 646W9GX953;
+					};
+				};
+			};
+			buildConfigurationList = EC62E8EC1BD0758E003718C2 /* Build configuration list for PBXProject "SplitMe" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = EC62E8E81BD0758E003718C2;
+			productRefGroup = EC62E8F21BD0758E003718C2 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				EC62E8F01BD0758E003718C2 /* SplitMe */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		EC62E8EF1BD0758E003718C2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EC62E8FF1BD0758E003718C2 /* LaunchScreen.storyboard in Resources */,
+				EC62E8FC1BD0758E003718C2 /* Assets.xcassets in Resources */,
+				EC62E8FA1BD0758E003718C2 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		EC62E8ED1BD0758E003718C2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EC62E90D1BD08CB0003718C2 /* TypeOwnDishesViewController.swift in Sources */,
+				EC62E9111BD184F4003718C2 /* ClientWatchAllDishesViewController.swift in Sources */,
+				EC62E9091BD0779A003718C2 /* ServerWaitViewController.swift in Sources */,
+				EC62E9151BD187D9003718C2 /* RemoveDishesDidNotEatViewController.swift in Sources */,
+				147B73DF1BDB243D0060B1E0 /* Meal.swift in Sources */,
+				EC62E8F51BD0758E003718C2 /* AppDelegate.swift in Sources */,
+				EC62E9131BD186A7003718C2 /* ServerCheckSubtotalViewController.swift in Sources */,
+				EC62E9071BD075BD003718C2 /* HomeViewController.swift in Sources */,
+				147B73E01BDB243D0060B1E0 /* User.swift in Sources */,
+				EC62E9171BD188B0003718C2 /* ServerConfirmTotalViewController.swift in Sources */,
+				EC62E90B1BD077B1003718C2 /* ClientJoinViewController.swift in Sources */,
+				147B73E21BDB24450060B1E0 /* Dish.swift in Sources */,
+				EC62E90F1BD095F3003718C2 /* ServerTypeShareDishesViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		EC62E8F81BD0758E003718C2 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				EC62E8F91BD0758E003718C2 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		EC62E8FD1BD0758E003718C2 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				EC62E8FE1BD0758E003718C2 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		EC62E9011BD0758E003718C2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		EC62E9021BD0758E003718C2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		EC62E9041BD0758E003718C2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Frameworks",
+				);
+				INFOPLIST_FILE = SplitMe/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.SplitMeeeee;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+			};
+			name = Debug;
+		};
+		EC62E9051BD0758E003718C2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Frameworks",
+				);
+				INFOPLIST_FILE = SplitMe/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.SplitMeeeee;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		EC62E8EC1BD0758E003718C2 /* Build configuration list for PBXProject "SplitMe" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EC62E9011BD0758E003718C2 /* Debug */,
+				EC62E9021BD0758E003718C2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		EC62E9031BD0758E003718C2 /* Build configuration list for PBXNativeTarget "SplitMe" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EC62E9041BD0758E003718C2 /* Debug */,
+				EC62E9051BD0758E003718C2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = EC62E8E91BD0758E003718C2 /* Project object */;
+}
