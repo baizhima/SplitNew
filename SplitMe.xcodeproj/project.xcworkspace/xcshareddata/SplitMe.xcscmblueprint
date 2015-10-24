@@ -1,15 +1,17 @@
 {
-  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "F47887CC8A567AC69DB7CB75CD93028427562633",
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "FC4292DD39BD4347B2FF890A11BE675909E8F146",
   "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
 
   },
   "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
     "F47887CC8A567AC69DB7CB75CD93028427562633" : 0,
+    "FC4292DD39BD4347B2FF890A11BE675909E8F146" : 0,
     "6EABD95A3D6EA7C0EC672A4D4E225E3213660D90" : 0
   },
   "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "544C94AB-FAED-4F94-95B9-25663A8F0914",
   "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
     "F47887CC8A567AC69DB7CB75CD93028427562633" : "SplitMe\/",
+    "FC4292DD39BD4347B2FF890A11BE675909E8F146" : "Spliter\/",
     "6EABD95A3D6EA7C0EC672A4D4E225E3213660D90" : ""
   },
   "DVTSourceControlWorkspaceBlueprintNameKey" : "SplitMe",
@@ -25,6 +27,11 @@
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/baizhima\/SplitMe",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "F47887CC8A567AC69DB7CB75CD93028427562633"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/baizhima\/SplitNew.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "FC4292DD39BD4347B2FF890A11BE675909E8F146"
     }
   ]
 }

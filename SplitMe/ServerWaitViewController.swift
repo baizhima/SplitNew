@@ -11,6 +11,7 @@ import Parse
 
 class ServerWaitViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
 
+    @IBOutlet weak var nextButton: UIBarButtonItem!
     
     @IBOutlet weak var joinedFriendsField: UILabel!
     @IBOutlet weak var uploadImageButton: UIButton!
@@ -73,10 +74,10 @@ class ServerWaitViewController: UIViewController, UINavigationControllerDelegate
         
         if let meal: Meal = Meal.currentMeal {
             
-            meal.fetchInBackgroundWithBlock({
+            meal.fetchInBackgroundWithBlock {
                 (object, error) -> Void in
                 if error != nil{
-                    print(error )
+                    print(error)
                 }
                 else{
                     if let meal: Meal = object as? Meal{
@@ -84,12 +85,17 @@ class ServerWaitViewController: UIViewController, UINavigationControllerDelegate
                         self.joinedFriendsField.text = String(meal.users.count-1)
                     }
                 }
-            })
+            }
+            if meal.users.count > 1 && meal.image != nil {
+                self.nextButton.enabled = true
+            }
         }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        nextButton.enabled = false
         
         if let meal = Meal.currentMeal{
             splitCodeField.text = meal.code
@@ -135,6 +141,9 @@ class ServerWaitViewController: UIViewController, UINavigationControllerDelegate
                     })
                 }
             })
+            if meal.users.count > 1 {
+                nextButton.enabled = true // just for fast response purpose
+            }
         }
         
 

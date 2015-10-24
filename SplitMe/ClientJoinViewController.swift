@@ -44,9 +44,11 @@ class ClientJoinViewController: UIViewController {
                             self.connectInfo.text = "joined successfully! Waiting others.."
                             //self.inputCodeField.enabled = false
                             //self.confirmButton.enabled = false
-                            print(meal)
+                            //print(meal)
                         }
                     })
+                    self.inputCodeField.enabled = false
+                    self.confirmButton.enabled = false
                 }else{
                     print("the result object is not meal \(objects)")
                 }
@@ -82,12 +84,7 @@ class ClientJoinViewController: UIViewController {
                 if error != nil{
                    print(error )
                 }
-                else{
-                    if let meal: Meal = object as? Meal{
-                        
-                        print(meal.users)
-                    }
-                }
+                
             }
             
             if meal.state >= Meal.AllUserJoined {

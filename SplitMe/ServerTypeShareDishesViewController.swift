@@ -7,12 +7,13 @@
 //
 
 import UIKit
+import Parse
 
 
-var sharedDishArr = [Dish]()
 
 class ServerTypeShareDishesViewController: UIViewController, UIScrollViewDelegate, UITextFieldDelegate, UITableViewDelegate {
     
+    var sharedDishArr = [Dish]()
     
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var imageView: UIImageView!
@@ -30,13 +31,17 @@ class ServerTypeShareDishesViewController: UIViewController, UIScrollViewDelegat
     
     @IBAction func nextPressed(sender: UIBarButtonItem) {
       //  currMeal?.shareDishes.appendContentsOf(sharedDishArr)
+        Meal.currentMeal!.addUniqueObjectsFromArray(sharedDishArr, forKey:"sharedDishes")
+        Meal.currentMeal!.saveInBackground()
+        
+        
         self.performSegueWithIdentifier("serverTypeShareDishesToServerCheckSubtotal", sender: self)
         
     }
     
     @IBAction func addPressed(sender: UIButton) {
         if dishField!.text != "" && priceField!.text != "" {
-            let currDish = Dish(name: dishField.text!, price: Double(priceField.text!)!, isShared: false, ownBy: User.currentUser!)
+            let currDish = Dish(name: dishField.text!, price: Double(priceField.text!)!, isShared: true)
             
             sharedDishArr.append(currDish)
             print("shareDishArr count = \(sharedDishArr.count)")
@@ -55,6 +60,16 @@ class ServerTypeShareDishesViewController: UIViewController, UIScrollViewDelegat
         self.scrollView.maximumZoomScale = 3.0
         // Do any additional setup after loading the view.
     }
+    
+    override func viewDidAppear(animated: Bool) {
+        let urlStr = Meal.currentMeal!.image
+        if let url = NSURL(string: urlStr) {
+            if let data = NSData(contentsOfURL: url) {
+                imageView.image = UIImage(data: data)
+            }
+        }
+    }
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

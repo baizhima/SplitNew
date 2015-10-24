@@ -7,12 +7,13 @@
 //
 
 import UIKit
+import Parse
 
 
-var soloDishArr = [Dish]()
 
 class TypeOwnDishesViewController: UIViewController, UIScrollViewDelegate, UITextFieldDelegate, UITableViewDelegate {
 
+    var soloDishArr = [Dish]()
     
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var imageView: UIImageView!
@@ -37,7 +38,7 @@ class TypeOwnDishesViewController: UIViewController, UIScrollViewDelegate, UITex
         Meal.currentMeal!.addUniqueObjectsFromArray(soloDishArr, forKey:"soloDishes")
         Meal.currentMeal!.saveInBackground()
         
-        if User.currentUser!.isHost {
+        if Meal.currentMeal!.master.objectId ==  User.currentUser?.objectId {
             self.performSegueWithIdentifier("typeOwnDishesToServerTypeShareDishes", sender: self)
         } else {
             self.performSegueWithIdentifier("typeOwnDishesToClientWatchAllDishes", sender: self)

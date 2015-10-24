@@ -9,71 +9,7 @@
 import UIKit
 import Parse
 
-//struct Meal {
-//    //let id: UInt32
-//    let splitCode: Int
-//    var receiptImage: UIImage?
-//    let tax: Double
-//    let tips: Double
-//    var soloDishes: [Dish]
-//    var shareDishes: [Dish]
-//    let master: User
-//    var users: [User]
-//    init(splitCode: Int, master: User) {
-//        self.splitCode = splitCode
-//        receiptImage = nil
-//        tax = 0
-//        tips = 0
-//        soloDishes = [Dish]()
-//        shareDishes = [Dish]()
-//        self.master = master
-//        users = [User]()
-//    }
-//    
-//}
-//
-//struct User {
-//    //let id: UInt32
-//    var userName: String
-//    var icon: UIImage?
-//    var isHost: Bool
-//    init() {
-//        userName = ""
-//        icon = nil
-//        isHost = false
-//    }
-//}
-//
-//struct Dish {
-//    //let id: UInt32
-//    var name: String
-//    var price: Double
-//    var isShared: Bool
-//    var users: [User]
-//    init(name: String, price: Double, user: User) {
-//        self.name = name
-//        self.price = price
-//        self.isShared = false
-//        users = [User]()
-//        users.append(user)
-//    }
-//    init(name: String, price: Double, users: [User]) {
-//        self.name = name
-//        self.price = price
-//        self.isShared = true
-//        self.users = [User]()
-//        for u in users {
-//            self.users.append(u)
-//        }
-//    }
-//}
-//
-//
-//var currUser: User?
-var currMeal: Meal?
-//
-var userId: String = ""
-var mealId: String = ""
+
 
 class HomeViewController: UIViewController {
 
@@ -98,7 +34,7 @@ class HomeViewController: UIViewController {
                     meal.saveInBackgroundWithBlock {
                         (succeed:Bool, error:NSError?) -> Void in
                         if succeed {
-                            mealId = meal.objectId!
+                            //mealId = meal.objectId!
                             Meal.currentMeal = meal
                             self.performSegueWithIdentifier("homeToServerWait", sender: self)
                         } else {

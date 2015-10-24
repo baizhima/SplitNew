@@ -32,6 +32,15 @@ class Dish: PFObject, PFSubclassing{
         self.ownBy = ownBy
         self.sharedWith = nil
     }
+    init(name: String, price: Double, isShared: Bool) {
+        
+        super.init(className: Dish.parseClassName())
+        
+        self.name = name
+        self.price = price
+        self.isShared = isShared
+        self.sharedWith = nil
+    }
     
     @NSManaged var name: String
     @NSManaged var price: Double
