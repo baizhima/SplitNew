@@ -42,8 +42,8 @@ class ClientJoinViewController: UIViewController {
                         (success, error ) -> Void in
                         if(success){
                             self.connectInfo.text = "joined successfully! Waiting others.."
-                            self.inputCodeField.enabled = false
-                            self.confirmButton.enabled = false
+                            //self.inputCodeField.enabled = false
+                            //self.confirmButton.enabled = false
                             print(meal)
                         }
                     })
@@ -99,7 +99,7 @@ class ClientJoinViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         connectInfo.hidden = true
-        NSTimer.scheduledTimerWithTimeInterval(2.0, target: self, selector: Selector("fetchMeal"), userInfo: nil, repeats: true)
+        NSTimer.scheduledTimerWithTimeInterval(2, target: self, selector: Selector("fetchMeal"), userInfo: nil, repeats: true)
     }
 
     override func didReceiveMemoryWarning() {

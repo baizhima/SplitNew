@@ -63,7 +63,7 @@ class Meal: PFObject, PFSubclassing {
         soloDishes = [Dish]()
         sharedDishes = [Dish]()
         
-        image = nil
+        //image = NilLiteralConvertible
     }
 }
 

@@ -82,8 +82,8 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var nameField: UITextField!
     @IBAction func createPressed(sender: UIButton) {
         
-        if let name = nameField.text{
-           
+        if nameField.text!.characters.count > 0 {
+            let name = nameField.text!
             print("before master")
             let master: User = User(userName: name)
             print("after master")
@@ -114,8 +114,8 @@ class HomeViewController: UIViewController {
     
     @IBAction func joinPressed(sender: UIButton) {
         
-        if let name = nameField.text{
-           
+        if nameField.text!.characters.count > 0 {
+            let name = nameField.text!
             let user: User = User(userName: name)
             user.saveInBackgroundWithBlock { (succeed:Bool, error:NSError?) -> Void in
                 if succeed {

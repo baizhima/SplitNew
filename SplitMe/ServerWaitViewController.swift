@@ -31,9 +31,11 @@ class ServerWaitViewController: UIViewController, UINavigationControllerDelegate
             
             if meal.image == nil {
                 print("error: image empty")
+                return
             }
             if meal.users.count < 2 {
                 print("less than one friends joined")
+                return
             }
             
             meal.state = Meal.AllUserJoined
@@ -95,7 +97,7 @@ class ServerWaitViewController: UIViewController, UINavigationControllerDelegate
             print("current meal is nil")
         }
         
-        NSTimer.scheduledTimerWithTimeInterval(2.0, target: self, selector: Selector("fetchMeal"), userInfo: nil, repeats: true)
+        NSTimer.scheduledTimerWithTimeInterval(2, target: self, selector: Selector("fetchMeal"), userInfo: nil, repeats: true)
     }
     
   
@@ -114,7 +116,7 @@ class ServerWaitViewController: UIViewController, UINavigationControllerDelegate
   
         if let meal: Meal = Meal.currentMeal{
            
-            let imageData = UIImageJPEGRepresentation(receiptImage!, 0.1)
+            let imageData = UIImageJPEGRepresentation(receiptImage!, 0.2)
             //let imageData = UIImagePNGRepresentation(receiptImag!,
             
             let imageFile = PFFile(name:"image.jpeg", data:imageData!)

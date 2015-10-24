@@ -18,6 +18,9 @@ class Dish: PFObject, PFSubclassing{
     static func parseClassName() -> String{
         return "Dish";
     }
+    override init() {
+        super.init()
+    }
     
     init(name: String, price: Double, isShared: Bool, ownBy: User) {
         

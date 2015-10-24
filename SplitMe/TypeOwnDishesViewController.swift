@@ -66,6 +66,14 @@ class TypeOwnDishesViewController: UIViewController, UIScrollViewDelegate, UITex
         // Do any additional setup after loading the view.
     }
     
+    override func viewDidAppear(animated: Bool) {
+        let urlStr = Meal.currentMeal!.image
+        if let url = NSURL(string: urlStr) {
+            if let data = NSData(contentsOfURL: url) {
+                imageView.image = UIImage(data: data)
+            }
+        }
+    }
     
 
     override func didReceiveMemoryWarning() {
