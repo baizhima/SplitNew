@@ -35,8 +35,16 @@ class ServerConfirmTotalViewController: UIViewController {
             subtotal += dish.price
         }*/
         
-        subtotalField.text = "\(subtotal)"
-        totalField.text = "\(subtotal)"
+        if let meal = Meal.currentMeal {
+           
+            meal.fetchIfNeededInBackground()
+            
+            subtotalField.text = "\(meal.subtotal)"
+            totalField.text = "\(meal.subtotal)"
+        }
+        
+        //subtotalField.text = "\(subtotal)"
+        //totalField.text = "\(subtotal)"
         // Do any additional setup after loading the view.
     }
 

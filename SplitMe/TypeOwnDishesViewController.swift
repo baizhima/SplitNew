@@ -9,8 +9,6 @@
 import UIKit
 import Parse
 
-
-
 class TypeOwnDishesViewController: UIViewController, UIScrollViewDelegate, UITextFieldDelegate, UITableViewDelegate {
 
     var soloDishArr = [Dish]()
@@ -33,23 +31,68 @@ class TypeOwnDishesViewController: UIViewController, UIScrollViewDelegate, UITex
     }
     
     @IBAction func nextPressed(sender: UIBarButtonItem) {
-        // extend currMeal.soloDishes by dishArr
-        
-        Meal.currentMeal!.addUniqueObjectsFromArray(soloDishArr, forKey:"soloDishes")
-        Meal.currentMeal!.saveInBackground()
-        
-        if Meal.currentMeal!.master.objectId ==  User.currentUser?.objectId {
-            self.performSegueWithIdentifier("typeOwnDishesToServerTypeShareDishes", sender: self)
-        } else {
-            self.performSegueWithIdentifier("typeOwnDishesToClientWatchAllDishes", sender: self)
+       
+        for dish: Dish in soloDishArr{
+            dish.saveInBackground()
         }
+        
+        if let meal = Meal.currentMeal {
+       
+//            meal.fetchIfNeededInBackground()
+//            meal.addUniqueObjectsFromArray(soloDishArr, forKey: "dishes")
+//            meal.saveInBackground()
+//            
+            if let user = User.currentUser {
+                
+                if meal.master.objectId ==  user.objectId {
+                    self.performSegueWithIdentifier("typeOwnDishesToServerTypeShareDishes", sender: self)
+                } else {
+                   
+                    user.state = User.DishesSaved
+                    user.saveInBackgroundWithBlock({
+                        (ok, error) -> Void in
+                        if ok{
+                            self.performSegueWithIdentifier("typeOwnDishesToClientWatchAllDishes", sender: self)
+                        }else{
+                            debugPrint(error)
+                        }
+                    })
+                }
+            }else{
+                debugPrint("Error: Current user is nil")
+            }
+        }else{
+            debugPrint("Error: Current meal is nil")
+        }
+        // extend currMeal.soloDishes by dishArr
+//        if let meal = Meal.currentMeal {
+//            meal.fetchIfNeededInBackground()
+//            meal.addUniqueObjectsFromArray(soloDishArr, forKey: "dishes")
+//            meal.saveInBackground()
+//            
+//            if let user = User.currentUser {
+//                
+//                if meal.master.objectId ==  user.objectId {
+//                    self.performSegueWithIdentifier("typeOwnDishesToServerTypeShareDishes", sender: self)
+//                } else {
+//                    self.performSegueWithIdentifier("typeOwnDishesToClientWatchAllDishes", sender: self)
+//                }
+//            }else{
+//                debugPrint("Error: Current user is nil")
+//            }
+//        }else{
+//            debugPrint("Error: Current meal is nil")
+//        }
     }
     
     @IBAction func addPressed(sender: UIButton) {
+        
+        // add my own dishes into dish list
         if dishField!.text != "" && priceField!.text != "" {
             // TODO:
-            let currDish = Dish(name: dishField.text!, price: Double(priceField.text!)!, isShared: false, ownBy: User.currentUser!)
+            let currDish = Dish(name: dishField.text!, price: Double(priceField.text!)!, isShared: false, meal: Meal.currentMeal!, ownBy: User.currentUser!)
             soloDishArr.append(currDish)
+            
             dishField.text = ""
             priceField.text = ""
             dishTable.reloadData()
@@ -68,14 +111,17 @@ class TypeOwnDishesViewController: UIViewController, UIScrollViewDelegate, UITex
     }
     
     override func viewDidAppear(animated: Bool) {
-        let urlStr = Meal.currentMeal!.image
-        if let url = NSURL(string: urlStr) {
-            if let data = NSData(contentsOfURL: url) {
-                imageView.image = UIImage(data: data)
+        
+        // get url from server
+        if let meal = Meal.currentMeal {
+            meal.fetchIfNeededInBackground()
+            if let url = NSURL(string: meal.image) {
+                if let data = NSData(contentsOfURL: url) {
+                    imageView.image = UIImage(data: data)
+                }
             }
         }
     }
-    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -101,9 +147,6 @@ class TypeOwnDishesViewController: UIViewController, UIScrollViewDelegate, UITex
         return soloDishArr.count
     }
     
-    
-    
-    
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let newCell = UITableViewCell(style: UITableViewCellStyle.Value1, reuseIdentifier: "Cell")
         let idx = soloDishArr.count-1-indexPath.row
@@ -121,5 +164,4 @@ class TypeOwnDishesViewController: UIViewController, UIScrollViewDelegate, UITex
         // Pass the selected object to the new view controller.
     }
     */
-
 }

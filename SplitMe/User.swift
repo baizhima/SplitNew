@@ -27,6 +27,10 @@ class User: PFObject, PFSubclassing {
     
     @NSManaged var isHost: Bool
     
+    static let UserJoining = 0 , UserJoined=1, DishesSaved = 2
+    
+    @NSManaged var state: Int
+    
     override init(){
         super.init()
     }
@@ -40,7 +44,7 @@ class User: PFObject, PFSubclassing {
         self.image = nil
         
         self.isHost = false
-        
+        self.state = User.UserJoining
     }
    
     /*

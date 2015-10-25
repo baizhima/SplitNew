@@ -84,7 +84,6 @@ class ClientJoinViewController: UIViewController {
                 if error != nil{
                    print(error )
                 }
-                
             }
             
             if meal.state >= Meal.AllUserJoined {

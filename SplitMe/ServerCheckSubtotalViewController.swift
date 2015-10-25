@@ -10,6 +10,8 @@ import UIKit
 import Parse
 
 class ServerCheckSubtotalViewController: UIViewController, UITableViewDelegate {
+   
+    var dishes: [Dish]?
     
     @IBOutlet weak var subtotalField: UILabel!
     
@@ -20,32 +22,43 @@ class ServerCheckSubtotalViewController: UIViewController, UITableViewDelegate {
     @IBAction func nextPressed(sender: UIBarButtonItem) {
         self.performSegueWithIdentifier("serverCheckSubtotalToRemoveDishDidNotEat", sender: self)
     }
+    
+    func fetchDishes() -> [Dish]?{
+        
+        if let meal = Meal.currentMeal {
+            
+            let query = Dish.query()
+            query?.whereKey("meal", equalTo: meal)
+            do{
+                try dishes = query?.findObjects() as? [Dish]
+                return dishes
+            }catch _{
+                debugPrint("Error in fetching dishes")
+            }
+        }else{
+            debugPrint("Error: current meal is nil")
+        }
+        return nil
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
     }
     
     override func viewDidAppear(animated: Bool) {
+     
+        print("get into view appear")
+        
+        self.dishes = fetchDishes()
+        
         var subtotal = 0.0
-        do {
-            try Meal.currentMeal!.fetchIfNeeded()
-        } catch _ {
-            
-        }
-        
-        
-        for dish in Meal.currentMeal!.sharedDishes {
-            subtotal += dish.price
-        }
-        for dish in Meal.currentMeal!.soloDishes {
+        for dish:Dish in dishes! {
             subtotal += dish.price
         }
         
-        subtotalField.text = String(NSString(format:"%.2f", subtotal))
+        print("subtotal: \(subtotal)")
+        self.subtotalField.text = String(NSString(format:"%.2f", subtotal))
     }
-    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -53,27 +66,37 @@ class ServerCheckSubtotalViewController: UIViewController, UITableViewDelegate {
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return Meal.currentMeal!.soloDishes.count + Meal.currentMeal!.sharedDishes.count
+    
+        if self.dishes == nil{
+            self.dishes = fetchDishes()
+        }
+      
+        if let dishes = self.dishes{
+            debugPrint("Dishes count: \(dishes.count)")
+            return dishes.count
+        }
+        else{
+            debugPrint("error when checking subtotal: dishes still nil")
+            return 0;
+        }
     }
     
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
+    {
+        let newCell = UITableViewCell(style: UITableViewCellStyle.Value1, reuseIdentifier: "Cell")
 
-    
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        
-       let newCell = UITableViewCell(style: UITableViewCellStyle.Value1, reuseIdentifier: "Cell")
-        print("indexPath.row=\(indexPath.row), soloCount=\(Meal.currentMeal!.soloDishes.count), shareCount=\(Meal.currentMeal!.sharedDishes.count)")
-        if indexPath.row < Meal.currentMeal!.soloDishes.count {
-            let idx = indexPath.row
-            newCell.textLabel!.text = "\(Meal.currentMeal!.soloDishes[idx].name)"
-            newCell.detailTextLabel?.text = "$" + String(NSString(format:"%.2f", Meal.currentMeal!.soloDishes[idx].price))
-        } else {
-            let idx = indexPath.row - Meal.currentMeal!.soloDishes.count
-            newCell.textLabel!.text = "\(Meal.currentMeal!.sharedDishes[idx].name)"
-            newCell.detailTextLabel?.text = "$" + String(NSString(format:"%.2f", Meal.currentMeal!.sharedDishes[idx].price))
+        if self.dishes == nil{
+            self.dishes = fetchDishes()
         }
         
-        
-        
+        if let dishes = self.dishes {
+            let dish: Dish = dishes[indexPath.row]
+            
+            newCell.textLabel!.text = "\(dish.name)"
+            newCell.detailTextLabel?.text = "$" + String(NSString(format:"%.2f", dish.price))
+        }else{
+            debugPrint("Error: tableView: dishes is empty")
+        }
         return newCell
     }
     /*
@@ -85,5 +108,4 @@ class ServerCheckSubtotalViewController: UIViewController, UITableViewDelegate {
         // Pass the selected object to the new view controller.
     }
     */
-
 }

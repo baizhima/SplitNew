@@ -20,15 +20,12 @@ class HomeViewController: UIViewController {
         
         if nameField.text!.characters.count > 0 {
             let name = nameField.text!
-            print("before master")
             let master: User = User(userName: name)
-            print("after master")
+            
             master.saveInBackgroundWithBlock {
                 (succeed:Bool, error:NSError?) -> Void in
                 if succeed {
                     
-                    print("[Home]userID = \(master.objectId)")
-                
                     User.currentUser = master
                     let meal: Meal = Meal(master: master)
                     meal.saveInBackgroundWithBlock {

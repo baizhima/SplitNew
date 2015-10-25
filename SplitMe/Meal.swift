@@ -32,12 +32,14 @@ class Meal: PFObject, PFSubclassing {
     @NSManaged var master: User
     @NSManaged var users: [User]
     
-    @NSManaged var sharedDishes: [Dish]
-    @NSManaged var soloDishes: [Dish]
+    @NSManaged var dishes: [Dish]
     
+    
+    @NSManaged var subtotal: Double
     @NSManaged var tax: Double
     @NSManaged var tips: Double
-
+    
+    @NSManaged var total: Double
   
     static let StartUserJoining = 0, AllUserJoined = 1, AllDishesSaved = 2;
     
@@ -59,9 +61,10 @@ class Meal: PFObject, PFSubclassing {
         self.master = master
         users = [User]()
         users.append(master)
-        
-        soloDishes = [Dish]()
-        sharedDishes = [Dish]()
+       
+        dishes = [Dish]()
+        //soloDishes = [Dish]()
+        //sharedDishes = [Dish]()
         
         //image = NilLiteralConvertible
     }
