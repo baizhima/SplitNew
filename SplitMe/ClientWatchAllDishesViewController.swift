@@ -28,16 +28,16 @@ class ClientWatchAllDishesViewController: UIViewController, UITableViewDelegate 
     }
 
     func updateDishes(dishes: [Dish]) {
-        
+        self.sharedDishes = [Dish]()
+        self.soloDishes = [Dish]()
         for dish in dishes {
             if dish.isShared {
                 self.sharedDishes.append(dish)
             } else {
-                for user in dish.sharedWith! as [User] {
-                    if user.objectId == User.currentUser?.objectId {
-                        self.soloDishes.append(dish)
-                    }
+                if dish.ownBy.objectId == User.currentUser?.objectId {
+                    self.soloDishes.append(dish)
                 }
+                
             }
         }
         print("soloDishes.count=\(soloDishes.count), sharedDishes.count=\(sharedDishes.count)")
@@ -45,29 +45,32 @@ class ClientWatchAllDishesViewController: UIViewController, UITableViewDelegate 
         self.sharedDishesView.reloadData()
     }
     
+    
+    
     func fetchMeal(){
+        var dishes: [Dish]?
+        
         
         if let meal: Meal = Meal.currentMeal {
-            
             meal.fetchInBackgroundWithBlock {
                 (object, error) -> Void in
                 if error != nil{
-                    print(error )
+                    print(error)
                 }
-                let query = PFQuery(className: "Dish")
-                query.whereKey("meal", equalTo: meal)
-                query.findObjectsInBackgroundWithBlock {
-                    (objects: [PFObject]?, error: NSError?) -> Void in
-                    if error != nil {
-                        let dishes = objects as! [Dish]
-                        self.updateDishes(dishes)
-                    } else {
-                        print(error)
-                    }
-                }
-                
-                
             }
+            
+            let query = Dish.query()
+            query?.whereKey("meal", equalTo: PFObject(withoutDataWithClassName: "Meal", objectId: meal.objectId))
+            do{
+                try dishes = query?.findObjects() as? [Dish]
+                if dishes != nil {
+                    self.updateDishes(dishes!)
+                }
+                    
+            }catch _{
+                debugPrint("Error in fetching dishes")
+            }
+ 
             
             if meal.state >= Meal.SubtotalConfirmed {
                 if let timer = self.timer {
@@ -87,9 +90,9 @@ class ClientWatchAllDishesViewController: UIViewController, UITableViewDelegate 
     
     override func viewDidAppear(animated: Bool) {
         
-        dispatch_async(dispatch_get_main_queue(), {
+        //dispatch_async(dispatch_get_main_queue(), {
             self.timer = NSTimer.scheduledTimerWithTimeInterval(2, target: self, selector: Selector("fetchMeal"), userInfo: nil, repeats: true)
-        });
+        //});
         
     }
 

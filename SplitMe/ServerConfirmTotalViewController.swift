@@ -23,11 +23,11 @@ class ServerConfirmTotalViewController: UIViewController, UITextFieldDelegate,
     
     @IBOutlet weak var taxField: UITextField!
     
-    
     @IBOutlet weak var pickerVIew: UIPickerView!
     
     @IBOutlet weak var totalField: UILabel!
     
+    @IBOutlet weak var splitButton: UIButton!
     @IBAction func splitPressed(sender: UIButton) {
         
         // TODO modify state code of Meal
@@ -60,12 +60,14 @@ class ServerConfirmTotalViewController: UIViewController, UITextFieldDelegate,
     }
     
     func updateTotal() {
-        let total: Double = (subtotal + tax) * (1 + Double(tipsPct) * 1.0 / 100)
+        let total: Double = subtotal * (1 + Double(tipsPct) * 1.0 / 100) + tax
         self.totalField.text = String(NSString(format:"%.2f", total))
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        splitButton.enabled = false
+        
         pickerVIew.selectRow(0, inComponent: 0, animated: true)
     }
     

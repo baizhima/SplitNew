@@ -765,6 +765,7 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="pickerVIew" destination="h9d-S0-F5F" id="WaZ-Ww-ILc"/>
+                        <outlet property="splitButton" destination="gla-pC-afc" id="m2O-pc-2ej"/>
                         <outlet property="subtotalField" destination="biE-U8-JHB" id="UP8-Ti-988"/>
                         <outlet property="taxField" destination="9I3-Yy-ZU5" id="eyk-bc-kSo"/>
                         <outlet property="totalField" destination="V3g-ff-yow" id="Tc1-hr-VBC"/>

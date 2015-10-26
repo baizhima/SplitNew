@@ -29,10 +29,12 @@ class ServerTypeShareDishesViewController: UIViewController, UIScrollViewDelegat
     
     @IBAction func nextPressed(sender: UIBarButtonItem) {
         
-        for dish in sharedDishArr {
+       /* for dish in sharedDishArr {
             dish.saveInBackground()
+        }*/
+        if timer != nil {
+            timer?.invalidate()
         }
-        
         self.performSegueWithIdentifier("serverTypeShareDishesToServerCheckSubtotal", sender: self)
         
         
@@ -55,6 +57,8 @@ class ServerTypeShareDishesViewController: UIViewController, UIScrollViewDelegat
                 priceField.text = ""
                 dishTable.reloadData()
                 dishField.becomeFirstResponder()
+                
+                currDish.saveInBackground()
             }else{
                 print("Error: current user is nil")
             }
@@ -65,11 +69,32 @@ class ServerTypeShareDishesViewController: UIViewController, UIScrollViewDelegat
         
         if let meal = Meal.currentMeal {
             
-            do{
-                let users = try User.fetchAll(meal.users) as! [User]
+            //do{
+                //let users = try User.fetchAll(meal.users) as! [User]
                 
+                User.fetchAllInBackground(meal.users, block: {(objects: [AnyObject]?, error: NSError?) -> Void in
+                    let users = objects as! [User]
+                    var count = 0
+                    for user: User in users{
+                        print("user.state=\(user.state)")
+                        if user.state == User.SoloDishesSaved {
+                            count += 1
+                        }
+                    }
+                    if( count == users.count ){
+                        meal.state = Meal.AllDishesSaved
+                    }else{
+                        debugPrint("Still \(users.count - count) users didn't finish")
+                    }
+                    
+                    if meal.state == Meal.AllDishesSaved {
+                        self.nextButton.enabled = true
+                    }
+                })
+                /*
                 var count = 0
                 for user: User in users{
+                    print("user.state=\(user.state)")
                     if user.state == User.SoloDishesSaved {
                         count += 1
                     }
@@ -77,15 +102,13 @@ class ServerTypeShareDishesViewController: UIViewController, UIScrollViewDelegat
                 if( count == users.count ){
                     meal.state = Meal.AllDishesSaved
                 }else{
-                    //debugPrint("Still \(users.count - count) users didn't finish")
-                }
+                    debugPrint("Still \(users.count - count) users didn't finish")
+                }*/
                 
-            }catch _ {
-                //debugPrint("Error: cannot get the number of users who saved meal")
-            }
-            if meal.state == Meal.AllDishesSaved {
-                nextButton.enabled = true
-            }
+           /* }catch _ {
+                debugPrint("Error: cannot get the number of users who saved meal")
+            }*/
+            
             
             
         }
@@ -104,7 +127,9 @@ class ServerTypeShareDishesViewController: UIViewController, UIScrollViewDelegat
     
     override func viewDidAppear(animated: Bool) {
        
-        timer = NSTimer.scheduledTimerWithTimeInterval(2, target: self, selector: Selector("updateMealState"), userInfo: nil, repeats: true)
+        dispatch_async(dispatch_get_main_queue(), {
+        self.timer = NSTimer.scheduledTimerWithTimeInterval(2, target: self, selector: Selector("updateMealState"), userInfo: nil, repeats: true)
+        })
         // get url from server
         if let meal = Meal.currentMeal {
             meal.fetchIfNeededInBackground()

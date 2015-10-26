@@ -46,8 +46,16 @@ class TypeOwnDishesViewController: UIViewController, UIScrollViewDelegate, UITex
             if let user = User.currentUser {
                 
                 if meal.master.objectId ==  user.objectId {
-                    self.performSegueWithIdentifier("typeOwnDishesToServerTypeShareDishes", sender: self)
-                } else {
+                    user.state = User.SoloDishesSaved
+                    user.saveInBackgroundWithBlock({
+                        (ok, error) -> Void in
+                        if ok {
+                            self.performSegueWithIdentifier("typeOwnDishesToServerTypeShareDishes", sender: self)
+                        }else{
+                            debugPrint(error)
+                        }
+                    })
+                }else {
                    
                     user.state = User.SoloDishesSaved
                     user.saveInBackgroundWithBlock({
@@ -115,12 +123,19 @@ class TypeOwnDishesViewController: UIViewController, UIScrollViewDelegate, UITex
         
         // get url from server
         if let meal = Meal.currentMeal {
-            meal.fetchIfNeededInBackground()
-            if let url = NSURL(string: meal.image) {
-                if let data = NSData(contentsOfURL: url) {
-                    imageView.image = UIImage(data: data)
+            meal.fetchInBackgroundWithBlock {
+                (object, error) -> Void in
+                if error != nil{
+                    print(error )
+                } else {
+                    if let url = NSURL(string: meal.image) {
+                        if let data = NSData(contentsOfURL: url) {
+                            self.imageView.image = UIImage(data: data)
+                        }
+                    }
                 }
             }
+            
         }
     }
 
