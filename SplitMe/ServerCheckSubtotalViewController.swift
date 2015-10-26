@@ -20,7 +20,13 @@ class ServerCheckSubtotalViewController: UIViewController, UITableViewDelegate {
     }
     
     @IBAction func nextPressed(sender: UIBarButtonItem) {
-        self.performSegueWithIdentifier("serverCheckSubtotalToRemoveDishDidNotEat", sender: self)
+        
+        if let meal: Meal =  Meal.currentMeal {
+            
+            meal.state = Meal.SubtotalConfirmed
+            meal.saveInBackground()
+        self.performSegueWithIdentifier("serverCheckSubtotalToRemoveDishesDidNotEat", sender: self)
+        }
     }
     
     func fetchDishes() -> [Dish]?{

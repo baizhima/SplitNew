@@ -9,8 +9,9 @@
 import UIKit
 import Parse
 
-class ClientJoinViewController: UIViewController {
+class ClientJoinViewController: UIViewController, UITextFieldDelegate {
 
+    var timer: NSTimer?
     
     @IBOutlet weak var inputCodeField: UITextField!
     @IBOutlet weak var connectInfo: UILabel!
@@ -87,6 +88,10 @@ class ClientJoinViewController: UIViewController {
             }
             
             if meal.state >= Meal.AllUserJoined {
+                if let timer = self.timer {
+                   timer.invalidate() 
+                }
+                
                 performSegueWithIdentifier("clientJoinToTypeOwnDishes", sender: self)
             }
         }
@@ -95,13 +100,23 @@ class ClientJoinViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         connectInfo.hidden = true
-        NSTimer.scheduledTimerWithTimeInterval(2, target: self, selector: Selector("fetchMeal"), userInfo: nil, repeats: true)
+        timer = NSTimer.scheduledTimerWithTimeInterval(2, target: self, selector: Selector("fetchMeal"), userInfo: nil, repeats: true)
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
+
     
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        self.view.endEditing(true)
+    }
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        inputCodeField.resignFirstResponder()
+        
+        return true
+    }
     /*
     // MARK: - Navigation
 

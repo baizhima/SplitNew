@@ -10,6 +10,8 @@ import UIKit
 
 class ServerConfirmTotalViewController: UIViewController {
     
+    var dishes: [Dish]?
+    
     var subtotal = 0.0
     var tax = 0.0
     var tipsPct: Int?
@@ -25,27 +27,55 @@ class ServerConfirmTotalViewController: UIViewController {
     
     @IBOutlet weak var totalField: UILabel!
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        /*
-        for dish in currMeal!.shareDishes {
-            subtotal += dish.price
+    @IBAction func splitPressed(sender: UIButton) {
+        
+        // TODO modify state code of Meal
+        if let meal: Meal =  Meal.currentMeal {
+            
+            meal.state = Meal.TotalConfirmed
+            meal.saveInBackground()
+            self.performSegueWithIdentifier("serverConfirmTotalToServerCharge", sender: self)
         }
-        for dish in currMeal!.soloDishes {
-            subtotal += dish.price
-        }*/
+        
+    }
+    
+    
+    func fetchDishes() -> [Dish]?{
         
         if let meal = Meal.currentMeal {
-           
-            meal.fetchIfNeededInBackground()
             
-            subtotalField.text = "\(meal.subtotal)"
-            totalField.text = "\(meal.subtotal)"
+            let query = Dish.query()
+            query?.whereKey("meal", equalTo: meal)
+            do{
+                try dishes = query?.findObjects() as? [Dish]
+                return dishes
+            }catch _{
+                debugPrint("Error in fetching dishes")
+            }
+        }else{
+            debugPrint("Error: current meal is nil")
+        }
+        return nil
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+       
+    }
+    
+    
+    
+    override func viewDidAppear(animated: Bool) {
+        
+        self.dishes = fetchDishes()
+        
+        for dish:Dish in self.dishes! {
+            subtotal += dish.price
         }
         
-        //subtotalField.text = "\(subtotal)"
-        //totalField.text = "\(subtotal)"
-        // Do any additional setup after loading the view.
+        print("subtotal: \(subtotal)")
+        self.subtotalField.text = String(NSString(format:"%.2f", subtotal))
+        self.totalField.text = String(NSString(format:"%.2f", (subtotal + tax) * (1 + tips)))
     }
 
     override func didReceiveMemoryWarning() {

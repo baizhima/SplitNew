@@ -11,6 +11,8 @@ import Parse
 
 class ServerWaitViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
 
+    
+    
     @IBOutlet weak var nextButton: UIBarButtonItem!
     
     @IBOutlet weak var joinedFriendsField: UILabel!

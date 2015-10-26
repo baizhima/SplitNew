@@ -41,7 +41,8 @@ class Meal: PFObject, PFSubclassing {
     
     @NSManaged var total: Double
   
-    static let StartUserJoining = 0, AllUserJoined = 1, AllDishesSaved = 2;
+    static let StartUserJoining = 0, AllUserJoined = 1, AllDishesSaved = 2
+    static let SubtotalConfirmed = 3, SharedDishesConfirmed = 4, TotalConfirmed = 5
     
     @NSManaged var state: Int
     

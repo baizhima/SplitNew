@@ -11,7 +11,7 @@ import Parse
 
 
 
-class HomeViewController: UIViewController {
+class HomeViewController: UIViewController, UITextFieldDelegate {
 
     let user = PFObject(className: "User")
     
@@ -64,11 +64,25 @@ class HomeViewController: UIViewController {
             }
         }
     }
+    
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+    }
+    
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        self.view.endEditing(true)
+    }
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        nameField.resignFirstResponder()
+        
+        return true
     }
 }

@@ -7,24 +7,24 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		147B73DF1BDB243D0060B1E0 /* Meal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147B73DD1BDB243D0060B1E0 /* Meal.swift */; settings = {ASSET_TAGS = (); }; };
-		147B73E01BDB243D0060B1E0 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147B73DE1BDB243D0060B1E0 /* User.swift */; settings = {ASSET_TAGS = (); }; };
-		147B73E21BDB24450060B1E0 /* Dish.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147B73E11BDB24450060B1E0 /* Dish.swift */; settings = {ASSET_TAGS = (); }; };
+		147B73DF1BDB243D0060B1E0 /* Meal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147B73DD1BDB243D0060B1E0 /* Meal.swift */; };
+		147B73E01BDB243D0060B1E0 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147B73DE1BDB243D0060B1E0 /* User.swift */; };
+		147B73E21BDB24450060B1E0 /* Dish.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147B73E11BDB24450060B1E0 /* Dish.swift */; };
 		EC62E8F51BD0758E003718C2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC62E8F41BD0758E003718C2 /* AppDelegate.swift */; };
 		EC62E8FA1BD0758E003718C2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EC62E8F81BD0758E003718C2 /* Main.storyboard */; };
 		EC62E8FC1BD0758E003718C2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EC62E8FB1BD0758E003718C2 /* Assets.xcassets */; };
 		EC62E8FF1BD0758E003718C2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EC62E8FD1BD0758E003718C2 /* LaunchScreen.storyboard */; };
-		EC62E9071BD075BD003718C2 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC62E9061BD075BD003718C2 /* HomeViewController.swift */; settings = {ASSET_TAGS = (); }; };
-		EC62E9091BD0779A003718C2 /* ServerWaitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC62E9081BD0779A003718C2 /* ServerWaitViewController.swift */; settings = {ASSET_TAGS = (); }; };
-		EC62E90B1BD077B1003718C2 /* ClientJoinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC62E90A1BD077B1003718C2 /* ClientJoinViewController.swift */; settings = {ASSET_TAGS = (); }; };
-		EC62E90D1BD08CB0003718C2 /* TypeOwnDishesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC62E90C1BD08CB0003718C2 /* TypeOwnDishesViewController.swift */; settings = {ASSET_TAGS = (); }; };
-		EC62E90F1BD095F3003718C2 /* ServerTypeShareDishesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC62E90E1BD095F3003718C2 /* ServerTypeShareDishesViewController.swift */; settings = {ASSET_TAGS = (); }; };
-		EC62E9111BD184F4003718C2 /* ClientWatchAllDishesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC62E9101BD184F4003718C2 /* ClientWatchAllDishesViewController.swift */; settings = {ASSET_TAGS = (); }; };
-		EC62E9131BD186A7003718C2 /* ServerCheckSubtotalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC62E9121BD186A7003718C2 /* ServerCheckSubtotalViewController.swift */; settings = {ASSET_TAGS = (); }; };
-		EC62E9151BD187D9003718C2 /* RemoveDishesDidNotEatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC62E9141BD187D9003718C2 /* RemoveDishesDidNotEatViewController.swift */; settings = {ASSET_TAGS = (); }; };
-		EC62E9171BD188B0003718C2 /* ServerConfirmTotalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC62E9161BD188B0003718C2 /* ServerConfirmTotalViewController.swift */; settings = {ASSET_TAGS = (); }; };
-		EC92FF1B1BDB448300D34576 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC92FF191BDB448300D34576 /* Bolts.framework */; settings = {ASSET_TAGS = (); }; };
-		EC92FF1C1BDB448300D34576 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC92FF1A1BDB448300D34576 /* Parse.framework */; settings = {ASSET_TAGS = (); }; };
+		EC62E9071BD075BD003718C2 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC62E9061BD075BD003718C2 /* HomeViewController.swift */; };
+		EC62E9091BD0779A003718C2 /* ServerWaitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC62E9081BD0779A003718C2 /* ServerWaitViewController.swift */; };
+		EC62E90B1BD077B1003718C2 /* ClientJoinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC62E90A1BD077B1003718C2 /* ClientJoinViewController.swift */; };
+		EC62E90D1BD08CB0003718C2 /* TypeOwnDishesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC62E90C1BD08CB0003718C2 /* TypeOwnDishesViewController.swift */; };
+		EC62E90F1BD095F3003718C2 /* ServerTypeShareDishesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC62E90E1BD095F3003718C2 /* ServerTypeShareDishesViewController.swift */; };
+		EC62E9111BD184F4003718C2 /* ClientWatchAllDishesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC62E9101BD184F4003718C2 /* ClientWatchAllDishesViewController.swift */; };
+		EC62E9131BD186A7003718C2 /* ServerCheckSubtotalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC62E9121BD186A7003718C2 /* ServerCheckSubtotalViewController.swift */; };
+		EC62E9151BD187D9003718C2 /* RemoveDishesDidNotEatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC62E9141BD187D9003718C2 /* RemoveDishesDidNotEatViewController.swift */; };
+		EC62E9171BD188B0003718C2 /* ServerConfirmTotalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC62E9161BD188B0003718C2 /* ServerConfirmTotalViewController.swift */; };
+		EC92FF1B1BDB448300D34576 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC92FF191BDB448300D34576 /* Bolts.framework */; };
+		EC92FF1C1BDB448300D34576 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC92FF1A1BDB448300D34576 /* Parse.framework */; };
 		ECAC022E1BDAF3BD0015EF50 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECAC022D1BDAF3BD0015EF50 /* AudioToolbox.framework */; };
 		ECAC02301BDAF3C40015EF50 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECAC022F1BDAF3C40015EF50 /* CFNetwork.framework */; };
 		ECAC02321BDAF3CA0015EF50 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECAC02311BDAF3CA0015EF50 /* CoreGraphics.framework */; };
@@ -35,6 +35,8 @@
 		ECAC023C1BDAF3ED0015EF50 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECAC023B1BDAF3ED0015EF50 /* SystemConfiguration.framework */; };
 		ECAC023E1BDAF3F50015EF50 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = ECAC023D1BDAF3F50015EF50 /* libz.tbd */; };
 		ECAC02401BDAF3FE0015EF50 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = ECAC023F1BDAF3FE0015EF50 /* libsqlite3.tbd */; };
+		ECC48DB01BDDCA20003EDB1C /* ClientTotalPayTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC48DAF1BDDCA20003EDB1C /* ClientTotalPayTableViewController.swift */; };
+		ECC48DB21BDDCB99003EDB1C /* ServerChargeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC48DB11BDDCB99003EDB1C /* ServerChargeTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -68,6 +70,8 @@
 		ECAC023B1BDAF3ED0015EF50 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		ECAC023D1BDAF3F50015EF50 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		ECAC023F1BDAF3FE0015EF50 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+		ECC48DAF1BDDCA20003EDB1C /* ClientTotalPayTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClientTotalPayTableViewController.swift; sourceTree = "<group>"; };
+		ECC48DB11BDDCB99003EDB1C /* ServerChargeTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerChargeTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,6 +122,7 @@
 				147B73DE1BDB243D0060B1E0 /* User.swift */,
 				EC62E8F41BD0758E003718C2 /* AppDelegate.swift */,
 				EC62E8F81BD0758E003718C2 /* Main.storyboard */,
+				ECC48DB11BDDCB99003EDB1C /* ServerChargeTableViewController.swift */,
 				EC62E9061BD075BD003718C2 /* HomeViewController.swift */,
 				EC62E9081BD0779A003718C2 /* ServerWaitViewController.swift */,
 				EC62E90A1BD077B1003718C2 /* ClientJoinViewController.swift */,
@@ -127,6 +132,7 @@
 				EC62E9121BD186A7003718C2 /* ServerCheckSubtotalViewController.swift */,
 				EC62E9141BD187D9003718C2 /* RemoveDishesDidNotEatViewController.swift */,
 				EC62E9161BD188B0003718C2 /* ServerConfirmTotalViewController.swift */,
+				ECC48DAF1BDDCA20003EDB1C /* ClientTotalPayTableViewController.swift */,
 				EC62E8FB1BD0758E003718C2 /* Assets.xcassets */,
 				EC62E8FD1BD0758E003718C2 /* LaunchScreen.storyboard */,
 				EC62E9001BD0758E003718C2 /* Info.plist */,
@@ -184,7 +190,7 @@
 				TargetAttributes = {
 					EC62E8F01BD0758E003718C2 = {
 						CreatedOnToolsVersion = 7.0.1;
-						DevelopmentTeam = NETDM9649U;
+						DevelopmentTeam = 646W9GX953;
 					};
 				};
 			};
@@ -224,6 +230,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ECC48DB01BDDCA20003EDB1C /* ClientTotalPayTableViewController.swift in Sources */,
 				EC62E90D1BD08CB0003718C2 /* TypeOwnDishesViewController.swift in Sources */,
 				EC62E9111BD184F4003718C2 /* ClientWatchAllDishesViewController.swift in Sources */,
 				EC62E9091BD0779A003718C2 /* ServerWaitViewController.swift in Sources */,
@@ -234,6 +241,7 @@
 				EC62E9071BD075BD003718C2 /* HomeViewController.swift in Sources */,
 				147B73E01BDB243D0060B1E0 /* User.swift in Sources */,
 				EC62E9171BD188B0003718C2 /* ServerConfirmTotalViewController.swift in Sources */,
+				ECC48DB21BDDCB99003EDB1C /* ServerChargeTableViewController.swift in Sources */,
 				EC62E90B1BD077B1003718C2 /* ClientJoinViewController.swift in Sources */,
 				147B73E21BDB24450060B1E0 /* Dish.swift in Sources */,
 				EC62E90F1BD095F3003718C2 /* ServerTypeShareDishesViewController.swift in Sources */,
@@ -357,8 +365,9 @@
 					"$(PROJECT_DIR)/Frameworks",
 				);
 				INFOPLIST_FILE = SplitMe/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.SplitMe;
+				PRODUCT_BUNDLE_IDENTIFIER = com.SplitMeeeee;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
@@ -376,8 +385,9 @@
 					"$(PROJECT_DIR)/Frameworks",
 				);
 				INFOPLIST_FILE = SplitMe/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.SplitMe;
+				PRODUCT_BUNDLE_IDENTIFIER = com.SplitMeeeee;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
