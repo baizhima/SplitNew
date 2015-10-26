@@ -1050,12 +1050,12 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="ghu-bt-NMB"/>
-        <segue reference="96H-5m-BCx"/>
-        <segue reference="Dn7-Wl-YMU"/>
-        <segue reference="4KL-G5-uf4"/>
         <segue reference="dGz-N1-fph"/>
+        <segue reference="4KL-G5-uf4"/>
+        <segue reference="Dn7-Wl-YMU"/>
+        <segue reference="S8D-pB-Lra"/>
         <segue reference="vOd-pg-Kca"/>
         <segue reference="bwC-y0-ghp"/>
+        <segue reference="ghu-bt-NMB"/>
     </inferredMetricsTieBreakers>
 </document>
