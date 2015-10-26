@@ -35,8 +35,6 @@ class ServerCheckSubtotalViewController: UIViewController, UITableViewDelegate  
         
         if let meal = Meal.currentMeal {
             
-            
-            
             let query = Dish.query()
             query?.whereKey("meal", equalTo: meal)
             do{

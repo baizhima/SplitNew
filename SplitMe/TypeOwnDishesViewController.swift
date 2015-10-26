@@ -36,6 +36,7 @@ class TypeOwnDishesViewController: UIViewController, UIScrollViewDelegate, UITex
             dish.saveInBackground()
         }
         
+        
         if let meal = Meal.currentMeal {
        
 //            meal.fetchIfNeededInBackground()
@@ -48,7 +49,7 @@ class TypeOwnDishesViewController: UIViewController, UIScrollViewDelegate, UITex
                     self.performSegueWithIdentifier("typeOwnDishesToServerTypeShareDishes", sender: self)
                 } else {
                    
-                    user.state = User.DishesSaved
+                    user.state = User.SoloDishesSaved
                     user.saveInBackgroundWithBlock({
                         (ok, error) -> Void in
                         if ok{
@@ -102,9 +103,9 @@ class TypeOwnDishesViewController: UIViewController, UIScrollViewDelegate, UITex
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // TODO:
+        
         imageView.image = nil
-        //imageView.image = currMeal?.receiptImage
+        
         self.scrollView.minimumZoomScale = 1.5
         self.scrollView.maximumZoomScale = 3.0
         // Do any additional setup after loading the view.

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Parse
 
 class ClientWatchAllDishesViewController: UIViewController, UITableViewDelegate {
     
@@ -26,7 +27,23 @@ class ClientWatchAllDishesViewController: UIViewController, UITableViewDelegate 
         self.performSegueWithIdentifier("clientWatchAllDishesToTypeOwnDishes", sender: self)
     }
 
-    
+    func updateDishes(dishes: [Dish]) {
+        
+        for dish in dishes {
+            if dish.isShared {
+                self.sharedDishes.append(dish)
+            } else {
+                for user in dish.sharedWith! as [User] {
+                    if user.objectId == User.currentUser?.objectId {
+                        self.soloDishes.append(dish)
+                    }
+                }
+            }
+        }
+        print("soloDishes.count=\(soloDishes.count), sharedDishes.count=\(sharedDishes.count)")
+        self.soloDishesView.reloadData()
+        self.sharedDishesView.reloadData()
+    }
     
     func fetchMeal(){
         
@@ -37,11 +54,18 @@ class ClientWatchAllDishesViewController: UIViewController, UITableViewDelegate 
                 if error != nil{
                     print(error )
                 }
-                self.updateSoloDishes()
-                self.updateSharedDishes()
+                let query = PFQuery(className: "Dish")
+                query.whereKey("meal", equalTo: meal)
+                query.findObjectsInBackgroundWithBlock {
+                    (objects: [PFObject]?, error: NSError?) -> Void in
+                    if error != nil {
+                        let dishes = objects as! [Dish]
+                        self.updateDishes(dishes)
+                    } else {
+                        print(error)
+                    }
+                }
                 
-                self.soloDishesView.reloadData()
-                self.sharedDishesView.reloadData()
                 
             }
             
@@ -62,56 +86,17 @@ class ClientWatchAllDishesViewController: UIViewController, UITableViewDelegate 
     }
     
     override func viewDidAppear(animated: Bool) {
-        if let meal = Meal.currentMeal {
-            meal.fetchInBackgroundWithBlock {
-                (object, error) -> Void in
-                if error != nil {
-                    self.updateSoloDishes()
-                    self.updateSharedDishes()
-                    self.soloDishesView.reloadData()
-                    self.sharedDishesView.reloadData()
-                } else {
-                    print(error)
-                }
-            }
-        }
         
+        dispatch_async(dispatch_get_main_queue(), {
+            self.timer = NSTimer.scheduledTimerWithTimeInterval(2, target: self, selector: Selector("fetchMeal"), userInfo: nil, repeats: true)
+        });
         
-        timer = NSTimer.scheduledTimerWithTimeInterval(2, target: self, selector: Selector("fetchMeal"), userInfo: nil, repeats: true)
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    func updateSoloDishes() {
-        
-        if let meal = Meal.currentMeal {
-            for dish in meal.dishes {
-                if !dish.isShared {
-                    for user in dish.sharedWith! as [User] {
-                        if user.objectId == User.currentUser?.objectId {
-                            self.soloDishes.append(dish)
-                        }
-                    }
-                }
-            }
-        }
-        print("solo dishes count =  \(soloDishes.count)")
-    }
-    
-    func updateSharedDishes() {
-        if let meal = Meal.currentMeal {
-            for dish in meal.dishes {
-                if dish.isShared {
-                    self.sharedDishes.append(dish)
-                }
-            }
-        }
-        print("shared dishes count =  \(sharedDishes.count)")
-    }
-    
     
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

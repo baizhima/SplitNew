@@ -11,7 +11,7 @@ import Parse
 
 class ServerWaitViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
 
-    
+    var timer: NSTimer?
     
     @IBOutlet weak var nextButton: UIBarButtonItem!
     
@@ -43,6 +43,10 @@ class ServerWaitViewController: UIViewController, UINavigationControllerDelegate
             
             meal.state = Meal.AllUserJoined
             meal.saveInBackground()
+            
+            if let timer = self.timer {
+                timer.invalidate()
+            }
             
             self.performSegueWithIdentifier("serverWaitToTypeOwnDishes", sender: self)
             
@@ -105,7 +109,7 @@ class ServerWaitViewController: UIViewController, UINavigationControllerDelegate
             print("current meal is nil")
         }
         
-        NSTimer.scheduledTimerWithTimeInterval(2, target: self, selector: Selector("fetchMeal"), userInfo: nil, repeats: true)
+        timer = NSTimer.scheduledTimerWithTimeInterval(2, target: self, selector: Selector("fetchMeal"), userInfo: nil, repeats: true)
     }
     
   

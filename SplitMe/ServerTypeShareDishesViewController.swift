@@ -12,6 +12,10 @@ import Parse
 class ServerTypeShareDishesViewController: UIViewController, UIScrollViewDelegate, UITextFieldDelegate, UITableViewDelegate {
     
     var sharedDishArr = [Dish]()
+    var timer: NSTimer?
+    
+    
+    @IBOutlet weak var nextButton: UIBarButtonItem!
     
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var imageView: UIImageView!
@@ -29,49 +33,10 @@ class ServerTypeShareDishesViewController: UIViewController, UIScrollViewDelegat
             dish.saveInBackground()
         }
         
-        if let user = User.currentUser {
-            if let meal = Meal.currentMeal {
-           
-                if user.state < User.DishesSaved {
-                    user.state = User.DishesSaved
-                    do{
-                        try user.save()
-                    }catch _{
-                        debugPrint("Error: can't save user to server")
-                    }
-                }
-                
-               
-                do{
-                    
-                    let users = try User.fetchAll(meal.users) as! [User]
-                    
-                    var count = 0
-                    for user: User in users{
-                        if user.state >= User.DishesSaved {
-                            count += 1
-                        }
-                    }
-                    if( count == users.count ){
-                        self.performSegueWithIdentifier("serverTypeShareDishesToServerCheckSubtotal", sender: self)
-                    }else{
-                        debugPrint("Still \(users.count - count) users didn't finish")
-                    }
-                    
-                }catch _ {
-                    debugPrint("Error: cannot get the number of users who saved meal")
-                }
-//              
-//                let query = User.query()
-//                query?.whereKey("meal", equalTo: meal)
-//                query?.whereKey("state", greaterThanOrEqualTo: User.DishesSaved)
-//               
-//                do{
-//                    let users: [User] = try query?.findObjects() as! [User]
-//                   
-                
-            }
-        }
+        self.performSegueWithIdentifier("serverTypeShareDishesToServerCheckSubtotal", sender: self)
+        
+        
+        
     }
     
     @IBAction func addPressed(sender: UIButton) {
@@ -95,26 +60,51 @@ class ServerTypeShareDishesViewController: UIViewController, UIScrollViewDelegat
             }
         }
     }
+    
+    func updateMealState() -> Int {
+        
+        if let meal = Meal.currentMeal {
+            
+            do{
+                let users = try User.fetchAll(meal.users) as! [User]
+                
+                var count = 0
+                for user: User in users{
+                    if user.state == User.SoloDishesSaved {
+                        count += 1
+                    }
+                }
+                if( count == users.count ){
+                    meal.state = Meal.AllDishesSaved
+                }else{
+                    //debugPrint("Still \(users.count - count) users didn't finish")
+                }
+                
+            }catch _ {
+                //debugPrint("Error: cannot get the number of users who saved meal")
+            }
+            if meal.state == Meal.AllDishesSaved {
+                nextButton.enabled = true
+            }
+            
+            
+        }
+        return 0
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // XXX: TODO: set to image
+        nextButton.enabled = false
+        
         imageView.image = nil // currMeal?.receiptImage
         self.scrollView.minimumZoomScale = 1.5
         self.scrollView.maximumZoomScale = 3.0
-        // Do any additional setup after loading the view.
+        
     }
     
     override func viewDidAppear(animated: Bool) {
        
-        /*
-        let urlStr = Meal.currentMeal!.image
-        if let url = NSURL(string: urlStr) {
-            if let data = NSData(contentsOfURL: url) {
-                imageView.image = UIImage(data: data)
-            }
-        }*/
-        
+        timer = NSTimer.scheduledTimerWithTimeInterval(2, target: self, selector: Selector("updateMealState"), userInfo: nil, repeats: true)
         // get url from server
         if let meal = Meal.currentMeal {
             meal.fetchIfNeededInBackground()

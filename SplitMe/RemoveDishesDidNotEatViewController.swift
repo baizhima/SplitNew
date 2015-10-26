@@ -10,6 +10,7 @@ import UIKit
 
 class RemoveDishesDidNotEatViewController: UIViewController, UITableViewDelegate {
 
+    @IBOutlet weak var promptField: UILabel!
     var sharedDishes : [Dish]?
     
     @IBAction func backPressed(sender: UIBarButtonItem) {
@@ -18,7 +19,19 @@ class RemoveDishesDidNotEatViewController: UIViewController, UITableViewDelegate
     
     
     @IBAction func nextPressed(sender: UIBarButtonItem) {
-        self.performSegueWithIdentifier("removeDishesDidNotEatToServerConfirmTotal", sender: self)
+        
+        if let meal = Meal.currentMeal {
+            if let user = User.currentUser {
+                if meal.master.objectId == user.objectId {
+                    self.performSegueWithIdentifier("removeDishesDidNotEatToServerConfirmTotal", sender: self)
+                }
+                else {
+                    promptField.hidden = false
+                }
+            }
+        }
+        
+        
     }
     
     func fetchSharedDishes() -> [Dish]?{
@@ -44,7 +57,7 @@ class RemoveDishesDidNotEatViewController: UIViewController, UITableViewDelegate
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        promptField.hidden = true
         // Do any additional setup after loading the view.
     }
     

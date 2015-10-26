@@ -37,7 +37,10 @@ class ClientJoinViewController: UIViewController, UITextFieldDelegate {
                         self.connectInfo.text = "group closed, sorry"
                         return
                     }
-                   
+                    
+                    slave.state = User.UserJoined
+                    slave.saveInBackground()
+                    
                     meal.users.append(slave)
                     meal.saveInBackgroundWithBlock({
                         (success, error ) -> Void in

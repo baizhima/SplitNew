@@ -12,7 +12,7 @@ class ServerConfirmTotalViewController: UIViewController, UITextFieldDelegate,
  UIPickerViewDelegate, UIPickerViewDataSource {
     
     var dishes: [Dish]?
-    var pickerData: [String] = ["10", "11", "12","13", "14", "15", "16", "17", "18", "19", "20"]
+    var pickerData: [String] = ["0", "10", "11", "12","13", "14", "15", "16", "17", "18", "19", "20"]
     
     var subtotal = 0.0
     var tax = 0.0
@@ -59,9 +59,14 @@ class ServerConfirmTotalViewController: UIViewController, UITextFieldDelegate,
         return nil
     }
     
+    func updateTotal() {
+        let total: Double = (subtotal + tax) * (1 + Double(tipsPct) * 1.0 / 100)
+        self.totalField.text = String(NSString(format:"%.2f", total))
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-       
+        pickerVIew.selectRow(0, inComponent: 0, animated: true)
     }
     
     
@@ -76,8 +81,7 @@ class ServerConfirmTotalViewController: UIViewController, UITextFieldDelegate,
         
         print("subtotal: \(subtotal)")
         self.subtotalField.text = String(NSString(format:"%.2f", subtotal))
-        let total: Double = (subtotal + tax) * (1 + Double(tipsPct) * 1.0 / 100)
-        self.totalField.text = String(NSString(format:"%.2f", total))
+        updateTotal()
     }
 
     override func didReceiveMemoryWarning() {
@@ -102,8 +106,7 @@ class ServerConfirmTotalViewController: UIViewController, UITextFieldDelegate,
         // This method is triggered whenever the user makes a change to the picker selection.
         // The parameter named row and component represents what was selected.
         self.tipsPct = Int(pickerData[row])!
-        let total: Double = (subtotal + tax) * (1 + Double(tipsPct) * 1.0 / 100)
-        self.totalField.text = String(NSString(format:"%.2f", total))
+        updateTotal()
     }
     
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
@@ -114,8 +117,7 @@ class ServerConfirmTotalViewController: UIViewController, UITextFieldDelegate,
         if taxField.text!.characters.count > 0 {
             self.tax = Double(taxField.text!)!
         }
-        let total: Double = (subtotal + tax) * (1 + Double(tipsPct) * 1.0 / 100)
-        self.totalField.text = String(NSString(format:"%.2f", total))
+        updateTotal()
         self.view.endEditing(true)
     }
     
@@ -124,8 +126,7 @@ class ServerConfirmTotalViewController: UIViewController, UITextFieldDelegate,
         if taxField.text!.characters.count > 0 {
             self.tax = Double(taxField.text!)!
         }
-        let total: Double = (subtotal + tax) * (1 + Double(tipsPct) * 1.0 / 100)
-        self.totalField.text = String(NSString(format:"%.2f", total))
+        updateTotal()
         
         return true
     }

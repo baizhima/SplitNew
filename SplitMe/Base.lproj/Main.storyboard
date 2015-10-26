@@ -587,12 +587,6 @@
                                     </navigationItem>
                                 </items>
                             </navigationBar>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Wait adding tax and tips..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FzY-RJ-oTb">
-                                <rect key="frame" x="56" y="513" width="244" height="72"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Z8X-N9-r6A">
                                 <rect key="frame" x="0.0" y="174" width="375" height="307"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -601,11 +595,18 @@
                                     <outlet property="delegate" destination="noI-Ie-780" id="64K-KG-hNB"/>
                                 </connections>
                             </tableView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Wait adding tax and tips..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FzY-RJ-oTb">
+                                <rect key="frame" x="56" y="513" width="244" height="72"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
+                        <outlet property="promptField" destination="FzY-RJ-oTb" id="3hc-9q-kMR"/>
                         <segue destination="tXM-hD-fRu" kind="show" identifier="removeDishesDidNotEatToClientWatchAllDishes" id="Dn7-Wl-YMU"/>
                         <segue destination="aXh-VE-ViT" kind="show" identifier="removeDishesDidNotEatToServerConfirmTotal" id="rKd-pn-Yaq"/>
                         <segue destination="c1q-5B-v3a" kind="show" identifier="removeDishesDidNotEatToClientTotalPay" id="QWX-na-4bG"/>
@@ -962,6 +963,7 @@
                         <outlet property="dishField" destination="eoL-J7-ykE" id="F6T-xe-yHn"/>
                         <outlet property="dishTable" destination="3XC-tr-Dh0" id="bys-1x-H1f"/>
                         <outlet property="imageView" destination="Z8n-5y-ESc" id="FaF-3b-ZSk"/>
+                        <outlet property="nextButton" destination="lae-88-Yw1" id="FLD-iq-86r"/>
                         <outlet property="priceField" destination="O31-J8-GSf" id="1dL-hi-aLI"/>
                         <outlet property="scrollView" destination="l9i-GI-391" id="AvA-vj-F5x"/>
                         <segue destination="a63-N9-D1F" kind="show" identifier="serverTypeShareDishesToTypeOwnDishes" id="p4C-2T-D0T"/>
@@ -1051,11 +1053,11 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="dGz-N1-fph"/>
-        <segue reference="4KL-G5-uf4"/>
-        <segue reference="Dn7-Wl-YMU"/>
-        <segue reference="S8D-pB-Lra"/>
+        <segue reference="p4C-2T-D0T"/>
+        <segue reference="ghu-bt-NMB"/>
         <segue reference="vOd-pg-Kca"/>
         <segue reference="bwC-y0-ghp"/>
-        <segue reference="ghu-bt-NMB"/>
+        <segue reference="S8D-pB-Lra"/>
+        <segue reference="Dn7-Wl-YMU"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -31,6 +31,7 @@ class Meal: PFObject, PFSubclassing {
    
     @NSManaged var master: User
     @NSManaged var users: [User]
+    @NSManaged var usersState: [Int]
     
     @NSManaged var dishes: [Dish]
     
@@ -59,9 +60,14 @@ class Meal: PFObject, PFSubclassing {
         
         state = Meal.StartUserJoining
         
+        master.state = User.UserJoined
+        master.saveInBackground()
+        
         self.master = master
         users = [User]()
         users.append(master)
+        
+        
        
         dishes = [Dish]()
         //soloDishes = [Dish]()
