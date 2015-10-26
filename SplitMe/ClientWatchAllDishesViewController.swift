@@ -26,9 +26,7 @@ class ClientWatchAllDishesViewController: UIViewController, UITableViewDelegate 
         self.performSegueWithIdentifier("clientWatchAllDishesToTypeOwnDishes", sender: self)
     }
 
-    @IBAction func nextPressed(sender: UIBarButtonItem) {
-        /*self.performSegueWithIdentifier("clientWatchAllDishesToRemoveDishesDidNotEat", sender: self)*/
-    }
+    
     
     func fetchMeal(){
         
@@ -39,32 +37,47 @@ class ClientWatchAllDishesViewController: UIViewController, UITableViewDelegate 
                 if error != nil{
                     print(error )
                 }
+                self.updateSoloDishes()
+                self.updateSharedDishes()
+                
+                self.soloDishesView.reloadData()
+                self.sharedDishesView.reloadData()
+                
             }
             
             if meal.state >= Meal.SubtotalConfirmed {
+                if let timer = self.timer {
+                    timer.invalidate()
+                }
                 performSegueWithIdentifier("clientWatchAllDishesToRemoveDishesDidNotEat", sender: self)
             }
-            updateSoloDishes()
-            updateSharedDishes()
             
-            self.soloDishesView.reloadData()
-            self.sharedDishesView.reloadData()
         }
         
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        timer = NSTimer.scheduledTimerWithTimeInterval(2, target: self, selector: Selector("fetchMeal"), userInfo: nil, repeats: true)
+        
     }
     
     override func viewDidAppear(animated: Bool) {
-        updateSoloDishes()
-        updateSharedDishes()
-        self.soloDishesView.reloadData()
-        self.sharedDishesView.reloadData()
+        if let meal = Meal.currentMeal {
+            meal.fetchInBackgroundWithBlock {
+                (object, error) -> Void in
+                if error != nil {
+                    self.updateSoloDishes()
+                    self.updateSharedDishes()
+                    self.soloDishesView.reloadData()
+                    self.sharedDishesView.reloadData()
+                } else {
+                    print(error)
+                }
+            }
+        }
         
         
+        timer = NSTimer.scheduledTimerWithTimeInterval(2, target: self, selector: Selector("fetchMeal"), userInfo: nil, repeats: true)
     }
 
     override func didReceiveMemoryWarning() {
@@ -85,6 +98,7 @@ class ClientWatchAllDishesViewController: UIViewController, UITableViewDelegate 
                 }
             }
         }
+        print("solo dishes count =  \(soloDishes.count)")
     }
     
     func updateSharedDishes() {
@@ -95,6 +109,7 @@ class ClientWatchAllDishesViewController: UIViewController, UITableViewDelegate 
                 }
             }
         }
+        print("shared dishes count =  \(sharedDishes.count)")
     }
     
     

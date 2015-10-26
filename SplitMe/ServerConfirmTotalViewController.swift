@@ -8,14 +8,15 @@
 
 import UIKit
 
-class ServerConfirmTotalViewController: UIViewController {
+class ServerConfirmTotalViewController: UIViewController, UITextFieldDelegate,
+ UIPickerViewDelegate, UIPickerViewDataSource {
     
     var dishes: [Dish]?
+    var pickerData: [String] = ["10", "11", "12","13", "14", "15", "16", "17", "18", "19", "20"]
     
     var subtotal = 0.0
     var tax = 0.0
-    var tipsPct: Int?
-    var tips = 0.0
+    var tipsPct = 0
     
     
     @IBOutlet weak var subtotalField: UILabel!
@@ -75,7 +76,8 @@ class ServerConfirmTotalViewController: UIViewController {
         
         print("subtotal: \(subtotal)")
         self.subtotalField.text = String(NSString(format:"%.2f", subtotal))
-        self.totalField.text = String(NSString(format:"%.2f", (subtotal + tax) * (1 + tips)))
+        let total: Double = (subtotal + tax) * (1 + Double(tipsPct) * 1.0 / 100)
+        self.totalField.text = String(NSString(format:"%.2f", total))
     }
 
     override func didReceiveMemoryWarning() {
@@ -83,6 +85,50 @@ class ServerConfirmTotalViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    
+    // The number of rows of data
+    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return pickerData.count
+    }
+    
+    
+    // The data to return for the row and component (column) that's being passed in
+    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return pickerData[row]
+    }
+    
+    
+    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        // This method is triggered whenever the user makes a change to the picker selection.
+        // The parameter named row and component represents what was selected.
+        self.tipsPct = Int(pickerData[row])!
+        let total: Double = (subtotal + tax) * (1 + Double(tipsPct) * 1.0 / 100)
+        self.totalField.text = String(NSString(format:"%.2f", total))
+    }
+    
+    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        if taxField.text!.characters.count > 0 {
+            self.tax = Double(taxField.text!)!
+        }
+        let total: Double = (subtotal + tax) * (1 + Double(tipsPct) * 1.0 / 100)
+        self.totalField.text = String(NSString(format:"%.2f", total))
+        self.view.endEditing(true)
+    }
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        taxField.resignFirstResponder()
+        if taxField.text!.characters.count > 0 {
+            self.tax = Double(taxField.text!)!
+        }
+        let total: Double = (subtotal + tax) * (1 + Double(tipsPct) * 1.0 / 100)
+        self.totalField.text = String(NSString(format:"%.2f", total))
+        
+        return true
+    }
 
     /*
     // MARK: - Navigation

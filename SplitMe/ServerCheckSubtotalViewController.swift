@@ -9,9 +9,11 @@
 import UIKit
 import Parse
 
-class ServerCheckSubtotalViewController: UIViewController, UITableViewDelegate {
+class ServerCheckSubtotalViewController: UIViewController, UITableViewDelegate  {
    
     var dishes: [Dish]?
+    
+    
     
     @IBOutlet weak var subtotalField: UILabel!
     
@@ -32,6 +34,8 @@ class ServerCheckSubtotalViewController: UIViewController, UITableViewDelegate {
     func fetchDishes() -> [Dish]?{
         
         if let meal = Meal.currentMeal {
+            
+            
             
             let query = Dish.query()
             query?.whereKey("meal", equalTo: meal)
@@ -70,6 +74,10 @@ class ServerCheckSubtotalViewController: UIViewController, UITableViewDelegate {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    
+    
+    
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     
