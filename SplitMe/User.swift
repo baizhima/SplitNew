@@ -27,7 +27,7 @@ class User: PFObject, PFSubclassing {
     
     @NSManaged var isHost: Bool
     
-    static let UserJoining = 0 , UserJoined = 1, SoloDishesSaved = 2
+    static let UserJoining = 0 , UserJoined = 1, SoloDishesSaved = 2, ShareDishesSaved = 3
     
     @NSManaged var state: Int
     

@@ -90,9 +90,9 @@ class ClientWatchAllDishesViewController: UIViewController, UITableViewDelegate 
     
     override func viewDidAppear(animated: Bool) {
         
-        //dispatch_async(dispatch_get_main_queue(), {
+        dispatch_async(dispatch_get_main_queue(), {
             self.timer = NSTimer.scheduledTimerWithTimeInterval(2, target: self, selector: Selector("fetchMeal"), userInfo: nil, repeats: true)
-        //});
+        });
         
     }
 

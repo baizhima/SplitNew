@@ -10,11 +10,16 @@ import UIKit
 
 class RemoveDishesDidNotEatViewController: UIViewController, UITableViewDelegate {
 
-    @IBOutlet weak var promptField: UILabel!
+    var timer: NSTimer?
     var sharedDishes : [Dish]?
     
+    @IBOutlet weak var nextButton: UIBarButtonItem!
+    
+    @IBOutlet weak var promptField: UILabel!
+    
+    
     @IBAction func backPressed(sender: UIBarButtonItem) {
-        self.performSegueWithIdentifier("serverCheckSubtotalToRemoveDishesDidNotEat", sender: self)
+        self.performSegueWithIdentifier("removeDishesDidNotEatToServerCheckSubTotal", sender: self)
     }
     
     
@@ -22,11 +27,15 @@ class RemoveDishesDidNotEatViewController: UIViewController, UITableViewDelegate
         
         if let meal = Meal.currentMeal {
             if let user = User.currentUser {
+                user.state = User.ShareDishesSaved
+                user.saveInBackground()
+                
                 if meal.master.objectId == user.objectId {
                     self.performSegueWithIdentifier("removeDishesDidNotEatToServerConfirmTotal", sender: self)
                 }
                 else {
                     promptField.hidden = false
+                    nextButton.enabled = false
                 }
             }
         }
@@ -53,7 +62,25 @@ class RemoveDishesDidNotEatViewController: UIViewController, UITableViewDelegate
         return nil
     }
     
-    
+    func updateMealState(){
+        
+        if let meal: Meal = Meal.currentMeal {
+            meal.fetchInBackgroundWithBlock {
+                (object, error) -> Void in
+                if error != nil{
+                    print(error)
+                }
+                
+            }
+            print("meal.state=\(meal.state)")
+            if meal.state == Meal.TotalConfirmed {
+                if let timer = self.timer {
+                    timer.invalidate()
+                }
+                self.performSegueWithIdentifier("removeDishesDidNotEatToClientTotalPay", sender: self)
+            }
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -61,7 +88,14 @@ class RemoveDishesDidNotEatViewController: UIViewController, UITableViewDelegate
         // Do any additional setup after loading the view.
     }
     
-    
+    override func viewDidAppear(animated: Bool) {
+        if Meal.currentMeal!.master.objectId != User.currentUser?.objectId {
+            dispatch_async(dispatch_get_main_queue(), {
+                self.timer = NSTimer.scheduledTimerWithTimeInterval(2, target: self, selector: Selector("updateMealState"), userInfo: nil, repeats: true)
+            })
+        }
+       
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

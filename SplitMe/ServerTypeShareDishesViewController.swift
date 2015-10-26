@@ -65,7 +65,7 @@ class ServerTypeShareDishesViewController: UIViewController, UIScrollViewDelegat
         }
     }
     
-    func updateMealState() -> Int {
+    func updateMealState() {
         
         if let meal = Meal.currentMeal {
             
@@ -90,29 +90,12 @@ class ServerTypeShareDishesViewController: UIViewController, UIScrollViewDelegat
                     if meal.state == Meal.AllDishesSaved {
                         self.nextButton.enabled = true
                     }
+                    meal.saveInBackground()
                 })
-                /*
-                var count = 0
-                for user: User in users{
-                    print("user.state=\(user.state)")
-                    if user.state == User.SoloDishesSaved {
-                        count += 1
-                    }
-                }
-                if( count == users.count ){
-                    meal.state = Meal.AllDishesSaved
-                }else{
-                    debugPrint("Still \(users.count - count) users didn't finish")
-                }*/
-                
-           /* }catch _ {
-                debugPrint("Error: cannot get the number of users who saved meal")
-            }*/
-            
             
             
         }
-        return 0
+        
     }
 
     override func viewDidLoad() {

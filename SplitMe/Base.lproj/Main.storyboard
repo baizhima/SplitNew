@@ -606,6 +606,7 @@
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
+                        <outlet property="nextButton" destination="UcV-Hu-KDR" id="pjn-zp-kMj"/>
                         <outlet property="promptField" destination="FzY-RJ-oTb" id="3hc-9q-kMR"/>
                         <segue destination="tXM-hD-fRu" kind="show" identifier="removeDishesDidNotEatToClientWatchAllDishes" id="Dn7-Wl-YMU"/>
                         <segue destination="aXh-VE-ViT" kind="show" identifier="removeDishesDidNotEatToServerConfirmTotal" id="rKd-pn-Yaq"/>

@@ -11,6 +11,7 @@ import UIKit
 class ServerConfirmTotalViewController: UIViewController, UITextFieldDelegate,
  UIPickerViewDelegate, UIPickerViewDataSource {
     
+    var timer: NSTimer?
     var dishes: [Dish]?
     var pickerData: [String] = ["0", "10", "11", "12","13", "14", "15", "16", "17", "18", "19", "20"]
     
@@ -62,6 +63,42 @@ class ServerConfirmTotalViewController: UIViewController, UITextFieldDelegate,
     func updateTotal() {
         let total: Double = subtotal * (1 + Double(tipsPct) * 1.0 / 100) + tax
         self.totalField.text = String(NSString(format:"%.2f", total))
+        if let meal = Meal.currentMeal {
+            meal.subtotal = subtotal
+            meal.tax = tax
+            meal.tips = subtotal * Double(tipsPct) / 100
+            meal.saveInBackground()
+        }
+        
+    }
+    
+    func updateMealState() {
+        
+        if let meal = Meal.currentMeal {
+            
+            
+            User.fetchAllInBackground(meal.users, block: {(objects: [AnyObject]?, error: NSError?) -> Void in
+                let users = objects as! [User]
+                var count = 0
+                for user: User in users{
+                    print("[ServerConfirmTotal]user.state=\(user.state)")
+                    if user.state == User.ShareDishesSaved {
+                        count += 1
+                    }
+                }
+                if( count == users.count ){
+                    meal.state = Meal.SharedDishesConfirmed
+                }else{
+                    debugPrint("Still \(users.count - count) users didn't finish")
+                }
+                
+                if meal.state == Meal.SharedDishesConfirmed {
+                    self.splitButton.enabled = true
+                }
+            })
+            meal.saveInBackground()
+        }
+        
     }
     
     override func viewDidLoad() {
@@ -74,6 +111,11 @@ class ServerConfirmTotalViewController: UIViewController, UITextFieldDelegate,
     
     
     override func viewDidAppear(animated: Bool) {
+        
+        
+        dispatch_async(dispatch_get_main_queue(), {
+            self.timer = NSTimer.scheduledTimerWithTimeInterval(2, target: self, selector: Selector("updateMealState"), userInfo: nil, repeats: true)
+        })
         
         self.dishes = fetchDishes()
         
