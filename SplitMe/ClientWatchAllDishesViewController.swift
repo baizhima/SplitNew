@@ -40,7 +40,7 @@ class ClientWatchAllDishesViewController: UIViewController, UITableViewDelegate 
                 
             }
         }
-        print("soloDishes.count=\(soloDishes.count), sharedDishes.count=\(sharedDishes.count)")
+        
         self.soloDishesView.reloadData()
         self.sharedDishesView.reloadData()
     }
@@ -89,7 +89,7 @@ class ClientWatchAllDishesViewController: UIViewController, UITableViewDelegate 
     }
     
     override func viewDidAppear(animated: Bool) {
-        
+        fetchMeal()
         dispatch_async(dispatch_get_main_queue(), {
             self.timer = NSTimer.scheduledTimerWithTimeInterval(2, target: self, selector: Selector("fetchMeal"), userInfo: nil, repeats: true)
         });

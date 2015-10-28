@@ -65,11 +65,9 @@ class RemoveDishesDidNotEatViewController: UIViewController, UITableViewDelegate
     func updateMealState(){
         
         if let meal: Meal = Meal.currentMeal {
-            meal.fetchInBackgroundWithBlock {
-                (object, error) -> Void in
-                if error != nil{
-                    print(error)
-                }
+            do {
+                try meal.fetch()
+            } catch _ {
                 
             }
             print("meal.state=\(meal.state)")
@@ -77,7 +75,7 @@ class RemoveDishesDidNotEatViewController: UIViewController, UITableViewDelegate
                 if let timer = self.timer {
                     timer.invalidate()
                 }
-                self.performSegueWithIdentifier("removeDishesDidNotEatToClientTotalPay", sender: self)
+                self.performSegueWithIdentifier("removeDishesDidNotEatToClientPay", sender: self)
             }
         }
     }
@@ -90,6 +88,7 @@ class RemoveDishesDidNotEatViewController: UIViewController, UITableViewDelegate
     
     override func viewDidAppear(animated: Bool) {
         if Meal.currentMeal!.master.objectId != User.currentUser?.objectId {
+            
             dispatch_async(dispatch_get_main_queue(), {
                 self.timer = NSTimer.scheduledTimerWithTimeInterval(2, target: self, selector: Selector("updateMealState"), userInfo: nil, repeats: true)
             })

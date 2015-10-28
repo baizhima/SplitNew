@@ -36,7 +36,7 @@ class ServerConfirmTotalViewController: UIViewController, UITextFieldDelegate,
             
             meal.state = Meal.TotalConfirmed
             meal.saveInBackground()
-            self.performSegueWithIdentifier("serverConfirmTotalToServerCharge", sender: self)
+            self.performSegueWithIdentifier("serverConfirmTotalToServerToll", sender: self)
         }
         
     }
