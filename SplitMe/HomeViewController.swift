@@ -23,6 +23,8 @@ class HomeViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var joinButton: UIButton!
     
     
+    
+    
     @IBAction func createPressed(sender: UIButton) {
         
         if nameField.text!.characters.count > 0 {
@@ -88,9 +90,17 @@ class HomeViewController: UIViewController, UITextFieldDelegate {
         super.didReceiveMemoryWarning()
     }
     
+    
+    
+    
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         self.view.endEditing(true)
     }
+    
+    func textFieldDidBeginEditing(textField: UITextField) {
+        print("hello")
+    }
+    
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         nameField.resignFirstResponder()
