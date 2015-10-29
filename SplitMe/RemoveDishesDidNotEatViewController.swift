@@ -26,12 +26,8 @@ class RemoveDishesDidNotEatViewController: UIViewController, UITableViewDelegate
         if let meal = Meal.currentMeal {
             if let user = User.currentUser {
                 
-                do{
-                    try sharedDishes = Dish.fetchAllIfNeeded(sharedDishes) as? [Dish]
-                }catch _{
-                    print("fetch dishes error")
-                }
                 
+                print(sharedDishes)
                 
                 // add users to the dishes
                 for dish: Dish in sharedDishes! {
