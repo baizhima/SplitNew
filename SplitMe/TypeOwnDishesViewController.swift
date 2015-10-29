@@ -31,18 +31,18 @@ class TypeOwnDishesViewController: UIViewController, UIScrollViewDelegate, UITex
     }
     
     @IBAction func nextPressed(sender: UIBarButtonItem) {
-       
-       /* for dish: Dish in soloDishArr{
-            dish.saveInBackground()
-        }*/
         
         if let meal = Meal.currentMeal {
             
             do{
-                //try meal.fetchIfNeeded()
+                try meal.fetch()
+                
+                print(meal)
+                
+                meal.addUniqueObjectsFromArray(soloDishArr, forKey: "dishes")
                 //meal.dishes.appendContentsOf(soloDishArr)
                 try Dish.saveAll(soloDishArr)
-                //try meal.save()
+                try meal.save()
             }catch _{
                 debugPrint("fail to save dishes")
             }

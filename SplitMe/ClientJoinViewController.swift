@@ -41,7 +41,9 @@ class ClientJoinViewController: UIViewController, UITextFieldDelegate {
                     slave.state = User.UserJoined
                     slave.saveInBackground()
                     
-                    meal.users.append(slave)
+                    //meal.users.append(slave)
+                    meal.addUniqueObject(slave, forKey: "users")
+                    
                     meal.saveInBackgroundWithBlock({
                         (success, error ) -> Void in
                         if(success){

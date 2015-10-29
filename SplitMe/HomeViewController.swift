@@ -72,6 +72,27 @@ class HomeViewController: UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
         
         
+//        Meal.query()?.getObjectInBackgroundWithId("Hy8PP2nuu6", block: {
+//            
+//            (object , error ) -> Void in
+//            
+//            //print(object!)
+//            
+//            let meal: Meal = object as! Meal
+//            
+//
+//            do{
+//                let dishes = try Dish.fetchAll(meal.dishes) as! [Dish]
+//                
+//                
+//                print(dishes)
+//                
+//            }catch _{
+//                
+//            }
+//            
+//        })
+        
         
     }
 

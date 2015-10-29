@@ -36,7 +36,8 @@ class RemoveDishesDidNotEatViewController: UIViewController, UITableViewDelegate
                 // add users to the dishes
                 for dish: Dish in sharedDishes! {
                     
-                    dish.sharedWith.append(user);
+                    dish.addUniqueObject(user, forKey: "sharedWith")
+                    //dish.sharedWith.append(user);
                     dish.saveInBackgroundWithBlock({
                         (ok, error) -> Void in
                         if(!ok){

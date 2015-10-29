@@ -21,6 +21,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Parse.setApplicationId("2kmTKNrByFmNDv86AMREP1HAzUUe6JugdDLoQlAP",
             clientKey: "8NWxhSFfja3qKIUO7w2Lrrg2tl3SCt2yu4yGqoxK")
         PFAnalytics.trackAppOpenedWithLaunchOptions(launchOptions)
+        
+        Meal.registerSubclass()
+        User.registerSubclass()
+        Dish.registerSubclass()
+        
         return true
     }
 

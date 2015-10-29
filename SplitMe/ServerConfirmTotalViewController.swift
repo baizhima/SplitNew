@@ -34,8 +34,14 @@ class ServerConfirmTotalViewController: UIViewController, UITextFieldDelegate,
         
         var sum = 0.0
         for dish: Dish in dishes {
-            if( dish.sharedWith.contains(user)){
-                sum += dish.price / Double(dish.sharedWith.count)
+            if( dish.ownBy.objectId == user.objectId && dish.isShared == false){
+                sum += dish.price
+            }
+
+            for u in dish.sharedWith{
+                if u.objectId == user.objectId{
+                    sum += dish.price / Double(dish.sharedWith.count)
+                }
             }
         }
         return sum;
@@ -46,20 +52,26 @@ class ServerConfirmTotalViewController: UIViewController, UITextFieldDelegate,
         // TODO modify state code of Meal
         if let meal: Meal =  Meal.currentMeal {
             
-            var dishes: [Dish] = [Dish]()
-            do{
+            
+            
+            print("before fetch: \(meal.users) \(meal.dishes)")
+            
+            var dishes: [Dish]?
+            
                 let query = Dish.query()
                 query?.whereKey("meal", equalTo: meal)
-                try dishes = query?.findObjects() as! [Dish]
-                //try meal.dishes = Dish.fetchAllIfNeeded(meal.dishes) as! [Dish]
-                try meal.users = User.fetchAllIfNeeded(meal.users) as! [User]
-            }catch _{
-                debugPrint("Error: Fail to get meal dishes and users from server")
-            }
+                do{
+                    try dishes = query?.findObjects() as? [Dish]
+                    
+                }catch _{
+                    debugPrint("Error in fetching dishes")
+                }
+            print(dishes)
+            
             
             for user: User in meal.users {
                 
-                let subpayment = getSubPayment(user, dishes: dishes)
+                let subpayment = getSubPayment(user, dishes: dishes!)
                 
                 // split tax and tips by the number of users
                 user.payment = subpayment + (meal.tips + meal.tax)/Double(meal.users.count)
@@ -75,6 +87,71 @@ class ServerConfirmTotalViewController: UIViewController, UITextFieldDelegate,
             meal.state = Meal.TotalConfirmed
             meal.saveInBackground()
             self.performSegueWithIdentifier("serverConfirmTotalToServerToll", sender: self)
+            
+          
+
+//            Dish.fetchAllInBackground(meal.dishes, block: {
+//                (objects, error ) -> Void in
+//                if error == nil{
+//                    debugPrint(error)
+//                }else{
+//                    
+//                    let dishes: [Dish] = objects as! [Dish]
+//                    
+//                    for user: User in meal.users {
+//                        
+//                        let subpayment = self.getSubPayment(user, dishes: dishes)
+//                        
+//                        // split tax and tips by the number of users
+//                        user.payment = subpayment + (meal.tips + meal.tax)/Double(meal.users.count)
+//                        
+//                        // split tax and tips by the sub total of each user
+//                        //user.payment = meal.total * (subpayment/meal.subtotal);
+//                        
+//                        debugPrint("user: \(user.userName) payment is \(user.payment)" )
+//                    }
+//                    
+//                    User.saveAllInBackground(meal.users)
+//                    
+//                    meal.state = Meal.TotalConfirmed
+//                    meal.saveInBackground()
+//                    self.performSegueWithIdentifier("serverConfirmTotalToServerToll", sender: self)
+//                    
+//                }
+//            })
+            
+            //var dishes: [Dish] = [Dish]()
+//            do{
+////                let query = Dish.query()
+////                query?.whereKey("meal", equalTo: meal)
+////                try dishes = query?.findObjects() as! [Dish]
+//                try meal.dishes = Dish.fetchAll(meal.dishes) as! [Dish]
+//                print("before2 fetch: \(meal.users) \(meal.dishes)")
+//                try meal.users = User.fetchAll(meal.users) as! [User]
+//            }catch _{
+//                debugPrint("Error: Fail to get meal dishes and users from server")
+//            }
+//            
+//            print("Meal Dishes: \(meal.dishes)" )
+//            
+//            for user: User in meal.users {
+//                
+//                let subpayment = getSubPayment(user, dishes: meal.dishes)
+//                
+//                // split tax and tips by the number of users
+//                user.payment = subpayment + (meal.tips + meal.tax)/Double(meal.users.count)
+//                
+//                // split tax and tips by the sub total of each user
+//                //user.payment = meal.total * (subpayment/meal.subtotal);
+//                
+//                debugPrint("user: \(user.userName) payment is \(user.payment)" )
+//            }
+//            
+//            User.saveAllInBackground(meal.users)
+//            
+//            meal.state = Meal.TotalConfirmed
+//            meal.saveInBackground()
+//            self.performSegueWithIdentifier("serverConfirmTotalToServerToll", sender: self)
         }
         
     }
@@ -120,7 +197,7 @@ class ServerConfirmTotalViewController: UIViewController, UITextFieldDelegate,
                 let users = objects as! [User]
                 var count = 0
                 for user: User in users{
-                    print("[ServerConfirmTotal]user.state=\(user.state)")
+                    //print("[ServerConfirmTotal]user.state=\(user.state)")
                     if user.state == User.ShareDishesSaved {
                         count += 1
                     }
