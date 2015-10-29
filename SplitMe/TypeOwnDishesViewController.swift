@@ -32,9 +32,9 @@ class TypeOwnDishesViewController: UIViewController, UIScrollViewDelegate, UITex
     
     @IBAction func nextPressed(sender: UIBarButtonItem) {
        
-        for dish: Dish in soloDishArr{
+       /* for dish: Dish in soloDishArr{
             dish.saveInBackground()
-        }
+        }*/
         
         if let meal = Meal.currentMeal {
             
@@ -155,6 +155,17 @@ class TypeOwnDishesViewController: UIViewController, UIScrollViewDelegate, UITex
         newCell.textLabel!.text = "\(soloDishArr[idx].name)"
         newCell.detailTextLabel?.text = "$" + String(NSString(format:"%.2f", soloDishArr[idx].price))
         return newCell
+    }
+    
+    func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        if (editingStyle == UITableViewCellEditingStyle.Delete) {
+            soloDishArr.removeAtIndex(indexPath.row)
+            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
+        }
     }
 
     /*
