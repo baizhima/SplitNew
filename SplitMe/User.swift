@@ -27,6 +27,8 @@ class User: PFObject, PFSubclassing {
     
     @NSManaged var isHost: Bool
     
+    @NSManaged var payment: Double
+    
     static let UserJoining = 0 , UserJoined = 1, SoloDishesSaved = 2, ShareDishesSaved = 3
     
     @NSManaged var state: Int
@@ -44,6 +46,8 @@ class User: PFObject, PFSubclassing {
         
         self.isHost = false
         self.state = User.UserJoining
+        
+        self.payment = 0.0
     }
    
     /*

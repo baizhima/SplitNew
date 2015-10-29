@@ -31,7 +31,7 @@ class Dish: PFObject, PFSubclassing{
         self.meal = meal
         self.isShared = isShared
         self.ownBy = ownBy
-        self.sharedWith = nil
+        self.sharedWith = [User]()
     }
     
     @NSManaged var name: String
@@ -39,5 +39,5 @@ class Dish: PFObject, PFSubclassing{
     @NSManaged var isShared: Bool
     @NSManaged var meal: Meal
     @NSManaged var ownBy: User
-    @NSManaged var sharedWith: [User]?
+    @NSManaged var sharedWith: [User]
 }

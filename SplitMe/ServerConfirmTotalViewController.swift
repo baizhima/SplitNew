@@ -29,10 +29,44 @@ class ServerConfirmTotalViewController: UIViewController, UITextFieldDelegate,
     @IBOutlet weak var totalField: UILabel!
     
     @IBOutlet weak var splitButton: UIButton!
+    
+    func getSubPayment(user: User, dishes: [Dish]) -> Double{
+        
+        var sum = 0.0
+        for dish: Dish in dishes {
+            if( dish.sharedWith.contains(user)){
+                sum += dish.price / Double(dish.sharedWith.count)
+            }
+        }
+        return sum;
+    }
+    
     @IBAction func splitPressed(sender: UIButton) {
         
         // TODO modify state code of Meal
         if let meal: Meal =  Meal.currentMeal {
+            
+            do{
+                try meal.dishes = Dish.fetchAllIfNeeded(meal.dishes) as! [Dish]
+                try meal.users = User.fetchAllIfNeeded(meal.users) as! [User]
+            }catch _{
+                debugPrint("Error: Fail to get meal dishes and users from server")
+            }
+            
+            for user: User in meal.users {
+                
+                let subpayment = getSubPayment(user, dishes: meal.dishes)
+                
+                // split tax and tips by the number of users
+                user.payment = subpayment + (meal.tips + meal.tax)/Double(meal.users.count)
+                
+                // split tax and tips by the sub total of each user
+                //user.payment = meal.total * (subpayment/meal.subtotal);
+                
+                debugPrint("user: \(user.userName) payment is \(user.payment)" )
+            }
+            
+            User.saveAllInBackground(meal.users)
             
             meal.state = Meal.TotalConfirmed
             meal.saveInBackground()
@@ -67,6 +101,7 @@ class ServerConfirmTotalViewController: UIViewController, UITextFieldDelegate,
             meal.subtotal = subtotal
             meal.tax = tax
             meal.tips = subtotal * Double(tipsPct) / 100
+            meal.total = total
             meal.saveInBackground()
         }
         
@@ -111,7 +146,6 @@ class ServerConfirmTotalViewController: UIViewController, UITextFieldDelegate,
     
     
     override func viewDidAppear(animated: Bool) {
-        
         
         dispatch_async(dispatch_get_main_queue(), {
             self.timer = NSTimer.scheduledTimerWithTimeInterval(2, target: self, selector: Selector("updateMealState"), userInfo: nil, repeats: true)

@@ -36,13 +36,17 @@ class TypeOwnDishesViewController: UIViewController, UIScrollViewDelegate, UITex
             dish.saveInBackground()
         }
         
-        
         if let meal = Meal.currentMeal {
-       
-//            meal.fetchIfNeededInBackground()
-//            meal.addUniqueObjectsFromArray(soloDishArr, forKey: "dishes")
-//            meal.saveInBackground()
-//            
+            
+            do{
+                try meal.fetchIfNeeded()
+                meal.dishes.appendContentsOf(soloDishArr)
+                try Dish.saveAll(meal.dishes)
+                try meal.save()
+            }catch _{
+                
+            }
+            
             if let user = User.currentUser {
                 
                 if meal.master.objectId ==  user.objectId {
@@ -73,25 +77,7 @@ class TypeOwnDishesViewController: UIViewController, UIScrollViewDelegate, UITex
         }else{
             debugPrint("Error: Current meal is nil")
         }
-        // extend currMeal.soloDishes by dishArr
-//        if let meal = Meal.currentMeal {
-//            meal.fetchIfNeededInBackground()
-//            meal.addUniqueObjectsFromArray(soloDishArr, forKey: "dishes")
-//            meal.saveInBackground()
-//            
-//            if let user = User.currentUser {
-//                
-//                if meal.master.objectId ==  user.objectId {
-//                    self.performSegueWithIdentifier("typeOwnDishesToServerTypeShareDishes", sender: self)
-//                } else {
-//                    self.performSegueWithIdentifier("typeOwnDishesToClientWatchAllDishes", sender: self)
-//                }
-//            }else{
-//                debugPrint("Error: Current user is nil")
-//            }
-//        }else{
-//            debugPrint("Error: Current meal is nil")
-//        }
+
     }
     
     @IBAction func addPressed(sender: UIButton) {

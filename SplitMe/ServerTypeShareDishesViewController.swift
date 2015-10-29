@@ -29,15 +29,22 @@ class ServerTypeShareDishesViewController: UIViewController, UIScrollViewDelegat
     
     @IBAction func nextPressed(sender: UIBarButtonItem) {
         
-       /* for dish in sharedDishArr {
-            dish.saveInBackground()
-        }*/
+        if let meal = Meal.currentMeal {
+            
+            do{
+                try meal.fetchIfNeeded()
+                try Dish.saveAll(sharedDishArr)
+                meal.dishes.appendContentsOf(sharedDishArr)
+                try meal.save()
+            }catch _{
+                
+            }
+        }
+        
         if timer != nil {
             timer?.invalidate()
         }
         self.performSegueWithIdentifier("serverTypeShareDishesToServerCheckSubtotal", sender: self)
-        
-        
         
     }
     
@@ -68,9 +75,6 @@ class ServerTypeShareDishesViewController: UIViewController, UIScrollViewDelegat
     func updateMealState() {
         
         if let meal = Meal.currentMeal {
-            
-            //do{
-                //let users = try User.fetchAll(meal.users) as! [User]
                 
                 User.fetchAllInBackground(meal.users, block: {(objects: [AnyObject]?, error: NSError?) -> Void in
                     let users = objects as! [User]

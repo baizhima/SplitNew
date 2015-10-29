@@ -74,9 +74,6 @@ class ServerCheckSubtotalViewController: UIViewController, UITableViewDelegate  
     }
     
     
-    
-    
-    
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     
         if self.dishes == nil{

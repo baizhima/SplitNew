@@ -31,15 +31,14 @@ class Meal: PFObject, PFSubclassing {
    
     @NSManaged var master: User
     @NSManaged var users: [User]
-    @NSManaged var usersState: [Int]
+    //@NSManaged var payments: [User:Double]
+    //@NSManaged var usersState: [Int]
     
     @NSManaged var dishes: [Dish]
-    
     
     @NSManaged var subtotal: Double
     @NSManaged var tax: Double
     @NSManaged var tips: Double
-    
     @NSManaged var total: Double
   
     static let StartUserJoining = 0, AllUserJoined = 1, AllDishesSaved = 2

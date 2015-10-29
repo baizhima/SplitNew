@@ -17,16 +17,34 @@ class RemoveDishesDidNotEatViewController: UIViewController, UITableViewDelegate
     
     @IBOutlet weak var promptField: UILabel!
     
-    
     @IBAction func backPressed(sender: UIBarButtonItem) {
         self.performSegueWithIdentifier("removeDishesDidNotEatToServerCheckSubTotal", sender: self)
     }
-    
     
     @IBAction func nextPressed(sender: UIBarButtonItem) {
         
         if let meal = Meal.currentMeal {
             if let user = User.currentUser {
+                
+                do{
+                    try sharedDishes = Dish.fetchAllIfNeeded(sharedDishes) as? [Dish]
+                }catch _{
+                    print("fetch dishes error")
+                }
+                
+                
+                // add users to the dishes
+                for dish: Dish in sharedDishes! {
+                    
+                    dish.sharedWith.append(user);
+                    dish.saveInBackgroundWithBlock({
+                        (ok, error) -> Void in
+                        if(!ok){
+                            print(error)
+                        }
+                    })
+                }
+                
                 user.state = User.ShareDishesSaved
                 user.saveInBackground()
                 
@@ -39,8 +57,6 @@ class RemoveDishesDidNotEatViewController: UIViewController, UITableViewDelegate
                 }
             }
         }
-        
-        
     }
     
     func fetchSharedDishes() -> [Dish]?{
@@ -93,7 +109,6 @@ class RemoveDishesDidNotEatViewController: UIViewController, UITableViewDelegate
                 self.timer = NSTimer.scheduledTimerWithTimeInterval(2, target: self, selector: Selector("updateMealState"), userInfo: nil, repeats: true)
             })
         }
-       
     }
 
     override func didReceiveMemoryWarning() {
@@ -129,7 +144,6 @@ class RemoveDishesDidNotEatViewController: UIViewController, UITableViewDelegate
         }else{
             debugPrint("Error: tableView: dishes is empty")
         }
-        
         
         return newCell
     }

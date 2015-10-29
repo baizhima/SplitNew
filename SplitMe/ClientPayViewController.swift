@@ -10,23 +10,15 @@ import UIKit
 
 class ClientPayViewController: UIViewController {
 
-    
-    
     @IBOutlet weak var hostNameField: UILabel!
-    
     @IBOutlet weak var totalAmountField: UILabel!
-
     
     @IBAction func donePressed(sender: UIBarButtonItem) {
         
     }
     
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -35,7 +27,6 @@ class ClientPayViewController: UIViewController {
             meal.fetchIfNeededInBackgroundWithBlock({ (object , error ) -> Void in
                 if error != nil {
                     if let meal: Meal = object as? Meal{
-                        
                         self.hostNameField.text = meal.master.userName
                     }
                 }
@@ -43,8 +34,25 @@ class ClientPayViewController: UIViewController {
             })
             
         }
-        let total = 0
-        totalAmountField.text = String(NSString(format:"%.2f", total))
+        if let user = User.currentUser {
+            user.fetchInBackgroundWithBlock({
+                ( object, error ) -> Void in
+                if( error != nil ){
+                    debugPrint("Client Pay: fail to fetch user from server")
+                }else{
+                    self.totalAmountField.text = String(NSString(format:"%.2f", user.payment))
+                    
+                    debugPrint("Client: should pay \(user.payment)");
+                    if let u: User = object as? User  {
+                        debugPrint(u)
+                    }
+                }
+            })
+            
+        }else{
+            debugPrint("ClientPay Error: The current user is nil")
+        }
+        
     }
 
     override func didReceiveMemoryWarning() {
