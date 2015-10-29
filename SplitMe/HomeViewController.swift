@@ -16,6 +16,13 @@ class HomeViewController: UIViewController, UITextFieldDelegate {
     let user = PFObject(className: "User")
     
     @IBOutlet weak var nameField: UITextField!
+    
+    @IBOutlet weak var logoView: UIImageView!
+    
+    @IBOutlet weak var createButton: UIButton!
+    @IBOutlet weak var joinButton: UIButton!
+    
+    
     @IBAction func createPressed(sender: UIButton) {
         
         if nameField.text!.characters.count > 0 {
@@ -70,33 +77,14 @@ class HomeViewController: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
-//        Meal.query()?.getObjectInBackgroundWithId("Hy8PP2nuu6", block: {
-//            
-//            (object , error ) -> Void in
-//            
-//            //print(object!)
-//            
-//            let meal: Meal = object as! Meal
-//            
-//
-//            do{
-//                let dishes = try Dish.fetchAll(meal.dishes) as! [Dish]
-//                
-//                
-//                print(dishes)
-//                
-//            }catch _{
-//                
-//            }
-//            
-//        })
-        
+        logoView.image = UIImage(named: "logo")
+       
+
         
     }
 
     override func didReceiveMemoryWarning() {
+        //print("hokadnfkoasdnfkldsankofsodn")
         super.didReceiveMemoryWarning()
     }
     

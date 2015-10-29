@@ -19,69 +19,68 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter Your Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cgu-ge-HIk">
-                                <rect key="frame" x="102" y="183" width="170" height="21"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter Your Name" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="BFZ-8f-FmN">
+                                <rect key="frame" x="76" y="417" width="232" height="30"/>
                                 <animations/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="170" id="1Q4-VR-dkn"/>
-                                    <constraint firstAttribute="height" constant="21" id="lQQ-Mb-vJR"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Eg. Jack Zhou" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="BFZ-8f-FmN">
-                                <rect key="frame" x="102" y="218" width="170" height="30"/>
-                                <animations/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="170" id="XYq-Gd-yiW"/>
-                                    <constraint firstAttribute="height" constant="30" id="Z5G-mt-tuX"/>
-                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="alphabet" returnKeyType="done"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eCV-bc-Ixt">
-                                <rect key="frame" x="102" y="290" width="46" height="30"/>
+                                <rect key="frame" x="75" y="487" width="100" height="50"/>
                                 <animations/>
-                                <state key="normal" title="Create"/>
+                                <color key="backgroundColor" red="0.49019607843137253" green="0.70588235294117641" blue="0.84313725490196079" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                <state key="normal" title="create">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.maskToBounds" value="YES"/>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="createPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="AnW-2q-hg6"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2vt-6i-2a1">
-                                <rect key="frame" x="234" y="290" width="30" height="30"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Spliter" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3b7-5A-t28">
+                                <rect key="frame" x="120" y="293" width="135" height="47"/>
                                 <animations/>
-                                <state key="normal" title="Join"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="35"/>
+                                <color key="textColor" red="0.49803921580314636" green="0.49803921580314636" blue="0.49803921580314636" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                                <color key="shadowColor" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2vt-6i-2a1">
+                                <rect key="frame" x="208" y="487" width="100" height="50"/>
+                                <animations/>
+                                <color key="backgroundColor" red="0.90196078431372551" green="0.27450980392156865" blue="0.29411764705882354" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                <state key="normal" title="join">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.maskToBounds" value="YES"/>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="joinPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="lPh-Vb-u1J"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SplitMe" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3b7-5A-t28">
-                                <rect key="frame" x="0.0" y="55" width="375" height="113"/>
-                                <animations/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="113" id="wNn-O3-0Fe"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="50"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                                <color key="shadowColor" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
-                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ne1-LD-JUM">
+                                <rect key="frame" x="107" y="111" width="160" height="159"/>
+                            </imageView>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="BFZ-8f-FmN" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="0Nr-Kz-Mp8"/>
-                            <constraint firstItem="cgu-ge-HIk" firstAttribute="top" secondItem="3b7-5A-t28" secondAttribute="bottom" constant="15" id="3Em-z9-PVt"/>
-                            <constraint firstItem="cgu-ge-HIk" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="KLY-hq-wLB"/>
-                            <constraint firstItem="3b7-5A-t28" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="35" id="VBt-pE-hhm"/>
-                            <constraint firstItem="3b7-5A-t28" firstAttribute="centerX" secondItem="cgu-ge-HIk" secondAttribute="centerX" id="cYU-W4-c8o"/>
-                            <constraint firstItem="3b7-5A-t28" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="iVu-9J-JwR"/>
-                            <constraint firstItem="BFZ-8f-FmN" firstAttribute="top" secondItem="cgu-ge-HIk" secondAttribute="bottom" constant="14" id="tZ9-YK-5Go"/>
-                        </constraints>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
+                        <outlet property="createButton" destination="eCV-bc-Ixt" id="1tY-kS-vRx"/>
+                        <outlet property="joinButton" destination="2vt-6i-2a1" id="Fza-hp-1yb"/>
+                        <outlet property="logoView" destination="Ne1-LD-JUM" id="rtr-X9-szA"/>
                         <outlet property="nameField" destination="BFZ-8f-FmN" id="JZh-xh-9uU"/>
                         <segue destination="Dji-Nd-e40" kind="show" identifier="homeToServerWait" id="ujL-4z-TzB"/>
                         <segue destination="zMg-sx-EcO" kind="show" identifier="homeToClientJoin" id="gIn-AL-ijd"/>
@@ -1134,11 +1133,11 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="S8D-pB-Lra"/>
-        <segue reference="Dn7-Wl-YMU"/>
+        <segue reference="KKg-IW-lmu"/>
+        <segue reference="p4C-2T-D0T"/>
+        <segue reference="7dO-xX-yeP"/>
         <segue reference="tFu-9C-18Q"/>
         <segue reference="ujL-4z-TzB"/>
         <segue reference="gIn-AL-ijd"/>
-        <segue reference="p4C-2T-D0T"/>
-        <segue reference="ghu-bt-NMB"/>
     </inferredMetricsTieBreakers>
 </document>
