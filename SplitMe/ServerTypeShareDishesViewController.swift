@@ -32,10 +32,10 @@ class ServerTypeShareDishesViewController: UIViewController, UIScrollViewDelegat
         if let meal = Meal.currentMeal {
             
             do{
-                try meal.fetchIfNeeded()
+                //try meal.fetchIfNeeded()
                 try Dish.saveAll(sharedDishArr)
-                meal.dishes.appendContentsOf(sharedDishArr)
-                try meal.save()
+                //meal.dishes.appendContentsOf(sharedDishArr)
+                //try meal.save()
             }catch _{
                 
             }

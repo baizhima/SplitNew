@@ -46,8 +46,12 @@ class ServerConfirmTotalViewController: UIViewController, UITextFieldDelegate,
         // TODO modify state code of Meal
         if let meal: Meal =  Meal.currentMeal {
             
+            var dishes: [Dish] = [Dish]()
             do{
-                try meal.dishes = Dish.fetchAllIfNeeded(meal.dishes) as! [Dish]
+                let query = Dish.query()
+                query?.whereKey("meal", equalTo: meal)
+                try dishes = query?.findObjects() as! [Dish]
+                //try meal.dishes = Dish.fetchAllIfNeeded(meal.dishes) as! [Dish]
                 try meal.users = User.fetchAllIfNeeded(meal.users) as! [User]
             }catch _{
                 debugPrint("Error: Fail to get meal dishes and users from server")
@@ -55,7 +59,7 @@ class ServerConfirmTotalViewController: UIViewController, UITextFieldDelegate,
             
             for user: User in meal.users {
                 
-                let subpayment = getSubPayment(user, dishes: meal.dishes)
+                let subpayment = getSubPayment(user, dishes: dishes)
                 
                 // split tax and tips by the number of users
                 user.payment = subpayment + (meal.tips + meal.tax)/Double(meal.users.count)

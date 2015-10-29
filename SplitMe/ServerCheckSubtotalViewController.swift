@@ -13,8 +13,6 @@ class ServerCheckSubtotalViewController: UIViewController, UITableViewDelegate  
    
     var dishes: [Dish]?
     
-    
-    
     @IBOutlet weak var subtotalField: UILabel!
     
     @IBAction func backPressed(sender: UIBarButtonItem) {
