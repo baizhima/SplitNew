@@ -40,7 +40,6 @@ class User: PFObject, PFSubclassing {
         super.init()
         
         self.userName = userName
-        //self.isMaster = isMaster
         self.image = nil
         
         self.isHost = false

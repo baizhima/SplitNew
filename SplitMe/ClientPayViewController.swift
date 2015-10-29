@@ -31,6 +31,18 @@ class ClientPayViewController: UIViewController {
     
     override func viewDidAppear(animated: Bool) {
         //hostNameField.text = Meal.currentMeal!.master.userName
+        if let meal = Meal.currentMeal {
+            meal.fetchIfNeededInBackgroundWithBlock({ (object , error ) -> Void in
+                if error != nil {
+                    if let meal: Meal = object as? Meal{
+                        
+                        self.hostNameField.text = meal.master.userName
+                    }
+                }
+                
+            })
+            
+        }
         let total = 0
         totalAmountField.text = String(NSString(format:"%.2f", total))
     }
