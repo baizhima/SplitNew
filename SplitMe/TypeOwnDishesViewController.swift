@@ -39,12 +39,12 @@ class TypeOwnDishesViewController: UIViewController, UIScrollViewDelegate, UITex
         if let meal = Meal.currentMeal {
             
             do{
-                try meal.fetchIfNeeded()
-                meal.dishes.appendContentsOf(soloDishArr)
-                try Dish.saveAll(meal.dishes)
-                try meal.save()
+                //try meal.fetchIfNeeded()
+                //meal.dishes.appendContentsOf(soloDishArr)
+                try Dish.saveAll(soloDishArr)
+                //try meal.save()
             }catch _{
-                
+                debugPrint("fail to save dishes")
             }
             
             if let user = User.currentUser {
