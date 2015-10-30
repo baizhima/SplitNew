@@ -24,6 +24,10 @@ class ClientPayViewController: UIViewController {
 
     
     @IBAction func donePressed(sender: UIBarButtonItem) {
+        
+        
+        
+        
         performSegueWithIdentifier("clientPayToHome", sender: self)
     }
     

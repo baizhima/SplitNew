@@ -148,9 +148,9 @@ class HomeViewController: UIViewController, UITextFieldDelegate {
     }
     
     func textFieldDidBeginEditing(textField: UITextField) {
-        print("textFieldDidBeginEditing")
+        
         self.nameField.frame = CGRect(x: 107,y: 131, width: 100, height: 50)
-        //self.nameField.
+        
     }
     
     

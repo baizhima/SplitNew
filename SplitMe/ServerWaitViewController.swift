@@ -18,11 +18,18 @@ class ServerWaitViewController: UIViewController, UINavigationControllerDelegate
     
     @IBOutlet weak var startButton: UIButton!
     
+    @IBOutlet weak var retakeButton: UIButton!
     @IBOutlet weak var joinedFriendsField: UILabel!
     @IBOutlet weak var uploadImageButton: UIButton!
     @IBOutlet weak var splitCodeField: UILabel!
     
     @IBOutlet weak var imageView: UIImageView!
+    
+    
+    
+    @IBAction func retakePressed(sender: UIButton) {
+        getImage()
+    }
     
     
     @IBAction func startPressed(sender: UIButton) {
@@ -63,6 +70,10 @@ class ServerWaitViewController: UIViewController, UINavigationControllerDelegate
     }
     
     @IBAction func captureImage(sender: UIButton) {
+        getImage()
+    }
+    
+    func getImage() {
         let imageFromSource = UIImagePickerController()
         imageFromSource.delegate = self
         imageFromSource.allowsEditing = false
@@ -111,7 +122,7 @@ class ServerWaitViewController: UIViewController, UINavigationControllerDelegate
         self.view.addSubview(statusBarView)
         
         
-        
+        retakeButton.hidden = true
         startButton.enabled = false
         
         if let meal = Meal.currentMeal{
@@ -164,6 +175,8 @@ class ServerWaitViewController: UIViewController, UINavigationControllerDelegate
         self.dismissViewControllerAnimated(true, completion: {})
         uploadImageButton.titleLabel!.text = "Retake the photo?"
         
+        retakeButton.hidden = false
+        uploadImageButton.hidden = true
         saveImage(receiptImage!)
     }
     

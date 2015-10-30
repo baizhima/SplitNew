@@ -38,7 +38,7 @@ class ServerCheckSubtotalViewController: UIViewController, UITableViewDelegate  
                     }
                     
                     print("subtotal: \(subtotal)")
-                    self.subtotalField.text = String(NSString(format:"%.2f", subtotal))
+                    self.subtotalField.text = "$ " + String(NSString(format:"%.2f", subtotal))
                     
                 }
             })
