@@ -796,7 +796,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="gEq-FS-V00">
-                                <rect key="frame" x="0.0" y="177" width="375" height="263"/>
+                                <rect key="frame" x="0.0" y="177" width="375" height="342"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
                             <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="42w-kb-Wmp">
@@ -1036,7 +1036,7 @@
                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </textAttributes>
                                 <items>
-                                    <navigationItem title="shared dishes" id="1Tg-8E-Zbm">
+                                    <navigationItem title="Shared dishes" id="1Tg-8E-Zbm">
                                         <barButtonItem key="leftBarButtonItem" title="back" id="QmD-HE-ZEu">
                                             <connections>
                                                 <action selector="backPressed:" destination="8fj-I8-EmW" id="It0-w1-Ebx"/>
@@ -1253,13 +1253,13 @@
         <image name="dollarSign" width="52" height="64"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Dn7-Wl-YMU"/>
-        <segue reference="S8D-pB-Lra"/>
-        <segue reference="FYX-OB-muc"/>
-        <segue reference="p4C-2T-D0T"/>
-        <segue reference="7dO-xX-yeP"/>
-        <segue reference="pvz-V4-lo1"/>
+        <segue reference="qaM-UR-PdU"/>
+        <segue reference="ghu-bt-NMB"/>
+        <segue reference="bqL-Sr-TlD"/>
+        <segue reference="96H-5m-BCx"/>
+        <segue reference="4KL-G5-uf4"/>
         <segue reference="vOd-pg-Kca"/>
-        <segue reference="bwC-y0-ghp"/>
+        <segue reference="7vK-Yb-F7p"/>
+        <segue reference="Xbw-4H-gG2"/>
     </inferredMetricsTieBreakers>
 </document>

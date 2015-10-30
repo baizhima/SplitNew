@@ -114,6 +114,8 @@ class ClientWatchAllDishesViewController: UIViewController, UITableViewDelegate 
             confirmButton.enabled = false
             backButton.enabled = false
             
+            confirmButton.backgroundColor = UIColor(red: 195.0/255, green: 195.0/255, blue: 195.0/255, alpha: 1.0)
+            
             // for every 3 second
             dispatch_async(dispatch_get_main_queue(), {
                 self.updateTimer = NSTimer.scheduledTimerWithTimeInterval(2, target: self, selector: Selector("update"), userInfo: nil, repeats: true)

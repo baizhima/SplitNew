@@ -55,6 +55,7 @@ class ClientJoinViewController: UIViewController, UITextFieldDelegate {
                             //print(meal)
                         }
                     })
+                    self.confirmButton.backgroundColor = UIColor(red: 195.0/255, green: 195.0/255, blue: 195.0/255, alpha: 1.0)
                     self.inputCodeField.enabled = false
                     self.confirmButton.enabled = false
                 }else{
@@ -77,7 +78,7 @@ class ClientJoinViewController: UIViewController, UITextFieldDelegate {
         
         connectInfo.text = "Connecting \(code)..."
         connectInfo.hidden = false
-        // connecting
+        
         
         joinMeal(User.currentUser!, code: String(code))
 
