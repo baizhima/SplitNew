@@ -87,71 +87,7 @@ class ServerConfirmTotalViewController: UIViewController, UITextFieldDelegate,
             meal.state = Meal.TotalConfirmed
             meal.saveInBackground()
             self.performSegueWithIdentifier("serverConfirmTotalToServerToll", sender: self)
-            
-          
-
-//            Dish.fetchAllInBackground(meal.dishes, block: {
-//                (objects, error ) -> Void in
-//                if error == nil{
-//                    debugPrint(error)
-//                }else{
-//                    
-//                    let dishes: [Dish] = objects as! [Dish]
-//                    
-//                    for user: User in meal.users {
-//                        
-//                        let subpayment = self.getSubPayment(user, dishes: dishes)
-//                        
-//                        // split tax and tips by the number of users
-//                        user.payment = subpayment + (meal.tips + meal.tax)/Double(meal.users.count)
-//                        
-//                        // split tax and tips by the sub total of each user
-//                        //user.payment = meal.total * (subpayment/meal.subtotal);
-//                        
-//                        debugPrint("user: \(user.userName) payment is \(user.payment)" )
-//                    }
-//                    
-//                    User.saveAllInBackground(meal.users)
-//                    
-//                    meal.state = Meal.TotalConfirmed
-//                    meal.saveInBackground()
-//                    self.performSegueWithIdentifier("serverConfirmTotalToServerToll", sender: self)
-//                    
-//                }
-//            })
-            
-            //var dishes: [Dish] = [Dish]()
-//            do{
-////                let query = Dish.query()
-////                query?.whereKey("meal", equalTo: meal)
-////                try dishes = query?.findObjects() as! [Dish]
-//                try meal.dishes = Dish.fetchAll(meal.dishes) as! [Dish]
-//                print("before2 fetch: \(meal.users) \(meal.dishes)")
-//                try meal.users = User.fetchAll(meal.users) as! [User]
-//            }catch _{
-//                debugPrint("Error: Fail to get meal dishes and users from server")
-//            }
-//            
-//            print("Meal Dishes: \(meal.dishes)" )
-//            
-//            for user: User in meal.users {
-//                
-//                let subpayment = getSubPayment(user, dishes: meal.dishes)
-//                
-//                // split tax and tips by the number of users
-//                user.payment = subpayment + (meal.tips + meal.tax)/Double(meal.users.count)
-//                
-//                // split tax and tips by the sub total of each user
-//                //user.payment = meal.total * (subpayment/meal.subtotal);
-//                
-//                debugPrint("user: \(user.userName) payment is \(user.payment)" )
-//            }
-//            
-//            User.saveAllInBackground(meal.users)
-//            
-//            meal.state = Meal.TotalConfirmed
-//            meal.saveInBackground()
-//            self.performSegueWithIdentifier("serverConfirmTotalToServerToll", sender: self)
+ 
         }
         
     }
@@ -221,7 +157,15 @@ class ServerConfirmTotalViewController: UIViewController, UITextFieldDelegate,
         super.viewDidLoad()
         splitButton.enabled = false
         
+        let statusBarView = UIView(frame:
+            CGRect(x: 0.0, y: 0.0, width: UIScreen.mainScreen().bounds.size.width, height: 20.0)
+        )
+        statusBarView.backgroundColor = UIColor(red:0.49, green:0.71, blue:0.84, alpha:1.0)
+        self.view.addSubview(statusBarView)
+        
         pickerVIew.selectRow(0, inComponent: 0, animated: true)
+        
+        
     }
     
     
@@ -255,9 +199,15 @@ class ServerConfirmTotalViewController: UIViewController, UITextFieldDelegate,
     }
     
     
-    // The data to return for the row and component (column) that's being passed in
+   /* // The data to return for the row and component (column) that's being passed in
     func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         return pickerData[row]
+    }*/
+    
+    func pickerView(pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
+        let string = pickerData[row]
+        let color = UIColor(red:0.49, green:0.71, blue:0.84, alpha:1.0)
+        return NSAttributedString(string: string, attributes: [NSForegroundColorAttributeName:color])
     }
     
     

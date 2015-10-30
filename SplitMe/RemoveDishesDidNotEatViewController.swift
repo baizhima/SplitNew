@@ -17,9 +17,7 @@ class RemoveDishesDidNotEatViewController: UIViewController, UITableViewDelegate
     
     @IBOutlet weak var promptField: UILabel!
     
-    @IBAction func backPressed(sender: UIBarButtonItem) {
-        self.performSegueWithIdentifier("removeDishesDidNotEatToServerCheckSubTotal", sender: self)
-    }
+   
     
     @IBAction func nextPressed(sender: UIBarButtonItem) {
         
@@ -96,6 +94,12 @@ class RemoveDishesDidNotEatViewController: UIViewController, UITableViewDelegate
     override func viewDidLoad() {
         super.viewDidLoad()
         promptField.hidden = true
+        
+        let statusBarView = UIView(frame:
+            CGRect(x: 0.0, y: 0.0, width: UIScreen.mainScreen().bounds.size.width, height: 20.0)
+        )
+        statusBarView.backgroundColor = UIColor(red:0.49, green:0.71, blue:0.84, alpha:1.0)
+        self.view.addSubview(statusBarView)
         // Do any additional setup after loading the view.
     }
     

@@ -37,6 +37,8 @@
 		ECAC02401BDAF3FE0015EF50 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = ECAC023F1BDAF3FE0015EF50 /* libsqlite3.tbd */; };
 		ECD310591BE1922900FA1244 /* ClientPayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECD310581BE1922900FA1244 /* ClientPayViewController.swift */; };
 		ECD3105B1BE1978300FA1244 /* ServerTollViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECD3105A1BE1978300FA1244 /* ServerTollViewController.swift */; };
+		ECF5DB451BE3EB830068BE74 /* icons_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = ECF5DB441BE3EB830068BE74 /* icons_icon.png */; };
+		ECF5DB491BE3F08C0068BE74 /* ClientDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECF5DB481BE3F08C0068BE74 /* ClientDetailViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -72,6 +74,8 @@
 		ECAC023F1BDAF3FE0015EF50 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		ECD310581BE1922900FA1244 /* ClientPayViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClientPayViewController.swift; sourceTree = "<group>"; };
 		ECD3105A1BE1978300FA1244 /* ServerTollViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerTollViewController.swift; sourceTree = "<group>"; };
+		ECF5DB441BE3EB830068BE74 /* icons_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icons_icon.png; sourceTree = "<group>"; };
+		ECF5DB481BE3F08C0068BE74 /* ClientDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClientDetailViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,6 +122,7 @@
 			isa = PBXGroup;
 			children = (
 				147B73E11BDB24450060B1E0 /* Dish.swift */,
+				ECF5DB481BE3F08C0068BE74 /* ClientDetailViewController.swift */,
 				147B73DD1BDB243D0060B1E0 /* Meal.swift */,
 				147B73DE1BDB243D0060B1E0 /* User.swift */,
 				EC62E8F41BD0758E003718C2 /* AppDelegate.swift */,
@@ -134,6 +139,7 @@
 				ECD3105A1BE1978300FA1244 /* ServerTollViewController.swift */,
 				ECD310581BE1922900FA1244 /* ClientPayViewController.swift */,
 				EC62E8FB1BD0758E003718C2 /* Assets.xcassets */,
+				ECF5DB441BE3EB830068BE74 /* icons_icon.png */,
 				EC62E8FD1BD0758E003718C2 /* LaunchScreen.storyboard */,
 				EC62E9001BD0758E003718C2 /* Info.plist */,
 			);
@@ -218,6 +224,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EC62E8FF1BD0758E003718C2 /* LaunchScreen.storyboard in Resources */,
+				ECF5DB451BE3EB830068BE74 /* icons_icon.png in Resources */,
 				EC62E8FC1BD0758E003718C2 /* Assets.xcassets in Resources */,
 				EC62E8FA1BD0758E003718C2 /* Main.storyboard in Resources */,
 			);
@@ -238,6 +245,7 @@
 				147B73DF1BDB243D0060B1E0 /* Meal.swift in Sources */,
 				EC62E8F51BD0758E003718C2 /* AppDelegate.swift in Sources */,
 				EC62E9131BD186A7003718C2 /* ServerCheckSubtotalViewController.swift in Sources */,
+				ECF5DB491BE3F08C0068BE74 /* ClientDetailViewController.swift in Sources */,
 				EC62E9071BD075BD003718C2 /* HomeViewController.swift in Sources */,
 				147B73E01BDB243D0060B1E0 /* User.swift in Sources */,
 				ECD3105B1BE1978300FA1244 /* ServerTollViewController.swift in Sources */,
