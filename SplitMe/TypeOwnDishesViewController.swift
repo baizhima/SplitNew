@@ -13,6 +13,7 @@ class TypeOwnDishesViewController: UIViewController, UIScrollViewDelegate, UITex
 
     var soloDishArr = [Dish]()
     
+    @IBOutlet weak var navBar: UINavigationBar!
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var imageView: UIImageView!
     
@@ -97,6 +98,15 @@ class TypeOwnDishesViewController: UIViewController, UIScrollViewDelegate, UITex
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let bgColor = UIColor(red:0.49, green:0.71, blue:0.84, alpha:1.0)
+        navBar.barTintColor = bgColor
+        let statusBarView = UIView(frame:
+            CGRect(x: 0.0, y: 0.0, width: UIScreen.mainScreen().bounds.size.width, height: 20.0)
+        )
+        statusBarView.backgroundColor = bgColor
+        self.view.addSubview(statusBarView)
+        
         
         imageView.image = nil
         

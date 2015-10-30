@@ -11,7 +11,7 @@ import Parse
 import Bolts
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, UINavigationBarDelegate {
 
     var window: UIWindow?
 
@@ -25,6 +25,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Meal.registerSubclass()
         User.registerSubclass()
         Dish.registerSubclass()
+        
+        UIApplication.sharedApplication().setStatusBarStyle(UIStatusBarStyle.LightContent, animated: true)
+        
+        //setStatusBarStyle(UIStatusBarStyle.LightContent)
         
         return true
     }

@@ -81,6 +81,7 @@ class HomeViewController: UIViewController, UITextFieldDelegate {
     }
     
     
+    
     func navigationController(navigationController: UINavigationController, willShowViewController viewController: UIViewController, animated: Bool) {
         viewController.viewWillAppear(animated)
     }

@@ -9,11 +9,19 @@
 import UIKit
 import Parse
 
-class ServerWaitViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
+class ServerWaitViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate
+     {
 
     var timer: NSTimer?
     
-    @IBOutlet weak var nextButton: UIBarButtonItem!
+    @IBOutlet var navBar: UINavigationBar!
+    
+    
+    
+    
+    @IBOutlet weak var startButton: UIButton!
+    
+    
     
     @IBOutlet weak var joinedFriendsField: UILabel!
     @IBOutlet weak var uploadImageButton: UIButton!
@@ -22,8 +30,8 @@ class ServerWaitViewController: UIViewController, UINavigationControllerDelegate
     @IBOutlet weak var imageView: UIImageView!
     
     
-    @IBAction func nextPressed(sender: UIBarButtonItem) {
-        // some condition: more than 1 friend, image uploaded ...
+    @IBAction func startPressed(sender: UIButton) {
+        
         if let meal: Meal =  Meal.currentMeal {
             do{
                 try meal.fetch()
@@ -53,8 +61,10 @@ class ServerWaitViewController: UIViewController, UINavigationControllerDelegate
         } else {
             print("error: current meal is nil")
         }
-        
     }
+    
+    
+    
     
     @IBAction func backPressed(sender: UIBarButtonItem) {
         self.performSegueWithIdentifier("serverWaitToHome", sender: self)
@@ -93,7 +103,7 @@ class ServerWaitViewController: UIViewController, UINavigationControllerDelegate
                 }
             }
             if meal.users.count > 1 && meal.image != nil {
-                self.nextButton.enabled = true
+                self.startButton.enabled = true
             }
         }
     }
@@ -101,7 +111,17 @@ class ServerWaitViewController: UIViewController, UINavigationControllerDelegate
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        nextButton.enabled = false
+        let bgColor = UIColor(red:0.49, green:0.71, blue:0.84, alpha:1.0)
+        navBar.barTintColor = bgColor
+        let statusBarView = UIView(frame:
+            CGRect(x: 0.0, y: 0.0, width: UIScreen.mainScreen().bounds.size.width, height: 20.0)
+        )
+        statusBarView.backgroundColor = bgColor
+        self.view.addSubview(statusBarView)
+        
+        
+        
+        startButton.enabled = false
         
         if let meal = Meal.currentMeal{
             splitCodeField.text = meal.code
@@ -113,6 +133,7 @@ class ServerWaitViewController: UIViewController, UINavigationControllerDelegate
     }
     
   
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -148,7 +169,7 @@ class ServerWaitViewController: UIViewController, UINavigationControllerDelegate
                 }
             })
             if meal.users.count > 1 {
-                nextButton.enabled = true // just for fast response purpose
+                startButton.enabled = true // just for fast response purpose
             }
         }
         

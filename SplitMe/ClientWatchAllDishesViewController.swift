@@ -13,11 +13,18 @@ class ClientWatchAllDishesViewController: UIViewController, UITableViewDelegate 
     
     var timer: NSTimer?
     var soloDishes = [Dish]()
-    var sharedDishes = [Dish]()
     
+    @IBOutlet weak var confirmButton: UIButton!
+    
+    @IBOutlet weak var promptLabel: UILabel!
     @IBOutlet weak var soloDishesView: UITableView!
     
-    @IBOutlet weak var sharedDishesView: UITableView!
+    
+    @IBAction func confirmPressed(sender: UIButton) {
+        promptLabel.hidden = false
+        confirmButton.enabled = false
+        // TODO ...
+    }
     
     @IBAction func backPressed(sender: UIBarButtonItem) {
         if let timer = self.timer {
@@ -28,11 +35,11 @@ class ClientWatchAllDishesViewController: UIViewController, UITableViewDelegate 
     }
 
     func updateDishes(dishes: [Dish]) {
-        self.sharedDishes = [Dish]()
+        
         self.soloDishes = [Dish]()
         for dish in dishes {
             if dish.isShared {
-                self.sharedDishes.append(dish)
+                //self.sharedDishes.append(dish)
             } else {
                 if dish.ownBy.objectId == User.currentUser?.objectId {
                     self.soloDishes.append(dish)
@@ -42,7 +49,7 @@ class ClientWatchAllDishesViewController: UIViewController, UITableViewDelegate 
         }
         
         self.soloDishesView.reloadData()
-        self.sharedDishesView.reloadData()
+        
     }
     
     
@@ -85,7 +92,7 @@ class ClientWatchAllDishesViewController: UIViewController, UITableViewDelegate 
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        promptLabel.hidden = true
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -104,13 +111,8 @@ class ClientWatchAllDishesViewController: UIViewController, UITableViewDelegate 
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        if tableView == self.soloDishesView {
-            return self.soloDishes.count
-        } else if tableView == self.sharedDishesView {
-            return self.sharedDishes.count
-        }
-
-        return 2
+        return self.soloDishes.count
+        
         
     }
     
@@ -119,13 +121,10 @@ class ClientWatchAllDishesViewController: UIViewController, UITableViewDelegate 
         let newCell = UITableViewCell(style: UITableViewCellStyle.Value1, reuseIdentifier: "Cell")
         let idx = indexPath.row
         
-        if tableView == self.soloDishesView {
+        
             newCell.textLabel!.text = "\(soloDishes[idx].name)"
             newCell.detailTextLabel?.text = "$" + String(NSString(format:"%.2f", soloDishes[idx].price))
-        } else if tableView == self.sharedDishesView {
-            newCell.textLabel!.text = "\(sharedDishes[idx].name)"
-            newCell.detailTextLabel?.text = "$" + String(NSString(format:"%.2f", sharedDishes[idx].price))
-        }
+        
         
         return newCell
     }
