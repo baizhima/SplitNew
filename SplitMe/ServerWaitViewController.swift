@@ -16,12 +16,7 @@ class ServerWaitViewController: UIViewController, UINavigationControllerDelegate
     
     @IBOutlet var navBar: UINavigationBar!
     
-    
-    
-    
     @IBOutlet weak var startButton: UIButton!
-    
-    
     
     @IBOutlet weak var joinedFriendsField: UILabel!
     @IBOutlet weak var uploadImageButton: UIButton!
@@ -63,13 +58,9 @@ class ServerWaitViewController: UIViewController, UINavigationControllerDelegate
         }
     }
     
-    
-    
-    
     @IBAction func backPressed(sender: UIBarButtonItem) {
         self.performSegueWithIdentifier("serverWaitToHome", sender: self)
     }
-    
     
     @IBAction func captureImage(sender: UIButton) {
         let imageFromSource = UIImagePickerController()
@@ -97,7 +88,6 @@ class ServerWaitViewController: UIViewController, UINavigationControllerDelegate
                 }
                 else{
                     if let meal: Meal = object as? Meal{
-                        
                         self.joinedFriendsField.text = String(meal.users.count-1)
                     }
                 }
@@ -132,12 +122,38 @@ class ServerWaitViewController: UIViewController, UINavigationControllerDelegate
         timer = NSTimer.scheduledTimerWithTimeInterval(2, target: self, selector: Selector("fetchMeal"), userInfo: nil, repeats: true)
     }
     
-  
-    
-
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func saveImage(image : UIImage){
+        
+        if let meal: Meal = Meal.currentMeal{
+            
+            let imageData = UIImageJPEGRepresentation(image, 0.2)
+            
+            let imageFile = PFFile(name:"image.jpeg", data:imageData!)
+            
+            imageFile!.saveInBackgroundWithBlock({
+                (ok, error) -> Void in
+                if( error != nil){
+                    print("[ServerWait] Fail to save image to server: \(error)")
+                }else{
+                    meal.image = imageFile?.url
+                    meal.saveInBackgroundWithBlock({
+                        (ok, error) -> Void in
+                        if(!ok){
+                            print("[ServerWait] Fail to save meal to server: \(error)")
+                        }
+                    })
+                }
+            })
+            
+            if meal.users.count > 1 {
+                startButton.enabled = true // just for fast response purpose
+            }
+        }
     }
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
@@ -146,39 +162,10 @@ class ServerWaitViewController: UIViewController, UINavigationControllerDelegate
         imageView.image = receiptImage
         self.dismissViewControllerAnimated(true, completion: {})
         uploadImageButton.titleLabel!.text = "Retake the photo?"
-  
-        if let meal: Meal = Meal.currentMeal{
-           
-            let imageData = UIImageJPEGRepresentation(receiptImage!, 0.2)
-            //let imageData = UIImagePNGRepresentation(receiptImag!,
-            
-            let imageFile = PFFile(name:"image.jpeg", data:imageData!)
-            
-            imageFile!.saveInBackgroundWithBlock({
-                (ok, error) -> Void in
-                if( error != nil){
-                    print("Can't save image \(error)")
-                }else{
-                    meal.image = imageFile?.url
-                    meal.saveInBackgroundWithBlock({
-                        (ok, error) -> Void in
-                        if(!ok){
-                            print("error when saving meal: \(error)")
-                        }
-                    })
-                }
-            })
-            if meal.users.count > 1 {
-                startButton.enabled = true // just for fast response purpose
-            }
-        }
         
-
+        saveImage(receiptImage!)
     }
     
-    
-    
-
     /*
     // MARK: - Navigation
 

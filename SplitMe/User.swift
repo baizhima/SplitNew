@@ -29,7 +29,8 @@ class User: PFObject, PFSubclassing {
     
     @NSManaged var payment: Double
     
-    static let UserJoining = 0 , UserJoined = 1, SoloDishesSaved = 2, ShareDishesSaved = 3
+    static let UserJoining = 0 , UserJoined = 1, UserDishesSaved = 2, UserSharedDishesRemoved = 3,
+                ShareDishesSaved = 5 // should remove
     
     @NSManaged var state: Int
     
@@ -49,15 +50,5 @@ class User: PFObject, PFSubclassing {
         
         self.payment = 0.0
     }
-   
-    /*
-    static func newSlaveUser(name: String) -> User{
-        return User(userName: name, isMaster: false)
-    }
-        
-    static func newMasterUser(name: String) -> User{
-        return User(userName: name, isMaster: true)
-        
-    }*/
     
 }

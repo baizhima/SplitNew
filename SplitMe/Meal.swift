@@ -26,13 +26,10 @@ class Meal: PFObject, PFSubclassing {
     }
     
     @NSManaged var code: String!
-    
     @NSManaged var image: String!
-   
+    
     @NSManaged var master: User
     @NSManaged var users: [User]
-    //@NSManaged var payments: [User:Double]
-    //@NSManaged var usersState: [Int]
     
     @NSManaged var dishes: [Dish]
     
@@ -41,8 +38,9 @@ class Meal: PFObject, PFSubclassing {
     @NSManaged var tips: Double
     @NSManaged var total: Double
   
-    static let StartUserJoining = 0, AllUserJoined = 1, AllDishesSaved = 2
-    static let SubtotalConfirmed = 3, SharedDishesConfirmed = 4, TotalConfirmed = 5
+    static let UserJoining = 0, AllUserJoined = 1  //, AllDishesSaved = 2
+    static let SubtotalCancelled = 2, SubtotalConfirmed = 3, TotalConfirmed = 5,
+                SharedDishesConfirmed = 4 // should removed after
     
     @NSManaged var state: Int
     
@@ -57,7 +55,7 @@ class Meal: PFObject, PFSubclassing {
         tax = -1.0
         tips = -1.0
         
-        state = Meal.StartUserJoining
+        state = Meal.UserJoining
         
         master.state = User.UserJoined
         master.saveInBackground()

@@ -11,75 +11,103 @@ import Parse
 
 class TypeOwnDishesViewController: UIViewController, UIScrollViewDelegate, UITextFieldDelegate, UITableViewDelegate {
 
-    var soloDishArr = [Dish]()
+    var dishes = [Dish]()
     
     @IBOutlet weak var navBar: UINavigationBar!
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var imageView: UIImageView!
-    
     @IBOutlet weak var dishField: UITextField!
     @IBOutlet weak var priceField: UITextField!
-    
     @IBOutlet weak var dishTable: UITableView!
     
+    func printErrorAndExit(message: String){
+        
+        print("\(NSStringFromClass(self.classForCoder)): \(message)")
+        exit(EXIT_FAILURE)
+    }
+    
+    func removeDishFromCloud(dish: Dish){
+        dish.deleteInBackground()
+    }
+    
+    func saveDishFromCloud(dish: Dish){
+        dish.saveInBackground()
+    }
+    
+    // fetch dishes and save to dishes object
+    func fetchDishesFromCloud(){
+        
+        if let user = User.currentUser {
+            
+            let query = Dish.query()
+            query?.whereKey("ownBy", equalTo: user)
+            query?.whereKey("isShared", equalTo: false)
+            query?.findObjectsInBackgroundWithBlock({
+                (objects, error ) -> Void in
+                if error == nil {
+                    
+                    self.dishes = objects as! [Dish]
+                    self.dishTable.reloadData()
+                    
+                }else{
+                    self.printErrorAndExit("Fail to fetch dishes from server: \(error)")
+                }
+            })
+            
+        }
+    }
+    
+    func fetchImageFromCloud(){
+        
+        if let meal = Meal.currentMeal {
+            meal.fetchInBackgroundWithBlock {
+                (object, error) -> Void in
+                if error != nil{
+                    print(error )
+                } else {
+                    if let url = NSURL(string: meal.image) {
+                        if let data = NSData(contentsOfURL: url) {
+                            self.imageView.image = UIImage(data: data)
+                        }
+                    }
+                }
+            }
+        }
+    }
     
     @IBAction func backPressed(sender: UIBarButtonItem) {
-        if User.currentUser!.isHost {
-            self.performSegueWithIdentifier("typeOwnDishesToServerWait", sender: self)
-        } else {
-            self.performSegueWithIdentifier("typeOwnDishesToClientJoin", sender: self)
-        }
+        
+        // this back should be removed
+        
+//        if User.currentUser!.isHost {
+//            self.performSegueWithIdentifier("typeOwnDishesToServerWait", sender: self)
+//        } else {
+//            self.performSegueWithIdentifier("typeOwnDishesToClientJoin", sender: self)
+//        }
     }
     
     @IBAction func nextPressed(sender: UIBarButtonItem) {
         
         if let meal = Meal.currentMeal {
             
-            do{
-                try meal.fetch()
-                
-                print(meal)
-                
-                meal.addUniqueObjectsFromArray(soloDishArr, forKey: "dishes")
-                //meal.dishes.appendContentsOf(soloDishArr)
-                try Dish.saveAll(soloDishArr)
-                try meal.save()
-            }catch _{
-                debugPrint("fail to save dishes")
-            }
-            
             if let user = User.currentUser {
                 
-                if meal.master.objectId ==  user.objectId {
-                    user.state = User.SoloDishesSaved
-                    user.saveInBackgroundWithBlock({
-                        (ok, error) -> Void in
-                        if ok {
-                            self.performSegueWithIdentifier("typeOwnDishesToServerTypeShareDishes", sender: self)
-                        }else{
-                            debugPrint(error)
-                        }
-                    })
-                }else {
-                   
-                    user.state = User.SoloDishesSaved
-                    user.saveInBackgroundWithBlock({
-                        (ok, error) -> Void in
-                        if ok{
-                            self.performSegueWithIdentifier("typeOwnDishesToClientWatchAllDishes", sender: self)
-                        }else{
-                            debugPrint(error)
-                        }
-                    })
+                // jump to next view
+                if user.objectId == meal.master.objectId {
+                    self.performSegueWithIdentifier("typeOwnDishesToServerTypeShareDishes", sender: self)
+                }else{
+                    self.performSegueWithIdentifier("typeOwnDishesToClientWatchAllDishes", sender: self)
                 }
             }else{
-                debugPrint("Error: Current user is nil")
+                printErrorAndExit("Fail to get current user")
             }
         }else{
-            debugPrint("Error: Current meal is nil")
+            printErrorAndExit("Fail to get current meal")
         }
 
     }
+    
+
     
     @IBAction func addPressed(sender: UIButton) {
         
@@ -87,7 +115,10 @@ class TypeOwnDishesViewController: UIViewController, UIScrollViewDelegate, UITex
         if dishField!.text != "" && priceField!.text != "" {
             // TODO:
             let currDish = Dish(name: dishField.text!, price: Double(priceField.text!)!, isShared: false, meal: Meal.currentMeal!, ownBy: User.currentUser!)
-            soloDishArr.append(currDish)
+            
+            dishes.append(currDish)
+            
+            saveDishFromCloud(currDish)
             
             dishField.text = ""
             priceField.text = ""
@@ -117,22 +148,9 @@ class TypeOwnDishesViewController: UIViewController, UIScrollViewDelegate, UITex
     
     override func viewDidAppear(animated: Bool) {
         
-        // get url from server
-        if let meal = Meal.currentMeal {
-            meal.fetchInBackgroundWithBlock {
-                (object, error) -> Void in
-                if error != nil{
-                    print(error )
-                } else {
-                    if let url = NSURL(string: meal.image) {
-                        if let data = NSData(contentsOfURL: url) {
-                            self.imageView.image = UIImage(data: data)
-                        }
-                    }
-                }
-            }
-            
-        }
+
+        fetchImageFromCloud()
+        fetchDishesFromCloud()
     }
 
     override func didReceiveMemoryWarning() {
@@ -156,14 +174,14 @@ class TypeOwnDishesViewController: UIViewController, UIScrollViewDelegate, UITex
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return soloDishArr.count
+        return dishes.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let newCell = UITableViewCell(style: UITableViewCellStyle.Value1, reuseIdentifier: "Cell")
-        let idx = soloDishArr.count-1-indexPath.row
-        newCell.textLabel!.text = "\(soloDishArr[idx].name)"
-        newCell.detailTextLabel?.text = "$" + String(NSString(format:"%.2f", soloDishArr[idx].price))
+        let idx = dishes.count-1-indexPath.row
+        newCell.textLabel!.text = "\(dishes[idx].name)"
+        newCell.detailTextLabel?.text = "$" + String(NSString(format:"%.2f", dishes[idx].price))
         return newCell
     }
     
@@ -173,18 +191,8 @@ class TypeOwnDishesViewController: UIViewController, UIScrollViewDelegate, UITex
     
     func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if (editingStyle == UITableViewCellEditingStyle.Delete) {
-            soloDishArr.removeAtIndex(indexPath.row)
+            dishes.removeAtIndex(indexPath.row)
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
         }
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 }

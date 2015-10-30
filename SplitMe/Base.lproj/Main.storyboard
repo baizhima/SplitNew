@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9059" systemVersion="14F1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9059" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
@@ -71,6 +71,7 @@
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Ne1-LD-JUM">
                                 <rect key="frame" x="107" y="62" width="160" height="159"/>
+                                <animations/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="160" id="Xtg-hx-bBs"/>
                                     <constraint firstAttribute="height" constant="159" id="ykh-dC-vcq"/>
@@ -324,6 +325,7 @@
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p8L-e6-mey">
                                 <rect key="frame" x="42" y="564" width="290" height="50"/>
+                                <animations/>
                                 <color key="backgroundColor" red="0.90196078431372551" green="0.27450980392156865" blue="0.29411764705882354" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="290" id="KSa-i5-hiQ"/>
@@ -537,7 +539,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5Nc-UX-lmd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="841.5" y="490.5"/>
+            <point key="canvasLocation" x="811.5" y="424.5"/>
         </scene>
         <!--Client Watch All Dishes View Controller-->
         <scene sceneID="3uR-R5-Kry">
@@ -592,6 +594,7 @@
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2ay-7f-gyD">
                                 <rect key="frame" x="42" y="460" width="290" height="50"/>
+                                <animations/>
                                 <color key="backgroundColor" red="0.98039215686274506" green="0.86274509803921573" blue="0.56862745098039214" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -625,16 +628,18 @@
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
+                        <outlet property="backButton" destination="QNi-2o-bUX" id="EtK-mo-4z9"/>
                         <outlet property="confirmButton" destination="2ay-7f-gyD" id="A51-2u-BKD"/>
                         <outlet property="promptLabel" destination="Oz4-f4-dfS" id="kC2-Ps-iLO"/>
                         <outlet property="soloDishesView" destination="5Qi-ox-x5C" id="gaQ-Of-a0p"/>
                         <segue destination="a63-N9-D1F" kind="show" identifier="clientWatchAllDishesToTypeOwnDishes" id="4KL-G5-uf4"/>
                         <segue destination="noI-Ie-780" kind="show" identifier="clientWatchAllDishesToRemoveDishesDidNotEat" id="S8D-pB-Lra"/>
+                        <segue destination="VlJ-1k-BW6" kind="show" identifier="clientWatchAllDishesToServerCheckSubtotal" id="bqL-Sr-TlD"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7Jx-Yu-zrM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1324.5" y="825.5"/>
+            <point key="canvasLocation" x="1710.5" y="429.5"/>
         </scene>
         <!--Remove Dishes Did Not Eat View Controller-->
         <scene sceneID="T2I-3p-MwP">
@@ -704,7 +709,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uiy-n9-RrW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2289.5" y="561.5"/>
+            <point key="canvasLocation" x="2613.5" y="413.5"/>
         </scene>
         <!--Client Pay View Controller-->
         <scene sceneID="Mgu-FF-eYJ">
@@ -764,7 +769,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dSV-8i-Kg2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2802.5" y="820.5"/>
+            <point key="canvasLocation" x="3581.5" y="860.5"/>
         </scene>
         <!--Server Confirm Total View Controller-->
         <scene sceneID="xna-Ym-pRd">
@@ -880,7 +885,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="45Q-0m-N2d" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2802.5" y="66.5"/>
+            <point key="canvasLocation" x="3116.5" y="72.5"/>
         </scene>
         <!--Server Toll View Controller-->
         <scene sceneID="VFX-Hb-g9C">
@@ -935,7 +940,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pi4-wZ-LeP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3243.5" y="66.5"/>
+            <point key="canvasLocation" x="3581.5" y="66.5"/>
         </scene>
         <!--Server Type Share Dishes View Controller-->
         <scene sceneID="Mc9-ib-ZjH">
@@ -1090,11 +1095,12 @@
                         <outlet property="scrollView" destination="l9i-GI-391" id="AvA-vj-F5x"/>
                         <segue destination="a63-N9-D1F" kind="show" identifier="serverTypeShareDishesToTypeOwnDishes" id="p4C-2T-D0T"/>
                         <segue destination="VlJ-1k-BW6" kind="show" identifier="serverTypeShareDishesToServerCheckSubtotal" id="pvz-V4-lo1"/>
+                        <segue destination="tXM-hD-fRu" kind="show" identifier="serverTypeShareDishesToClientWatchAllDishes" id="qaM-UR-PdU"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Dhr-eF-EHH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1324.5" y="66.5"/>
+            <point key="canvasLocation" x="1258.5" y="66.5"/>
         </scene>
         <!--Server Check Subtotal View Controller-->
         <scene sceneID="NgA-Zf-Eek">
@@ -1169,6 +1175,7 @@
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
+                        <outlet property="dishesTable" destination="iKM-8I-2UV" id="LnD-2k-Jh4"/>
                         <outlet property="subtotalField" destination="zlm-z2-eZz" id="1HZ-ZQ-Q64"/>
                         <segue destination="8fj-I8-EmW" kind="show" identifier="serverCheckSubtotalToServerTypeShareDishes" id="ghu-bt-NMB"/>
                         <segue destination="noI-Ie-780" kind="show" identifier="serverCheckSubtotalToRemoveDishesDidNotEat" id="96H-5m-BCx"/>
@@ -1176,16 +1183,17 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qsu-gu-6B0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1787.5" y="66.5"/>
+            <point key="canvasLocation" x="2155.5" y="66.5"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="S8D-pB-Lra"/>
-        <segue reference="KKg-IW-lmu"/>
+        <segue reference="qaM-UR-PdU"/>
+        <segue reference="ghu-bt-NMB"/>
+        <segue reference="bqL-Sr-TlD"/>
         <segue reference="4KL-G5-uf4"/>
         <segue reference="vOd-pg-Kca"/>
         <segue reference="dGz-N1-fph"/>
-        <segue reference="7dO-xX-yeP"/>
-        <segue reference="Xbw-4H-gG2"/>
+        <segue reference="bwC-y0-ghp"/>
     </inferredMetricsTieBreakers>
 </document>

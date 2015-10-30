@@ -11,40 +11,89 @@ import Parse
 
 class ServerCheckSubtotalViewController: UIViewController, UITableViewDelegate  {
    
+    
     var dishes: [Dish]?
     
+    @IBOutlet weak var dishesTable: UITableView!
     @IBOutlet weak var subtotalField: UILabel!
     
-    @IBAction func backPressed(sender: UIBarButtonItem) {
-        self.performSegueWithIdentifier("serverCheckSubtotalToServerTypeShareDishes", sender: self)
-    }
     
-    @IBAction func nextPressed(sender: UIBarButtonItem) {
-        
-        if let meal: Meal =  Meal.currentMeal {
-            
-            meal.state = Meal.SubtotalConfirmed
-            meal.saveInBackground()
-        self.performSegueWithIdentifier("serverCheckSubtotalToRemoveDishesDidNotEat", sender: self)
-        }
-    }
-    
-    func fetchDishes() -> [Dish]?{
+    func fetchDishes(){
         
         if let meal = Meal.currentMeal {
             
             let query = Dish.query()
             query?.whereKey("meal", equalTo: meal)
-            do{
-                try dishes = query?.findObjects() as? [Dish]
-                return dishes
-            }catch _{
-                debugPrint("Error in fetching dishes")
-            }
-        }else{
+            query?.findObjectsInBackgroundWithBlock({ (objects, error) -> Void in
+                if error == nil{
+                    
+                    self.dishes = objects as? [Dish]
+                    
+                    // table view reload
+                    self.dishesTable.reloadData()
+                    
+                    var subtotal = 0.0
+                    for dish:Dish in self.dishes! {
+                        subtotal += dish.price
+                    }
+                    
+                    print("subtotal: \(subtotal)")
+                    self.subtotalField.text = String(NSString(format:"%.2f", subtotal))
+                    
+                }
+            })
+        }
+        else{
             debugPrint("Error: current meal is nil")
         }
-        return nil
+    }
+    
+    func revoke(){
+        
+        if let meal: Meal =  Meal.currentMeal {
+            
+            // set all user's state to UserJoin
+            
+            let query = User.query()
+            query?.whereKey( "meal", equalTo: meal)
+            query?.findObjectsInBackgroundWithBlock({ (objects, error ) -> Void in
+                if error == nil{
+                    
+                    let users : [User] = objects as! [User]
+                    for u : User in users {
+                        u.state = User.UserJoined
+                    }
+                    User.saveAllInBackground(users)
+                    
+                }else{
+                    
+                }
+            })
+            
+            meal.state = Meal.SubtotalCancelled
+            meal.saveInBackground()
+            self.performSegueWithIdentifier("serverCheckSubtotalToServerTypeShareDishes", sender: self)
+        }
+
+    }
+    
+    func confirm(){
+        
+        if let meal: Meal =  Meal.currentMeal {
+
+            meal.state = Meal.SubtotalConfirmed
+            meal.saveInBackground()
+            self.performSegueWithIdentifier("serverCheckSubtotalToRemoveDishesDidNotEat", sender: self)
+        }
+
+    }
+    
+    @IBAction func backPressed(sender: UIBarButtonItem) {
+        revoke()
+    }
+    
+    @IBAction func nextPressed(sender: UIBarButtonItem) {
+        confirm()
     }
 
     override func viewDidLoad() {
@@ -52,18 +101,8 @@ class ServerCheckSubtotalViewController: UIViewController, UITableViewDelegate  
     }
     
     override func viewDidAppear(animated: Bool) {
-     
-        print("get into view appear")
         
-        self.dishes = fetchDishes()
-        
-        var subtotal = 0.0
-        for dish:Dish in dishes! {
-            subtotal += dish.price
-        }
-        
-        print("subtotal: \(subtotal)")
-        self.subtotalField.text = String(NSString(format:"%.2f", subtotal))
+        fetchDishes()
     }
 
     override func didReceiveMemoryWarning() {
@@ -75,7 +114,8 @@ class ServerCheckSubtotalViewController: UIViewController, UITableViewDelegate  
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     
         if self.dishes == nil{
-            self.dishes = fetchDishes()
+            return 0;
+            //self.dishes = fetchDishes()
         }
       
         if let dishes = self.dishes{
@@ -93,7 +133,8 @@ class ServerCheckSubtotalViewController: UIViewController, UITableViewDelegate  
         let newCell = UITableViewCell(style: UITableViewCellStyle.Value1, reuseIdentifier: "Cell")
 
         if self.dishes == nil{
-            self.dishes = fetchDishes()
+            return newCell
+            //self.dishes = fetchDishes()
         }
         
         if let dishes = self.dishes {

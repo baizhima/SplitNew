@@ -11,96 +11,142 @@ import Parse
 
 class ClientWatchAllDishesViewController: UIViewController, UITableViewDelegate {
     
-    var timer: NSTimer?
-    var soloDishes = [Dish]()
+    var updateTimer : NSTimer?
     
+    var dishes = [Dish]()
+    
+    @IBOutlet weak var backButton: UIBarButtonItem!
     @IBOutlet weak var confirmButton: UIButton!
     
     @IBOutlet weak var promptLabel: UILabel!
     @IBOutlet weak var soloDishesView: UITableView!
     
     
-    @IBAction func confirmPressed(sender: UIButton) {
-        promptLabel.hidden = false
-        confirmButton.enabled = false
-        // TODO ...
+    func fetchDishesFromCloud(){
+    
+        if let user: User = User.currentUser {
+            
+            let query = Dish.query()
+            query?.whereKey("ownBy" , equalTo: user )
+            query?.findObjectsInBackgroundWithBlock({ ( objects, error ) -> Void in
+                if error == nil{
+                    self.dishes = objects as! [Dish]
+                    self.soloDishesView.reloadData()
+                }else{
+                    
+                }
+            })
+            
+        }
+
     }
     
-    @IBAction func backPressed(sender: UIBarButtonItem) {
-        if let timer = self.timer {
-            timer.invalidate()
-        }
-        
-        self.performSegueWithIdentifier("clientWatchAllDishesToTypeOwnDishes", sender: self)
-    }
+    
+    func update(){
+        if let meal = Meal.currentMeal {
+            if let myself = User.currentUser{
+                
+                // for master user
+                if meal.master.objectId == myself.objectId {
+                    let query = User.query()
+                    query?.whereKey("meal", equalTo: meal)
+                    query?.findObjectsInBackgroundWithBlock({ (objects, error ) -> Void in
+                        if error == nil{
+                            
+                            let users: [User] = objects as! [User]
+                            for user: User in users {
+                                if user.state < User.UserDishesSaved {
+                                    return
+                                }
+                            }
+                            
+                            // just jump to next view
+                            self.updateTimer?.invalidate()
+                            self.performSegueWithIdentifier("clientWatchAllDishesToServerCheckSubtotal", sender: self)
+                            
+                        }else{
+                        
+                        }
+                    })
 
-    func updateDishes(dishes: [Dish]) {
+                }else{
+                    
+                    meal.fetchInBackgroundWithBlock({ ( object, error) -> Void in
+                        if error == nil{
+                            if meal.state == Meal.SubtotalConfirmed {
+                                
+                                self.updateTimer?.invalidate()
+                                self.performSegueWithIdentifier("clientWatchAllDishesToRemoveDishesDidNotEat", sender: self)
         
-        self.soloDishes = [Dish]()
-        for dish in dishes {
-            if dish.isShared {
-                //self.sharedDishes.append(dish)
-            } else {
-                if dish.ownBy.objectId == User.currentUser?.objectId {
-                    self.soloDishes.append(dish)
+                            }else if meal.state == Meal.SubtotalCancelled {
+                                
+                                self.updateTimer?.invalidate()
+                                
+                                self.backButton.enabled = true
+                                self.confirmButton.enabled = true
+                                
+                                self.promptLabel.hidden = false
+                                self.promptLabel.text = "Please review your dishes"
+                                //self.performSegueWithIdentifier("clientWatchAllDishesToTypeOwnDishes", sender: self)
+                            }
+                        }else{
+                            
+                        }
+                    })
                 }
                 
             }
         }
-        
-        self.soloDishesView.reloadData()
-        
     }
     
-    
-    
-    func fetchMeal(){
-        var dishes: [Dish]?
+    @IBAction func confirmPressed(sender: UIButton) {
         
-        
-        if let meal: Meal = Meal.currentMeal {
-            meal.fetchInBackgroundWithBlock {
-                (object, error) -> Void in
-                if error != nil{
-                    print(error)
-                }
-            }
+        if let user = User.currentUser {
             
-            let query = Dish.query()
-            query?.whereKey("meal", equalTo: PFObject(withoutDataWithClassName: "Meal", objectId: meal.objectId))
-            do{
-                try dishes = query?.findObjects() as? [Dish]
-                if dishes != nil {
-                    self.updateDishes(dishes!)
-                }
-                    
-            }catch _{
-                debugPrint("Error in fetching dishes")
-            }
- 
+            user.state = User.UserDishesSaved
+            user.saveInBackground()
             
-            if meal.state >= Meal.SubtotalConfirmed {
-                if let timer = self.timer {
-                    timer.invalidate()
-                }
-                performSegueWithIdentifier("clientWatchAllDishesToRemoveDishesDidNotEat", sender: self)
-            }
+            promptLabel.hidden = false
+            promptLabel.text = "Waiting for others ..."
             
+            confirmButton.enabled = false
+            backButton.enabled = false
+            
+            // for every 3 second
+            dispatch_async(dispatch_get_main_queue(), {
+                self.updateTimer = NSTimer.scheduledTimerWithTimeInterval(2, target: self, selector: Selector("update"), userInfo: nil, repeats: true)
+            })
         }
+    }
+    
+    @IBAction func backPressed(sender: UIBarButtonItem) {
+//        if let timer = self.timer {
+//            timer.invalidate()
+//        }
         
+//        if User.currentUser?.objectId == Meal.currentMeal?.master.objectId {
+//            
+//        }else{
+//            
+//        }
+        
+        self.performSegueWithIdentifier("clientWatchAllDishesToTypeOwnDishes", sender: self)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         promptLabel.hidden = true
+        
+        
     }
     
     override func viewDidAppear(animated: Bool) {
-        fetchMeal()
-        dispatch_async(dispatch_get_main_queue(), {
-            self.timer = NSTimer.scheduledTimerWithTimeInterval(2, target: self, selector: Selector("fetchMeal"), userInfo: nil, repeats: true)
-        });
+//        fetchMeal()
+//        dispatch_async(dispatch_get_main_queue(), {
+//            self.timer = NSTimer.scheduledTimerWithTimeInterval(2, target: self, selector: Selector("fetchMeal"), userInfo: nil, repeats: true)
+//        });
         
+        fetchDishesFromCloud()
     }
 
     override func didReceiveMemoryWarning() {
@@ -111,7 +157,7 @@ class ClientWatchAllDishesViewController: UIViewController, UITableViewDelegate 
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return self.soloDishes.count
+        return self.dishes.count
         
         
     }
@@ -122,8 +168,8 @@ class ClientWatchAllDishesViewController: UIViewController, UITableViewDelegate 
         let idx = indexPath.row
         
         
-            newCell.textLabel!.text = "\(soloDishes[idx].name)"
-            newCell.detailTextLabel?.text = "$" + String(NSString(format:"%.2f", soloDishes[idx].price))
+            newCell.textLabel!.text = "\(dishes[idx].name)"
+            newCell.detailTextLabel?.text = "$" + String(NSString(format:"%.2f", dishes[idx].price))
         
         
         return newCell

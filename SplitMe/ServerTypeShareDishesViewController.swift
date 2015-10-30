@@ -11,9 +11,8 @@ import Parse
 
 class ServerTypeShareDishesViewController: UIViewController, UIScrollViewDelegate, UITextFieldDelegate, UITableViewDelegate {
     
-    var sharedDishArr = [Dish]()
+    var sharedDishes = [Dish]()
     var timer: NSTimer?
-    
     
     @IBOutlet weak var nextButton: UIBarButtonItem!
     
@@ -23,29 +22,86 @@ class ServerTypeShareDishesViewController: UIViewController, UIScrollViewDelegat
     @IBOutlet weak var priceField: UITextField!
     @IBOutlet weak var dishTable: UITableView!
     
+    
+    func printErrorAndExit(message: String){
+        
+        print("\(NSStringFromClass(self.classForCoder)): \(message)")
+        exit(EXIT_FAILURE)
+    }
+    
+    func saveDishToCloud(dish: Dish){
+        dish.saveInBackground()
+    }
+    
+    func removeDishFromCloud(dish: Dish){
+        dish.deleteInBackground()
+    }
+    
+    func fetchDishFromCloud(){
+        
+        if let user = User.currentUser {
+            
+            let query = Dish.query()
+            query?.whereKey("ownBy", equalTo: user)
+            query?.whereKey("isShared", equalTo: true)
+            query?.findObjectsInBackgroundWithBlock({
+                (objects, error ) -> Void in
+                if error == nil {
+                    
+                    self.sharedDishes = objects as! [Dish]
+                    self.dishTable.reloadData()
+                    
+                }else{
+                    self.printErrorAndExit("Fail to fetch dishes from server: \(error)")
+                }
+            })
+            
+        }
+    }
+    
+    func fetchImageFromCloud(){
+        if let meal = Meal.currentMeal {
+            meal.fetchInBackgroundWithBlock {
+                (object, error) -> Void in
+                if error != nil{
+                    print(error )
+                } else {
+                    if let url = NSURL(string: meal.image) {
+                        if let data = NSData(contentsOfURL: url) {
+                            self.imageView.image = UIImage(data: data)
+                        }
+                    }
+                }
+            }
+        }
+
+    }
+    
+    
+    
     @IBAction func backPressed(sender: UIBarButtonItem) {
         self.performSegueWithIdentifier("serverTypeShareDishesToTypeOwnDishes", sender: self)
     }
     
     @IBAction func nextPressed(sender: UIBarButtonItem) {
         
-        if let meal = Meal.currentMeal {
-            
-            do{
-                try meal.fetchIfNeeded()
-                try Dish.saveAll(sharedDishArr)
-                meal.addUniqueObjectsFromArray(sharedDishArr, forKey: "dishes")
-                //meal.dishes.appendContentsOf(sharedDishArr)
-                try meal.save()
-            }catch _{
-                
-            }
-        }
+//        if let meal = Meal.currentMeal {
+//            
+//            do{
+//                try meal.fetchIfNeeded()
+//                try Dish.saveAll(sharedDishes)
+//                meal.addUniqueObjectsFromArray(sharedDishes, forKey: "dishes")
+//                //meal.dishes.appendContentsOf(sharedDishes)
+//                try meal.save()
+//            }catch _{
+//                
+//            }
+//        }
         
         if timer != nil {
             timer?.invalidate()
         }
-        self.performSegueWithIdentifier("serverTypeShareDishesToServerCheckSubtotal", sender: self)
+        self.performSegueWithIdentifier("serverTypeShareDishesToClientWatchAllDishes", sender: self)
         
     }
     
@@ -59,8 +115,11 @@ class ServerTypeShareDishesViewController: UIViewController, UIScrollViewDelegat
                 
                 let currDish = Dish(name: dishname, price: Double(price)!, isShared: true, meal: Meal.currentMeal!, ownBy: user)
                 
-                sharedDishArr.append(currDish)
-                print("shareDishArr count = \(sharedDishArr.count)")
+                sharedDishes.append(currDish)
+    
+                saveDishToCloud(currDish)
+                
+                //print("shareDishArr count = \(sharedDishes.count)")
                 dishField.text = ""
                 priceField.text = ""
                 dishTable.reloadData()
@@ -73,39 +132,37 @@ class ServerTypeShareDishesViewController: UIViewController, UIScrollViewDelegat
         }
     }
     
-    func updateMealState() {
-        
-        if let meal = Meal.currentMeal {
-                
-                User.fetchAllInBackground(meal.users, block: {(objects: [AnyObject]?, error: NSError?) -> Void in
-                    let users = objects as! [User]
-                    var count = 0
-                    for user: User in users{
-                        print("user.state=\(user.state)")
-                        if user.state == User.SoloDishesSaved {
-                            count += 1
-                        }
-                    }
-                    if( count == users.count ){
-                        meal.state = Meal.AllDishesSaved
-                    }else{
-                        debugPrint("Still \(users.count - count) users didn't finish")
-                    }
-                    
-                    if meal.state == Meal.AllDishesSaved {
-                        self.nextButton.enabled = true
-                    }
-                    meal.saveInBackground()
-                })
-            
-            
-        }
-        
-    }
+//    func updateMealState() {
+//        
+//        if let meal = Meal.currentMeal {
+//                
+//                User.fetchAllInBackground(meal.users, block: {(objects: [AnyObject]?, error: NSError?) -> Void in
+//                    let users = objects as! [User]
+//                    var count = 0
+//                    for user: User in users{
+//                        print("user.state=\(user.state)")
+//                        if user.state == User.SoloDishesSaved {
+//                            count += 1
+//                        }
+//                    }
+//                    if( count == users.count ){
+//                        meal.state = Meal.AllDishesSaved
+//                    }else{
+//                        debugPrint("Still \(users.count - count) users didn't finish")
+//                    }
+//                    
+//                    if meal.state == Meal.AllDishesSaved {
+//                        self.nextButton.enabled = true
+//                    }
+//                    meal.saveInBackground()
+//                })
+//        }
+//        
+//    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        nextButton.enabled = false
+        //nextButton.enabled = false
         
         imageView.image = nil // currMeal?.receiptImage
         self.scrollView.minimumZoomScale = 1.5
@@ -115,18 +172,12 @@ class ServerTypeShareDishesViewController: UIViewController, UIScrollViewDelegat
     
     override func viewDidAppear(animated: Bool) {
        
-        dispatch_async(dispatch_get_main_queue(), {
-        self.timer = NSTimer.scheduledTimerWithTimeInterval(2, target: self, selector: Selector("updateMealState"), userInfo: nil, repeats: true)
-        })
-        // get url from server
-        if let meal = Meal.currentMeal {
-            meal.fetchIfNeededInBackground()
-            if let url = NSURL(string: meal.image) {
-                if let data = NSData(contentsOfURL: url) {
-                    imageView.image = UIImage(data: data)
-                }
-            }
-        }
+//        dispatch_async(dispatch_get_main_queue(), {
+//        self.timer = NSTimer.scheduledTimerWithTimeInterval(2, target: self, selector: Selector("updateMealState"), userInfo: nil, repeats: true)
+//        })
+        
+        fetchImageFromCloud()
+        fetchDishFromCloud()
     }
 
     override func didReceiveMemoryWarning() {
@@ -149,14 +200,14 @@ class ServerTypeShareDishesViewController: UIViewController, UIScrollViewDelegat
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return sharedDishArr.count
+        return sharedDishes.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let newCell = UITableViewCell(style: UITableViewCellStyle.Value1, reuseIdentifier: "Cell")
-        let idx = sharedDishArr.count-1-indexPath.row
-        newCell.textLabel!.text = "\(sharedDishArr[idx].name)"
-        newCell.detailTextLabel?.text = "$" + String(NSString(format:"%.2f", sharedDishArr[idx].price))
+        let idx = sharedDishes.count-1-indexPath.row
+        newCell.textLabel!.text = "\(sharedDishes[idx].name)"
+        newCell.detailTextLabel?.text = "$" + String(NSString(format:"%.2f", sharedDishes[idx].price))
         return newCell
     }
 
