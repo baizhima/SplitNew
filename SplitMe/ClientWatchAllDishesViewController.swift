@@ -101,6 +101,8 @@ class ClientWatchAllDishesViewController: UIViewController, UITableViewDelegate 
     
     @IBAction func confirmPressed(sender: UIButton) {
         
+        
+        
         if let user = User.currentUser {
             
             user.state = User.UserDishesSaved

@@ -14,7 +14,7 @@ class ClientPayViewController: UIViewController {
     @IBOutlet weak var totalAmountField: UILabel!
     
     @IBAction func donePressed(sender: UIBarButtonItem) {
-        
+        performSegueWithIdentifier("clientPayToHome", sender: self)
     }
     
     override func viewDidLoad() {

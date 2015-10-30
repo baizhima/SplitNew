@@ -108,13 +108,14 @@ class ClientJoinViewController: UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
         connectInfo.hidden = true
         
-        //self.preferredStatusBarStyle()
         
-        let bgColor = UIColor(red:0.49, green:0.71, blue:0.84, alpha:1.0)
-        navBar.barTintColor = bgColor
+        let bgColor = UIColor(red:0.49, green:0.71, blue:0.84, alpha:1)
+        
+        
         let statusBarView = UIView(frame:
-            CGRect(x: 0.0, y: 0.0, width: UIScreen.mainScreen().bounds.size.width, height: 20.0)
+            CGRect(x: 0.0, y: 0.0, width: UIScreen.mainScreen().bounds.size.width, height: 20 + 44)
         )
+        
         statusBarView.backgroundColor = bgColor
         self.view.addSubview(statusBarView)
         
