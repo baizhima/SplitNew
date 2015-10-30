@@ -19,11 +19,13 @@ class HomeViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var logoView: UIImageView!
     
+    @IBOutlet weak var spliterLabel: UILabel!
+    
     @IBOutlet weak var createButton: UIButton!
     @IBOutlet weak var joinButton: UIButton!
     
-    
-    
+    var uiState: Int = 0
+    var keyboardOn: Bool = false
     
     @IBAction func createPressed(sender: UIButton) {
         
@@ -75,15 +77,58 @@ class HomeViewController: UIViewController, UITextFieldDelegate {
     }
     
     
-    
+    func navigationController(navigationController: UINavigationController, willShowViewController viewController: UIViewController, animated: Bool) {
+        viewController.viewWillAppear(animated)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         logoView.image = UIImage(named: "logo")
-       
-
+        
         
     }
+    
+    
+    
+    override func viewDidLayoutSubviews() {
+        
+        if uiState < 2 {
+            self.spliterLabel.center.y -= self.view.bounds.height
+            self.logoView.center.y -= self.view.bounds.height
+            
+            nameField.center.x -= view.bounds.width
+            createButton.center.x -= view.bounds.width
+            joinButton.center.x -= view.bounds.width
+            uiState += 1
+        }
+        
+        //print("triggered")
+    }
+    
+    
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        UIView.animateWithDuration(1, animations: {
+            self.spliterLabel.center.y += self.view.bounds.height
+            self.logoView.center.y += self.view.bounds.height
+            
+        })
+        
+        UIView.animateWithDuration(0.5, delay: 1, options: [], animations: {
+            self.nameField.center.x += self.view.bounds.width
+            self.createButton.center.x += self.view.bounds.width
+            self.joinButton.center.x += self.view.bounds.width
+            }, completion: nil)
+        //print(nameField.center.x)
+    }
+    
+    
+    
+    
+    
+    
 
     override func didReceiveMemoryWarning() {
         //print("hokadnfkoasdnfkldsankofsodn")
@@ -98,7 +143,9 @@ class HomeViewController: UIViewController, UITextFieldDelegate {
     }
     
     func textFieldDidBeginEditing(textField: UITextField) {
-        print("hello")
+        print("textFieldDidBeginEditing")
+        self.nameField.frame = CGRect(x: 107,y: 131, width: 100, height: 50)
+        //self.nameField.
     }
     
     
