@@ -53,6 +53,8 @@ class HomeViewController: UIViewController, UITextFieldDelegate {
                     print("create user failed")
                 }
             }
+        } else {
+            nameField.becomeFirstResponder()
         }
     }
     
@@ -73,6 +75,8 @@ class HomeViewController: UIViewController, UITextFieldDelegate {
                     print("create user failed")
                 }
             }
+        } else {
+            nameField.becomeFirstResponder()
         }
     }
     
