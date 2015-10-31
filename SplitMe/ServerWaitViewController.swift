@@ -108,7 +108,7 @@ class ServerWaitViewController: UIViewController, UINavigationControllerDelegate
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+       /*
         let bgColor = UIColor(red:0.49, green:0.71, blue:0.84, alpha:1.0)
         
         let statusBarView = UIView(frame:
@@ -116,7 +116,7 @@ class ServerWaitViewController: UIViewController, UINavigationControllerDelegate
         )
         
         statusBarView.backgroundColor = bgColor
-        self.view.addSubview(statusBarView)
+        self.view.addSubview(statusBarView)*/
         
         
         

@@ -12,7 +12,6 @@
 		147B73E21BDB24450060B1E0 /* Dish.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147B73E11BDB24450060B1E0 /* Dish.swift */; };
 		EC62E8F51BD0758E003718C2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC62E8F41BD0758E003718C2 /* AppDelegate.swift */; };
 		EC62E8FA1BD0758E003718C2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EC62E8F81BD0758E003718C2 /* Main.storyboard */; };
-		EC62E8FC1BD0758E003718C2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EC62E8FB1BD0758E003718C2 /* Assets.xcassets */; };
 		EC62E8FF1BD0758E003718C2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EC62E8FD1BD0758E003718C2 /* LaunchScreen.storyboard */; };
 		EC62E9071BD075BD003718C2 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC62E9061BD075BD003718C2 /* HomeViewController.swift */; };
 		EC62E9091BD0779A003718C2 /* ServerWaitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC62E9081BD0779A003718C2 /* ServerWaitViewController.swift */; };
@@ -39,6 +38,7 @@
 		ECD3105B1BE1978300FA1244 /* ServerTollViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECD3105A1BE1978300FA1244 /* ServerTollViewController.swift */; };
 		ECF5DB451BE3EB830068BE74 /* icons_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = ECF5DB441BE3EB830068BE74 /* icons_icon.png */; };
 		ECF5DB491BE3F08C0068BE74 /* ClientDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECF5DB481BE3F08C0068BE74 /* ClientDetailViewController.swift */; };
+		ECF5DB8F1BE588430068BE74 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ECF5DB8E1BE588430068BE74 /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,7 +48,6 @@
 		EC62E8F11BD0758E003718C2 /* SplitMe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SplitMe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EC62E8F41BD0758E003718C2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EC62E8F91BD0758E003718C2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		EC62E8FB1BD0758E003718C2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EC62E8FE1BD0758E003718C2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		EC62E9001BD0758E003718C2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EC62E9061BD075BD003718C2 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -76,6 +75,7 @@
 		ECD3105A1BE1978300FA1244 /* ServerTollViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerTollViewController.swift; sourceTree = "<group>"; };
 		ECF5DB441BE3EB830068BE74 /* icons_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icons_icon.png; sourceTree = "<group>"; };
 		ECF5DB481BE3F08C0068BE74 /* ClientDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClientDetailViewController.swift; sourceTree = "<group>"; };
+		ECF5DB8E1BE588430068BE74 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -138,7 +138,7 @@
 				EC62E9161BD188B0003718C2 /* ServerConfirmTotalViewController.swift */,
 				ECD3105A1BE1978300FA1244 /* ServerTollViewController.swift */,
 				ECD310581BE1922900FA1244 /* ClientPayViewController.swift */,
-				EC62E8FB1BD0758E003718C2 /* Assets.xcassets */,
+				ECF5DB8E1BE588430068BE74 /* Assets.xcassets */,
 				ECF5DB441BE3EB830068BE74 /* icons_icon.png */,
 				EC62E8FD1BD0758E003718C2 /* LaunchScreen.storyboard */,
 				EC62E9001BD0758E003718C2 /* Info.plist */,
@@ -196,7 +196,7 @@
 				TargetAttributes = {
 					EC62E8F01BD0758E003718C2 = {
 						CreatedOnToolsVersion = 7.0.1;
-						DevelopmentTeam = NETDM9649U;
+						DevelopmentTeam = 646W9GX953;
 					};
 				};
 			};
@@ -225,8 +225,8 @@
 			files = (
 				EC62E8FF1BD0758E003718C2 /* LaunchScreen.storyboard in Resources */,
 				ECF5DB451BE3EB830068BE74 /* icons_icon.png in Resources */,
-				EC62E8FC1BD0758E003718C2 /* Assets.xcassets in Resources */,
 				EC62E8FA1BD0758E003718C2 /* Main.storyboard in Resources */,
+				ECF5DB8F1BE588430068BE74 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -375,7 +375,7 @@
 				INFOPLIST_FILE = SplitMe/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.SplitMe;
+				PRODUCT_BUNDLE_IDENTIFIER = com.baizhima.SplitMe;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
@@ -395,7 +395,7 @@
 				INFOPLIST_FILE = SplitMe/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.SplitMe;
+				PRODUCT_BUNDLE_IDENTIFIER = com.baizhima.SplitMe;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};

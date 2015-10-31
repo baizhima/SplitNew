@@ -90,24 +90,16 @@ class HomeViewController: UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
         logoView.image = UIImage(named: "logo")
         
-        let user = User()
-        user.objectId = "EUPUVq6Np4"
+        createButton.layer.shadowColor = UIColor.blackColor().CGColor
+        createButton.layer.shadowOffset = CGSizeMake(3, 3)
+        createButton.layer.shadowOpacity = 0.8
+        createButton.layer.shadowRadius = 0.0
         
-        let query = Dish.query()
-        query?.whereKey("ownBy", equalTo: user)
-        query?.whereKey("isShared", equalTo: false)
-        query?.findObjectsInBackgroundWithBlock({
-            (objects, error ) -> Void in
-            if error == nil {
-                
-                let dishes : [Dish] = objects as! [Dish]
-                print(dishes)
-                //self.dishTable.reloadData()
-                
-            }else{
-                //self.printErrorAndExit("Fail to fetch dishes from server: \(error)")
-            }
-        })
+        joinButton.layer.shadowColor = UIColor.blackColor().CGColor
+        joinButton.layer.shadowOffset = CGSizeMake(3, 3)
+        joinButton.layer.shadowOpacity = 0.8
+        joinButton.layer.shadowRadius = 0.0
+        
 
         
     }
