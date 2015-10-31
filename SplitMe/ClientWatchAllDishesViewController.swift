@@ -18,7 +18,7 @@ class ClientWatchAllDishesViewController: UIViewController, UITableViewDelegate 
     @IBOutlet weak var backButton: UIBarButtonItem!
     @IBOutlet weak var confirmButton: UIButton!
     
-    @IBOutlet weak var promptLabel: UILabel!
+    //@IBOutlet weak var promptLabel: UILabel!
     @IBOutlet weak var soloDishesView: UITableView!
     
     
@@ -48,14 +48,16 @@ class ClientWatchAllDishesViewController: UIViewController, UITableViewDelegate 
                 
                 // for master user
                 if meal.master.objectId == myself.objectId {
-                    let query = User.query()
-                    query?.whereKey("meal", equalTo: meal)
-                    query?.findObjectsInBackgroundWithBlock({ (objects, error ) -> Void in
-                        if error == nil{
+                    
+                    User.fetchAllInBackground(meal.users, block: { (objects, error) -> Void in
+                        
+                        if error != nil{
+                            print(error)
+                        }else{
                             
                             let users: [User] = objects as! [User]
                             for user: User in users {
-                                if user.state < User.UserDishesSaved {
+                                if user.state != User.UserDishesSaved {
                                     return
                                 }
                             }
@@ -64,9 +66,9 @@ class ClientWatchAllDishesViewController: UIViewController, UITableViewDelegate 
                             self.updateTimer?.invalidate()
                             self.performSegueWithIdentifier("clientWatchAllDishesToServerCheckSubtotal", sender: self)
                             
-                        }else{
-                        
                         }
+                        
+            
                     })
 
                 }else{
@@ -85,8 +87,13 @@ class ClientWatchAllDishesViewController: UIViewController, UITableViewDelegate 
                                 self.backButton.enabled = true
                                 self.confirmButton.enabled = true
                                 
-                                self.promptLabel.hidden = false
-                                self.promptLabel.text = "Please review your dishes"
+                                
+                                self.confirmButton.setTitle("Confirm", forState: UIControlState.Normal)
+                                self.confirmButton.backgroundColor = UIColor(red: 250.0/255, green: 220.0/255, blue: 145.0/255, alpha: 1.0)
+                                
+                                
+                                //self.promptLabel.hidden = false
+                                //self.promptLabel.text = "Please review your dishes"
                                 //self.performSegueWithIdentifier("clientWatchAllDishesToTypeOwnDishes", sender: self)
                             }
                         }else{
@@ -132,7 +139,6 @@ class ClientWatchAllDishesViewController: UIViewController, UITableViewDelegate 
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        promptLabel.hidden = true
         
         let statusBarView = UIView(frame:
             CGRect(x: 0.0, y: 0.0, width: UIScreen.mainScreen().bounds.size.width, height: 20.0)
@@ -144,7 +150,7 @@ class ClientWatchAllDishesViewController: UIViewController, UITableViewDelegate 
     
     override func viewDidAppear(animated: Bool) {
 
-        
+        //promptLabel.hidden = true
         fetchDishesFromCloud()
     }
 

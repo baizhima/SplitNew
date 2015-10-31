@@ -69,6 +69,12 @@ class ClientJoinViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func confirmPressed(sender: UIButton) {
+        
+        if inputCodeField.text == "" {
+            connectInfo.text = "Please input the code..."
+            connectInfo.hidden = false
+            return
+        }
         let code = Int(inputCodeField!.text!)!
         if code > 9999 || code < 1000 {
             connectInfo.text = "Code is 4 digits"

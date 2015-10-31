@@ -25,8 +25,8 @@ class ClientPayViewController: UIViewController {
     
     @IBAction func donePressed(sender: UIBarButtonItem) {
         
-        
-        
+        Meal.currentMeal = nil
+        User.currentUser = nil
         
         performSegueWithIdentifier("clientPayToHome", sender: self)
     }

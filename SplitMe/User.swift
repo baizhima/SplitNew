@@ -29,8 +29,8 @@ class User: PFObject, PFSubclassing {
     
     @NSManaged var payment: Double
     
-    static let UserJoining = 0 , UserJoined = 1, UserDishesSaved = 2, UserSharedDishesRemoved = 3,
-                ShareDishesSaved = 5 // should remove
+    static let UserJoining = 0 , UserJoined = 1, UserDishesSaved = 2, UserSharedDishesRemoved = 3
+                //ShareDishesSaved = 5 // should remove
     
     @NSManaged var state: Int
     

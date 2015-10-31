@@ -30,6 +30,27 @@ class ServerConfirmTotalViewController: UIViewController, UITextFieldDelegate,
     
     @IBOutlet weak var splitButton: UIButton!
     
+    
+    // when user pressed back
+    func revoke() {
+        
+        // save tax and tips in meal
+        
+        //Meal.currentMeal?.tax = tax
+        //Meal.currentMeal?.tips = tipsPct
+        
+        Meal.currentMeal?.state = Meal.TotalCancelled
+        Meal.currentMeal?.saveInBackground()
+        
+        // jump back to remove shared dishes
+        
+    }
+    
+    @IBAction func backButtonPressed(sender: AnyObject) {
+        revoke()
+        self.performSegueWithIdentifier("ServerConfirmTotalToRemoveDishesDidNotEat", sender: self)
+    }
+    
     func getSubPayment(user: User, dishes: [Dish]) -> Double{
         
         var sum = 0.0
@@ -47,51 +68,71 @@ class ServerConfirmTotalViewController: UIViewController, UITextFieldDelegate,
         return sum;
     }
     
+    
+    func split(){
+        let meal : Meal = Meal.currentMeal!
+        var dishes: [Dish]?
+        
+        let query = Dish.query()
+        query?.whereKey("meal", equalTo: meal)
+        do{
+            try dishes = query?.findObjects() as? [Dish]
+            
+        }catch _{
+            debugPrint("Error in fetching dishes")
+        }
+        
+        for user: User in meal.users {
+            
+            let subpayment = getSubPayment(user, dishes: dishes!)
+            
+            // split tax and tips by the number of users
+            user.payment = subpayment + (meal.tips + meal.tax)/Double(meal.users.count)
+            
+            // split tax and tips by the sub total of each user
+            //user.payment = meal.total * (subpayment/meal.subtotal);
+            
+            debugPrint("user: \(user.userName) payment is \(user.payment)" )
+        }
+        
+        User.saveAllInBackground(meal.users)
+        
+        meal.state = Meal.TotalConfirmed
+        meal.saveInBackground()
+        
+    }
+    
     @IBAction func splitPressed(sender: UIButton) {
         
         // TODO modify state code of Meal
         if let meal: Meal =  Meal.currentMeal {
             
-            
-            
-            print("before fetch: \(meal.users) \(meal.dishes)")
-            
-            var dishes: [Dish]?
-            
-                let query = Dish.query()
-                query?.whereKey("meal", equalTo: meal)
-                do{
-                    try dishes = query?.findObjects() as? [Dish]
+            // query for the number of users who confirmed
+            User.fetchAllInBackground(meal.users, block: { (objects, error) -> Void in
+                if error != nil {
+                    print(error)
+                }else{
+                    let users = objects as! [User]
                     
-                }catch _{
-                    debugPrint("Error in fetching dishes")
+                    var count = users.count
+                    for user : User in users {
+                        if user.state == User.UserSharedDishesRemoved {
+                            count -= 1
+                        }
+                    }
+                    if count == 0 {
+                        self.split()
+                        self.performSegueWithIdentifier("serverConfirmTotalToServerToll", sender: self)
+                    }else{
+                        print("\(count) friends haven't finish ...")
+                        
+                    }
                 }
-            print(dishes)
-            
-            
-            for user: User in meal.users {
-                
-                let subpayment = getSubPayment(user, dishes: dishes!)
-                
-                // split tax and tips by the number of users
-                user.payment = subpayment + (meal.tips + meal.tax)/Double(meal.users.count)
-                
-                // split tax and tips by the sub total of each user
-                //user.payment = meal.total * (subpayment/meal.subtotal);
-                
-                debugPrint("user: \(user.userName) payment is \(user.payment)" )
-            }
-            
-            User.saveAllInBackground(meal.users)
-            
-            meal.state = Meal.TotalConfirmed
-            meal.saveInBackground()
-            self.performSegueWithIdentifier("serverConfirmTotalToServerToll", sender: self)
+            })
  
         }
         
     }
-    
     
     func fetchDishes() -> [Dish]?{
         
@@ -124,38 +165,38 @@ class ServerConfirmTotalViewController: UIViewController, UITextFieldDelegate,
         
     }
     
-    func updateMealState() {
-        
-        if let meal = Meal.currentMeal {
-            
-            
-            User.fetchAllInBackground(meal.users, block: {(objects: [AnyObject]?, error: NSError?) -> Void in
-                let users = objects as! [User]
-                var count = 0
-                for user: User in users{
-                    //print("[ServerConfirmTotal]user.state=\(user.state)")
-                    if user.state == User.ShareDishesSaved {
-                        count += 1
-                    }
-                }
-                if( count == users.count ){
-                    meal.state = Meal.SharedDishesConfirmed
-                }else{
-                    debugPrint("Still \(users.count - count) users didn't finish")
-                }
-                
-                if meal.state == Meal.SharedDishesConfirmed {
-                    self.splitButton.enabled = true
-                }
-            })
-            meal.saveInBackground()
-        }
-        
-    }
+//    func updateMealState() {
+//        
+//        if let meal = Meal.currentMeal {
+//            
+//            
+//            User.fetchAllInBackground(meal.users, block: {(objects: [AnyObject]?, error: NSError?) -> Void in
+//                let users = objects as! [User]
+//                var count = 0
+//                for user: User in users{
+//                    //print("[ServerConfirmTotal]user.state=\(user.state)")
+//                    if user.state == User.ShareDishesSaved {
+//                        count += 1
+//                    }
+//                }
+//                if( count == users.count ){
+//                    meal.state = Meal.SharedDishesConfirmed
+//                }else{
+//                    debugPrint("Still \(users.count - count) users didn't finish")
+//                }
+//                
+//                if meal.state == Meal.SharedDishesConfirmed {
+//                    self.splitButton.enabled = true
+//                }
+//            })
+//            meal.saveInBackground()
+//        }
+//        
+//    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        splitButton.enabled = false
+        //splitButton.enabled = false
         
         let statusBarView = UIView(frame:
             CGRect(x: 0.0, y: 0.0, width: UIScreen.mainScreen().bounds.size.width, height: 20.0)
@@ -168,21 +209,20 @@ class ServerConfirmTotalViewController: UIViewController, UITextFieldDelegate,
         
     }
     
-    
-    
     override func viewDidAppear(animated: Bool) {
         
-        dispatch_async(dispatch_get_main_queue(), {
-            self.timer = NSTimer.scheduledTimerWithTimeInterval(2, target: self, selector: Selector("updateMealState"), userInfo: nil, repeats: true)
-        })
+//        dispatch_async(dispatch_get_main_queue(), {
+//            self.timer = NSTimer.scheduledTimerWithTimeInterval(2, target: self, selector: Selector("updateMealState"), userInfo: nil, repeats: true)
+//        })
         
-        self.dishes = fetchDishes()
+//        self.dishes = fetchDishes()
+//        for dish:Dish in self.dishes! {
+//            subtotal += dish.price
+//        }
         
-        for dish:Dish in self.dishes! {
-            subtotal += dish.price
-        }
+        self.subtotal = (Meal.currentMeal?.subtotal)!
         
-        print("subtotal: \(subtotal)")
+        print("subtotal: \(Meal.currentMeal!.subtotal)")
         self.subtotalField.text = String(NSString(format:"%.2f", subtotal))
         updateTotal()
     }

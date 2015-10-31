@@ -40,4 +40,5 @@ class Dish: PFObject, PFSubclassing{
     @NSManaged var meal: Meal
     @NSManaged var ownBy: User
     @NSManaged var sharedWith: [User]
+    
 }

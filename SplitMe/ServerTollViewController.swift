@@ -16,6 +16,10 @@ class ServerTollViewController: UIViewController, UITableViewDelegate {
 
     @IBOutlet weak var userView: UITableView!
     @IBAction func donePressed(sender: UIBarButtonItem) {
+        
+        Meal.currentMeal = nil
+        User.currentUser = nil
+        
         performSegueWithIdentifier("serverTollToHome", sender: self)
     }
     

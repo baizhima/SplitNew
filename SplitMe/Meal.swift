@@ -39,8 +39,8 @@ class Meal: PFObject, PFSubclassing {
     @NSManaged var total: Double
   
     static let UserJoining = 0, AllUserJoined = 1  //, AllDishesSaved = 2
-    static let SubtotalCancelled = 2, SubtotalConfirmed = 3, TotalConfirmed = 5,
-                SharedDishesConfirmed = 4 // should removed after
+    static let SubtotalCancelled = 2, SubtotalConfirmed = 3, TotalConfirmed = 5, TotalCancelled = 6
+                //SharedDishesConfirmed = 4 // should removed after
     
     @NSManaged var state: Int
     

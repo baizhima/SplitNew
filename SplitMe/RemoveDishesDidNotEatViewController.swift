@@ -10,68 +10,15 @@ import UIKit
 
 class RemoveDishesDidNotEatViewController: UIViewController, UITableViewDelegate {
 
+    @IBOutlet weak var tableView: UITableView!
+    
     var timer: NSTimer?
-    var sharedDishes : [Dish]?
+    var sharedDishes : [Dish] = [Dish]()
+    var isRemoved : [Bool] = [Bool]()
     
     @IBOutlet weak var nextButton: UIBarButtonItem!
-    
     @IBOutlet weak var promptField: UILabel!
     
-   
-    
-    @IBAction func nextPressed(sender: UIBarButtonItem) {
-        
-        if let meal = Meal.currentMeal {
-            if let user = User.currentUser {
-                
-                
-                print(sharedDishes)
-                
-                // add users to the dishes
-                for dish: Dish in sharedDishes! {
-                    
-                    dish.addUniqueObject(user, forKey: "sharedWith")
-                    //dish.sharedWith.append(user);
-                    dish.saveInBackgroundWithBlock({
-                        (ok, error) -> Void in
-                        if(!ok){
-                            print(error)
-                        }
-                    })
-                }
-                
-                user.state = User.ShareDishesSaved
-                user.saveInBackground()
-                
-                if meal.master.objectId == user.objectId {
-                    self.performSegueWithIdentifier("removeDishesDidNotEatToServerConfirmTotal", sender: self)
-                }
-                else {
-                    promptField.hidden = false
-                    nextButton.enabled = false
-                }
-            }
-        }
-    }
-    
-    func fetchSharedDishes() -> [Dish]?{
-        
-        if let meal = Meal.currentMeal {
-            
-            let query = Dish.query()
-            query?.whereKey("meal", equalTo: meal)
-            query?.whereKey("isShared", equalTo: true)
-            do{
-                try sharedDishes = query?.findObjects() as? [Dish]
-                return sharedDishes
-            }catch _{
-                debugPrint("Error in fetching dishes")
-            }
-        }else{
-            debugPrint("Error: current meal is nil")
-        }
-        return nil
-    }
     
     func updateMealState(){
         
@@ -88,6 +35,88 @@ class RemoveDishesDidNotEatViewController: UIViewController, UITableViewDelegate
                 }
                 self.performSegueWithIdentifier("removeDishesDidNotEatToClientPay", sender: self)
             }
+            if meal.state == Meal.TotalCancelled {
+                promptField.hidden = true
+                nextButton.enabled = true
+                User.currentUser?.state = User.UserDishesSaved
+                User.currentUser?.saveInBackground()
+            }
+        }
+    }
+    
+    @IBAction func nextPressed(sender: UIBarButtonItem) {
+        
+        if let meal = Meal.currentMeal {
+            if let user = User.currentUser {
+                //print(sharedDishes)
+                // add users to the dishes
+                for var i=0; i < sharedDishes.count; i++ {
+                    
+                    if isRemoved[i] == false {
+                        sharedDishes[i].addUniqueObject(user, forKey: "sharedWith")
+                    }else{
+                        sharedDishes[i].removeObject(user, forKey: "sharedWith")
+                    }
+                    sharedDishes[i].saveInBackground()
+                }
+          
+                user.state = User.UserSharedDishesRemoved
+                user.saveInBackground()
+                
+                if meal.master.objectId == user.objectId {
+                    self.performSegueWithIdentifier("removeDishesDidNotEatToServerConfirmTotal", sender: self)
+                }
+                else {
+                    promptField.hidden = false
+                    nextButton.enabled = false
+                    
+//                    meal.fetchInBackgroundWithBlock({ (object, error) -> Void in
+//                        if error != nil {
+//                            print(error)
+//                        }else{
+//                            let meal = object as! Meal
+//                            if meal.state == Meal.TotalConfirmed {
+//                                self.performSegueWithIdentifier("removeDishesDidNotEatToClientPay", sender: self)
+//                            }else{
+//                                self.promptField.hidden = false
+//                                self.promptField.text = "Wait for others ..."
+//                            }
+//                        }
+//                    })
+                    
+                    dispatch_async(dispatch_get_main_queue(), {
+                        self.timer = NSTimer.scheduledTimerWithTimeInterval(2, target: self, selector: Selector("updateMealState"), userInfo: nil, repeats: true)
+                    })
+                }
+            }
+        }
+    }
+    
+    func fetchSharedDishes() {
+        
+        if let meal = Meal.currentMeal {
+            
+            let query = Dish.query()
+            query?.whereKey("meal", equalTo: meal)
+            query?.whereKey("isShared", equalTo: true)
+            query?.findObjectsInBackgroundWithBlock({ ( objects, error) -> Void in
+                
+                if error != nil {
+                    print(error)
+                }else{
+                    self.sharedDishes = objects as! [Dish]
+                    self.isRemoved = [Bool](count: self.sharedDishes.count, repeatedValue: false)
+                    self.tableView.reloadData()
+                }
+            })
+//            do{
+//                try self.sharedDishes = query?.findObjects() as? [Dish]
+//                //return sharedDishes
+//            }catch _{
+//                debugPrint("Error in fetching dishes")
+//            }
+        }else{
+            debugPrint("Error: current meal is nil")
         }
     }
     
@@ -104,12 +133,14 @@ class RemoveDishesDidNotEatViewController: UIViewController, UITableViewDelegate
     }
     
     override func viewDidAppear(animated: Bool) {
-        if Meal.currentMeal!.master.objectId != User.currentUser?.objectId {
-            
-            dispatch_async(dispatch_get_main_queue(), {
-                self.timer = NSTimer.scheduledTimerWithTimeInterval(2, target: self, selector: Selector("updateMealState"), userInfo: nil, repeats: true)
-            })
-        }
+//        if Meal.currentMeal!.master.objectId != User.currentUser?.objectId {
+//            
+//            dispatch_async(dispatch_get_main_queue(), {
+//                self.timer = NSTimer.scheduledTimerWithTimeInterval(2, target: self, selector: Selector("updateMealState"), userInfo: nil, repeats: true)
+//            })
+//        }
+        
+        fetchSharedDishes()
     }
 
     override func didReceiveMemoryWarning() {
@@ -118,32 +149,27 @@ class RemoveDishesDidNotEatViewController: UIViewController, UITableViewDelegate
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if self.sharedDishes == nil{
-            self.sharedDishes = fetchSharedDishes()
-        }
         
-        if let dishes = self.sharedDishes{
-            return dishes.count
-        }
-        else{
-            return 0;
-        }
+//        if let dishes = self.sharedDishes{
+//            return dishes.count
+//        }
+//        else{
+//            return 0;
+//        }
+        return self.sharedDishes.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
         let newCell = UITableViewCell(style: UITableViewCellStyle.Value1, reuseIdentifier: "Cell")
         
-        if self.sharedDishes == nil{
-            self.sharedDishes = fetchSharedDishes()
-        }
-        
-        if let dishes = self.sharedDishes {
-            let dish: Dish = dishes[indexPath.row]
+        let dish: Dish = self.sharedDishes[indexPath.row]
             
-            newCell.textLabel!.text = "\(dish.name)"
-            newCell.detailTextLabel?.text = "$" + String(NSString(format:"%.2f", dish.price))
-        }else{
-            debugPrint("Error: tableView: dishes is empty")
+        newCell.textLabel!.text = "\(dish.name)"
+        newCell.detailTextLabel?.text = "$" + String(NSString(format:"%.2f", dish.price))
+        
+        if isRemoved[indexPath.row] == true {
+            newCell.backgroundColor = UIColor(red:0.49, green:0.71, blue:0.84, alpha:1.0)
         }
         
         return newCell
@@ -155,9 +181,13 @@ class RemoveDishesDidNotEatViewController: UIViewController, UITableViewDelegate
     }
     
     func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        
         if (editingStyle == UITableViewCellEditingStyle.Delete) {
-            sharedDishes!.removeAtIndex(indexPath.row)
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
+            
+            isRemoved[indexPath.row] = true
+            tableView.reloadData()
+            //sharedDishes!.removeAtIndex(indexPath.row)
+            //tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
         }
     }
     
