@@ -65,10 +65,7 @@ class ClientWatchAllDishesViewController: UIViewController, UITableViewDelegate 
                             // just jump to next view
                             self.updateTimer?.invalidate()
                             self.performSegueWithIdentifier("clientWatchAllDishesToServerCheckSubtotal", sender: self)
-                            
                         }
-                        
-            
                     })
 
                 }else{
@@ -80,21 +77,19 @@ class ClientWatchAllDishesViewController: UIViewController, UITableViewDelegate 
                                 self.updateTimer?.invalidate()
                                 self.performSegueWithIdentifier("clientWatchAllDishesToRemoveDishesDidNotEat", sender: self)
         
-                            }else if meal.state == Meal.SubtotalCancelled {
+                            }else{
                                 
-                                self.updateTimer?.invalidate()
-                                
-                                self.backButton.enabled = true
-                                self.confirmButton.enabled = true
-                                
-                                
-                                self.confirmButton.setTitle("Confirm", forState: UIControlState.Normal)
-                                self.confirmButton.backgroundColor = UIColor(red: 250.0/255, green: 220.0/255, blue: 145.0/255, alpha: 1.0)
-                                
-                                
-                                //self.promptLabel.hidden = false
-                                //self.promptLabel.text = "Please review your dishes"
-                                //self.performSegueWithIdentifier("clientWatchAllDishesToTypeOwnDishes", sender: self)
+                                User.currentUser?.fetchInBackgroundWithBlock({ (object, error) -> Void in
+                                    let user = object as! User
+                                    if user.state == User.UserJoined {
+                                        self.updateTimer?.invalidate()
+                                        
+                                        self.backButton.enabled = true
+                                        self.confirmButton.enabled = true
+                                        self.confirmButton.setTitle("Confirm", forState: UIControlState.Normal)
+                                        self.confirmButton.backgroundColor = UIColor(red: 250.0/255, green: 220.0/255, blue: 145.0/255, alpha: 1.0)
+                                    }
+                                })
                             }
                         }else{
                             

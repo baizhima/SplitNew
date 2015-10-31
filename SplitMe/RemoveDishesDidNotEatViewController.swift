@@ -35,12 +35,23 @@ class RemoveDishesDidNotEatViewController: UIViewController, UITableViewDelegate
                 }
                 self.performSegueWithIdentifier("removeDishesDidNotEatToClientPay", sender: self)
             }
-            if meal.state == Meal.TotalCancelled {
-                promptField.hidden = true
-                nextButton.enabled = true
-                User.currentUser?.state = User.UserDishesSaved
-                User.currentUser?.saveInBackground()
-            }
+            
+            User.currentUser?.fetchInBackgroundWithBlock({ (object, error ) -> Void in
+                let user = object as! User
+                if user.state == User.UserDishesSaved {
+                    self.promptField.hidden = true
+                    self.nextButton.enabled = true
+                    //User.currentUser?.state = User.UserDishesSaved
+                    //user.saveInBackground()
+                }
+            })
+            
+//            if meal.state == Meal.TotalCancelled {
+//                promptField.hidden = true
+//                nextButton.enabled = true
+//                User.currentUser?.state = User.UserDishesSaved
+//                User.currentUser?.saveInBackground()
+//            }
         }
     }
     

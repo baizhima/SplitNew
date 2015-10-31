@@ -53,27 +53,28 @@ class ServerCheckSubtotalViewController: UIViewController, UITableViewDelegate  
         
         if let meal: Meal =  Meal.currentMeal {
             
-            // set all user's state to UserJoin
+            for u : User in meal.users {
+                u.state = User.UserJoined
+            }
+            User.saveAllInBackground(meal.users)
             
-            let query = User.query()
-            query?.whereKey( "meal", equalTo: meal)
-            query?.findObjectsInBackgroundWithBlock({ (objects, error ) -> Void in
-                if error == nil{
-                    
-                    let users : [User] = objects as! [User]
-                    for u : User in users {
-                        u.state = User.UserJoined
-                    }
-                    User.saveAllInBackground(users)
-                    
-                }else{
-                    
-                }
-            })
-            
-            meal.state = Meal.SubtotalCancelled
-            meal.saveInBackground()
             self.performSegueWithIdentifier("serverCheckSubtotalToServerTypeShareDishes", sender: self)
+            
+            // set all user's state to UserJoin
+//            User.fetchAllInBackground(meal.users, block: { (objects, error) -> Void in
+//            
+//                if error != nil{
+//                    print(error )
+//                }else{
+//                    let users : [User] = objects as! [User]
+//                    for u : User in users {
+//                        u.state = User.UserJoined
+//                    }
+//                    User.saveAllInBackground(users)
+//                    
+//                    self.performSegueWithIdentifier("serverCheckSubtotalToServerTypeShareDishes", sender: self)
+//                }
+//            })
         }
 
     }

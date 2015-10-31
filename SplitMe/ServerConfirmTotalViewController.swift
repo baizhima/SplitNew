@@ -30,7 +30,7 @@ class ServerConfirmTotalViewController: UIViewController, UITextFieldDelegate,
     
     @IBOutlet weak var splitButton: UIButton!
     
-    
+    // xueyang changed
     // when user pressed back
     func revoke() {
         
@@ -38,11 +38,24 @@ class ServerConfirmTotalViewController: UIViewController, UITextFieldDelegate,
         
         //Meal.currentMeal?.tax = tax
         //Meal.currentMeal?.tips = tipsPct
+        let users = Meal.currentMeal?.users
+        for u: User in users! {
+            u.state = User.UserDishesSaved
+        }
+        User.saveAllInBackground(users)
         
-        Meal.currentMeal?.state = Meal.TotalCancelled
-        Meal.currentMeal?.saveInBackground()
-        
-        // jump back to remove shared dishes
+//        User.fetchAllInBackground(Meal.currentMeal?.users) { (objects, error) -> Void in
+//            if error != nil {
+//                print(error)
+//                let users = objects as! [User]
+//                for u: User in objects as! [User] {
+//                    u.state = User.UserJoined
+//                    
+//                }
+//                User.saveAllInBackground(users)
+//            }
+//        }
+//        Meal.currentMeal?.saveInBackground()
         
     }
     
