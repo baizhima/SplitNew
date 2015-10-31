@@ -103,6 +103,10 @@ class TypeOwnDishesViewController: UIViewController, UIScrollViewDelegate, UITex
     @IBAction func addPressed(sender: UIButton) {
         
         // add my own dishes into dish list
+        addNewDish()
+    }
+    
+    func addNewDish() {
         if dishField!.text != "" && priceField!.text != "" {
             // TODO:
             let currDish = Dish(name: dishField.text!, price: Double(priceField.text!)!, isShared: false, meal: Meal.currentMeal!, ownBy: User.currentUser!)
