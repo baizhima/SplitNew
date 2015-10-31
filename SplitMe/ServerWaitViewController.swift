@@ -20,11 +20,11 @@ class ServerWaitViewController: UIViewController, UINavigationControllerDelegate
     
     @IBOutlet weak var retakeButton: UIButton!
     @IBOutlet weak var joinedFriendsField: UILabel!
-    @IBOutlet weak var uploadImageButton: UIButton!
     @IBOutlet weak var splitCodeField: UILabel!
     
     @IBOutlet weak var imageView: UIImageView!
     
+    @IBOutlet weak var uploadPromptView: UIView!
     
     
     @IBAction func retakePressed(sender: UIButton) {
@@ -69,9 +69,6 @@ class ServerWaitViewController: UIViewController, UINavigationControllerDelegate
         self.performSegueWithIdentifier("serverWaitToHome", sender: self)
     }
     
-    @IBAction func captureImage(sender: UIButton) {
-        getImage()
-    }
     
     func getImage() {
         let imageFromSource = UIImagePickerController()
@@ -120,6 +117,12 @@ class ServerWaitViewController: UIViewController, UINavigationControllerDelegate
         
         statusBarView.backgroundColor = bgColor
         self.view.addSubview(statusBarView)
+        
+        
+        
+        let uploadSubviewTap = UITapGestureRecognizer.init(target: self, action: Selector("getImage"))
+        uploadPromptView.addGestureRecognizer(uploadSubviewTap)
+        
         
         
         retakeButton.hidden = true
@@ -173,10 +176,9 @@ class ServerWaitViewController: UIViewController, UINavigationControllerDelegate
         let receiptImage = info[UIImagePickerControllerOriginalImage] as? UIImage
         imageView.image = receiptImage
         self.dismissViewControllerAnimated(true, completion: {})
-        uploadImageButton.titleLabel!.text = "Retake the photo?"
         
         retakeButton.hidden = false
-        uploadImageButton.hidden = true
+        uploadPromptView.hidden = true
         saveImage(receiptImage!)
     }
     

@@ -152,8 +152,8 @@
                                     </navigationItem>
                                 </items>
                             </navigationBar>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please enter the 4 digit code" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hZK-PT-oXx">
-                                <rect key="frame" x="76" y="121" width="220" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Please enter the 4-digit code" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hZK-PT-oXx">
+                                <rect key="frame" x="75" y="121" width="223" height="21"/>
                                 <animations/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="ONI-d2-XEQ"/>
@@ -281,8 +281,8 @@
                                 <color key="textColor" red="0.49019607840000001" green="0.70588235290000001" blue="0.84313725490000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="invitation code" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rvd-Xh-x6P">
-                                <rect key="frame" x="29" y="123" width="144" height="27"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Invitation code" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rvd-Xh-x6P">
+                                <rect key="frame" x="29" y="123" width="145" height="27"/>
                                 <animations/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="27" id="Epj-z6-xji"/>
@@ -292,14 +292,6 @@
                                 <color key="textColor" red="0.49019607840000001" green="0.70588235290000001" blue="0.84313725490000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1xo-vA-u7q">
-                                <rect key="frame" x="119" y="345" width="136" height="30"/>
-                                <animations/>
-                                <state key="normal" title="Upload your receipt"/>
-                                <connections>
-                                    <action selector="captureImage:" destination="Dji-Nd-e40" eventType="touchUpInside" id="nNX-0b-wR4"/>
-                                </connections>
-                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="friends have joined" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RsR-aQ-eNn">
                                 <rect key="frame" x="141" y="293" width="172" height="40"/>
                                 <animations/>
@@ -329,6 +321,45 @@
                                     <constraint firstAttribute="width" constant="240" id="Qwr-dV-5PR"/>
                                 </constraints>
                             </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pfT-Q7-Ic4">
+                                <rect key="frame" x="55" y="260" width="264" height="2"/>
+                                <color key="backgroundColor" red="0.76470588240000004" green="0.76470588240000004" blue="0.76470588240000004" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="264" id="WBD-2H-EP2"/>
+                                    <constraint firstAttribute="height" constant="2" id="hus-Pb-Yz7"/>
+                                </constraints>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h0M-GB-EwG">
+                                <rect key="frame" x="281" y="527" width="51" height="23"/>
+                                <state key="normal" title="retake">
+                                    <color key="titleColor" red="0.49019607840000001" green="0.70588235290000001" blue="0.84313725490000002" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="retakePressed:" destination="Dji-Nd-e40" eventType="touchUpInside" id="g73-28-RSy"/>
+                                </connections>
+                            </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kk2-YC-biW">
+                                <rect key="frame" x="67" y="391" width="240" height="128"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="+" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="teW-li-xmK">
+                                        <rect key="frame" x="84" y="26" width="73" height="46"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="53"/>
+                                        <color key="textColor" red="0.90196078430000004" green="0.27450980390000002" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Upload your receipt" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="noW-Mi-mZm">
+                                        <rect key="frame" x="45" y="80" width="151" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="0.90196078430000004" green="0.27450980390000002" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="240" id="f4P-w8-ny1"/>
+                                    <constraint firstAttribute="height" constant="128" id="sdA-Vx-dTo"/>
+                                </constraints>
+                            </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p8L-e6-mey">
                                 <rect key="frame" x="42" y="564" width="290" height="50"/>
                                 <animations/>
@@ -350,23 +381,6 @@
                                     <action selector="startPressed:" destination="Dji-Nd-e40" eventType="touchUpInside" id="HfK-DX-0Ib"/>
                                 </connections>
                             </button>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pfT-Q7-Ic4">
-                                <rect key="frame" x="55" y="260" width="264" height="2"/>
-                                <color key="backgroundColor" red="0.76470588240000004" green="0.76470588240000004" blue="0.76470588240000004" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="264" id="WBD-2H-EP2"/>
-                                    <constraint firstAttribute="height" constant="2" id="hus-Pb-Yz7"/>
-                                </constraints>
-                            </view>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h0M-GB-EwG">
-                                <rect key="frame" x="281" y="527" width="51" height="23"/>
-                                <state key="normal" title="retake">
-                                    <color key="titleColor" red="0.49019607840000001" green="0.70588235290000001" blue="0.84313725490000002" alpha="1" colorSpace="calibratedRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="retakePressed:" destination="Dji-Nd-e40" eventType="touchUpInside" id="g73-28-RSy"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -384,15 +398,15 @@
                             <constraint firstItem="p8L-e6-mey" firstAttribute="top" secondItem="kRG-C9-Pdz" secondAttribute="bottom" constant="45" id="GRy-bR-ZK9"/>
                             <constraint firstItem="pfT-Q7-Ic4" firstAttribute="top" secondItem="DrT-t7-mJL" secondAttribute="bottom" constant="3" id="MoX-kK-tpO"/>
                             <constraint firstItem="pfT-Q7-Ic4" firstAttribute="centerX" secondItem="b97-Nd-Fkm" secondAttribute="centerX" id="Mvb-On-Bh6"/>
-                            <constraint firstItem="1xo-vA-u7q" firstAttribute="top" secondItem="RsR-aQ-eNn" secondAttribute="bottom" constant="12" id="U0P-iX-DMi"/>
                             <constraint firstItem="Rvd-Xh-x6P" firstAttribute="top" secondItem="bBa-Af-9b9" secondAttribute="bottom" constant="59" id="VLr-yR-wzn"/>
                             <constraint firstItem="bBa-Af-9b9" firstAttribute="centerX" secondItem="kRG-C9-Pdz" secondAttribute="centerX" id="WRE-Pt-Idv"/>
+                            <constraint firstItem="kk2-YC-biW" firstAttribute="centerX" secondItem="b97-Nd-Fkm" secondAttribute="centerX" id="Z2s-sl-vLb"/>
                             <constraint firstItem="DrT-t7-mJL" firstAttribute="leading" secondItem="b97-Nd-Fkm" secondAttribute="leadingMargin" constant="68" id="cKl-2G-0oe"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Rvd-Xh-x6P" secondAttribute="trailing" constant="182" id="egm-sd-Pcd"/>
-                            <constraint firstItem="DrT-t7-mJL" firstAttribute="centerX" secondItem="1xo-vA-u7q" secondAttribute="centerX" id="ewW-me-ldk"/>
                             <constraint firstItem="RsR-aQ-eNn" firstAttribute="leading" secondItem="Vfg-Oz-czi" secondAttribute="trailing" constant="8" symbolic="YES" id="h3e-Cu-Dr5"/>
                             <constraint firstItem="bBa-Af-9b9" firstAttribute="leading" secondItem="b97-Nd-Fkm" secondAttribute="leading" id="h76-23-SJA"/>
                             <constraint firstItem="pfT-Q7-Ic4" firstAttribute="top" secondItem="DrT-t7-mJL" secondAttribute="bottom" constant="3" id="xrO-8e-NdU"/>
+                            <constraint firstItem="kk2-YC-biW" firstAttribute="top" secondItem="Vfg-Oz-czi" secondAttribute="bottom" constant="58" id="y1s-83-ZXQ"/>
                             <constraint firstItem="RsR-aQ-eNn" firstAttribute="top" secondItem="pfT-Q7-Ic4" secondAttribute="bottom" constant="31" id="zS0-FA-KlY"/>
                         </constraints>
                     </view>
@@ -404,7 +418,7 @@
                         <outlet property="retakeButton" destination="h0M-GB-EwG" id="M2W-4N-sk2"/>
                         <outlet property="splitCodeField" destination="DrT-t7-mJL" id="cS8-40-ZVh"/>
                         <outlet property="startButton" destination="p8L-e6-mey" id="h7d-8c-S9F"/>
-                        <outlet property="uploadImageButton" destination="1xo-vA-u7q" id="aTv-Cy-DMP"/>
+                        <outlet property="uploadPromptView" destination="kk2-YC-biW" id="xab-Fu-0sq"/>
                         <segue destination="BYZ-38-t0r" kind="show" identifier="serverWaitToHome" id="bwC-y0-ghp"/>
                         <segue destination="a63-N9-D1F" kind="show" identifier="serverWaitToTypeOwnDishes" id="GNX-lR-uzL"/>
                     </connections>
@@ -514,6 +528,9 @@
                                 <state key="normal" title="+">
                                     <color key="titleColor" red="0.90196078430000004" green="0.27450980390000002" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="addPressed:" destination="a63-N9-D1F" eventType="touchUpInside" id="Gmb-nw-w8n"/>
+                                </connections>
                             </button>
                         </subviews>
                         <animations/>
@@ -1162,7 +1179,6 @@
                                 </state>
                                 <connections>
                                     <action selector="addPressed:" destination="8fj-I8-EmW" eventType="touchUpInside" id="8fs-hD-78S"/>
-                                    <action selector="addPressed:" destination="a63-N9-D1F" eventType="touchUpInside" id="WQK-7G-Xg6"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -1316,12 +1332,12 @@
         <image name="percentSign" width="60" height="52"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="qaM-UR-PdU"/>
-        <segue reference="7dO-xX-yeP"/>
-        <segue reference="p4C-2T-D0T"/>
+        <segue reference="KKg-IW-lmu"/>
+        <segue reference="4KL-G5-uf4"/>
         <segue reference="vOd-pg-Kca"/>
-        <segue reference="pvz-V4-lo1"/>
-        <segue reference="96H-5m-BCx"/>
+        <segue reference="7dO-xX-yeP"/>
+        <segue reference="S8D-pB-Lra"/>
+        <segue reference="bqL-Sr-TlD"/>
         <segue reference="FYX-OB-muc"/>
         <segue reference="Xbw-4H-gG2"/>
     </inferredMetricsTieBreakers>

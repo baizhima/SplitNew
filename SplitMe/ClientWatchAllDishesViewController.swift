@@ -108,10 +108,12 @@ class ClientWatchAllDishesViewController: UIViewController, UITableViewDelegate 
             user.state = User.UserDishesSaved
             user.saveInBackground()
             
-            promptLabel.hidden = false
-            promptLabel.text = "Waiting for others ..."
+            //promptLabel.hidden = false
+            //promptLabel.text = "Waiting for others ..."
             
+            confirmButton.setTitle("Waiting for others ...", forState: UIControlState.Normal)
             confirmButton.enabled = false
+            
             backButton.enabled = false
             
             confirmButton.backgroundColor = UIColor(red: 195.0/255, green: 195.0/255, blue: 195.0/255, alpha: 1.0)
@@ -124,16 +126,7 @@ class ClientWatchAllDishesViewController: UIViewController, UITableViewDelegate 
     }
     
     @IBAction func backPressed(sender: UIBarButtonItem) {
-//        if let timer = self.timer {
-//            timer.invalidate()
-//        }
-        
-//        if User.currentUser?.objectId == Meal.currentMeal?.master.objectId {
-//            
-//        }else{
-//            
-//        }
-        
+      
         self.performSegueWithIdentifier("clientWatchAllDishesToTypeOwnDishes", sender: self)
     }
     
@@ -150,10 +143,7 @@ class ClientWatchAllDishesViewController: UIViewController, UITableViewDelegate 
     }
     
     override func viewDidAppear(animated: Bool) {
-//        fetchMeal()
-//        dispatch_async(dispatch_get_main_queue(), {
-//            self.timer = NSTimer.scheduledTimerWithTimeInterval(2, target: self, selector: Selector("fetchMeal"), userInfo: nil, repeats: true)
-//        });
+
         
         fetchDishesFromCloud()
     }
