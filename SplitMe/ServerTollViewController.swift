@@ -72,8 +72,15 @@ class ServerTollViewController: UIViewController, UITableViewDelegate {
             newCell.textLabel!.text = "\(users[idx].userName)"
             newCell.detailTextLabel?.text = "$" + String(NSString(format:"%.2f", users[idx].payment))
         }
+        let idx = indexPath.row
         
-        
+        if idx % 2 == 0 {
+            newCell.backgroundColor = UIColor.init(red: 146.0/255, green: 146.0/255, blue: 146.0/255, alpha: 1.0)
+        } else {
+            newCell.backgroundColor = UIColor.init(red: 113.0/255, green: 113.0/255, blue: 113.0/255, alpha: 1.0)
+        }
+        newCell.textLabel?.textColor = UIColor.whiteColor()
+        newCell.detailTextLabel?.textColor = UIColor.whiteColor()
         
         return newCell
     }

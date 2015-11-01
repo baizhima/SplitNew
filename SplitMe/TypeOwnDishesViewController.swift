@@ -184,6 +184,7 @@ class TypeOwnDishesViewController: UIViewController, UIScrollViewDelegate, UITex
         let idx = dishes.count-1-indexPath.row
         newCell.textLabel!.text = "\(dishes[idx].name)"
         newCell.detailTextLabel?.text = "$" + String(NSString(format:"%.2f", dishes[idx].price))
+        newCell.detailTextLabel?.textColor = UIColor.blackColor()
         return newCell
     }
     

@@ -223,6 +223,7 @@ class ServerTypeShareDishesViewController: UIViewController, UIScrollViewDelegat
         let idx = sharedDishes.count-1-indexPath.row
         newCell.textLabel!.text = "\(sharedDishes[idx].name)"
         newCell.detailTextLabel?.text = "$" + String(NSString(format:"%.2f", sharedDishes[idx].price))
+        newCell.detailTextLabel?.textColor = UIColor.blackColor()
         return newCell
     }
 

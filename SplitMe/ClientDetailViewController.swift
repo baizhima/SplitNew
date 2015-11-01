@@ -158,6 +158,8 @@ class ClientDetailViewController: UIViewController, UITableViewDelegate {
         cell.textLabel!.text = "\(dish.name)"
         cell.detailTextLabel?.text = "$" + String(NSString(format:"%.2f/%.2f", myprice, dish.price))
         
+        
+        
         return cell
         
 
