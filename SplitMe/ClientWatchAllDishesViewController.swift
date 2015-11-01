@@ -86,7 +86,7 @@ class ClientWatchAllDishesViewController: UIViewController, UITableViewDelegate 
                                         
                                         self.backButton.enabled = true
                                         self.confirmButton.enabled = true
-                                        self.confirmButton.setTitle("Confirm", forState: UIControlState.Normal)
+                                        self.confirmButton.setTitle("confirm", forState: UIControlState.Normal)
                                         self.confirmButton.backgroundColor = UIColor(red: 250.0/255, green: 220.0/255, blue: 145.0/255, alpha: 1.0)
                                     }
                                 })
@@ -117,7 +117,6 @@ class ClientWatchAllDishesViewController: UIViewController, UITableViewDelegate 
             confirmButton.enabled = false
             
             backButton.enabled = false
-            
             confirmButton.backgroundColor = UIColor(red: 195.0/255, green: 195.0/255, blue: 195.0/255, alpha: 1.0)
             
             // for every 3 second

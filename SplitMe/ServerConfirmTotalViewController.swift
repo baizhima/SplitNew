@@ -100,10 +100,10 @@ class ServerConfirmTotalViewController: UIViewController, UITextFieldDelegate,
             let subpayment = getSubPayment(user, dishes: dishes!)
             
             // split tax and tips by the number of users
-            user.payment = subpayment + (meal.tips + meal.tax)/Double(meal.users.count)
+            //user.payment = subpayment + (meal.tips + meal.tax)/Double(meal.users.count)
             
             // split tax and tips by the sub total of each user
-            //user.payment = meal.total * (subpayment/meal.subtotal);
+            user.payment = meal.total * (subpayment/meal.subtotal);
             
             debugPrint("user: \(user.userName) payment is \(user.payment)" )
         }

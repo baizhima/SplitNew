@@ -17,6 +17,7 @@ class ServerCheckSubtotalViewController: UIViewController, UITableViewDelegate  
     @IBOutlet weak var dishesTable: UITableView!
     @IBOutlet weak var subtotalField: UILabel!
     
+
     
     func fetchDishes(){
         
@@ -79,6 +80,11 @@ class ServerCheckSubtotalViewController: UIViewController, UITableViewDelegate  
     }
     
     @IBAction func nextPressed(sender: UIBarButtonItem) {
+        confirm()
+    }
+    
+    
+    @IBAction func confirmButtonPressed(sender: AnyObject) {
         confirm()
     }
 

@@ -78,34 +78,6 @@ class ServerTypeShareDishesViewController: UIViewController, UIScrollViewDelegat
 
     }
     
-    
-    
-    @IBAction func backPressed(sender: UIBarButtonItem) {
-        self.performSegueWithIdentifier("serverTypeShareDishesToTypeOwnDishes", sender: self)
-    }
-    
-    @IBAction func nextPressed(sender: UIBarButtonItem) {
-        
-//        if let meal = Meal.currentMeal {
-//            
-//            do{
-//                try meal.fetchIfNeeded()
-//                try Dish.saveAll(sharedDishes)
-//                meal.addUniqueObjectsFromArray(sharedDishes, forKey: "dishes")
-//                //meal.dishes.appendContentsOf(sharedDishes)
-//                try meal.save()
-//            }catch _{
-//                
-//            }
-//        }
-        
-        if timer != nil {
-            timer?.invalidate()
-        }
-        self.performSegueWithIdentifier("serverTypeShareDishesToClientWatchAllDishes", sender: self)
-        
-    }
-    
     func addSharedDish() {
         if dishField!.text != "" && priceField!.text != "" {
             
@@ -117,7 +89,7 @@ class ServerTypeShareDishesViewController: UIViewController, UIScrollViewDelegat
                 let currDish = Dish(name: dishname, price: Double(price)!, isShared: true, meal: Meal.currentMeal!, ownBy: user)
                 
                 sharedDishes.append(currDish)
-    
+                
                 saveDishToCloud(currDish)
                 
                 //print("shareDishArr count = \(sharedDishes.count)")
@@ -133,33 +105,29 @@ class ServerTypeShareDishesViewController: UIViewController, UIScrollViewDelegat
         }
     }
     
-//    func updateMealState() {
-//        
-//        if let meal = Meal.currentMeal {
-//                
-//                User.fetchAllInBackground(meal.users, block: {(objects: [AnyObject]?, error: NSError?) -> Void in
-//                    let users = objects as! [User]
-//                    var count = 0
-//                    for user: User in users{
-//                        print("user.state=\(user.state)")
-//                        if user.state == User.SoloDishesSaved {
-//                            count += 1
-//                        }
-//                    }
-//                    if( count == users.count ){
-//                        meal.state = Meal.AllDishesSaved
-//                    }else{
-//                        debugPrint("Still \(users.count - count) users didn't finish")
-//                    }
-//                    
-//                    if meal.state == Meal.AllDishesSaved {
-//                        self.nextButton.enabled = true
-//                    }
-//                    meal.saveInBackground()
-//                })
-//        }
-//        
-//    }
+    func deleteDish(sender: AnyObject?) {
+        print("line number: \(sender?.tag)")
+        
+        let dish = self.sharedDishes.removeAtIndex((sender?.tag)!)
+        dish.deleteInBackground()
+        
+        self.dishTable.reloadData()
+    }
+    
+    
+    
+    @IBAction func backPressed(sender: UIBarButtonItem) {
+        self.performSegueWithIdentifier("serverTypeShareDishesToTypeOwnDishes", sender: self)
+    }
+    
+    @IBAction func nextPressed(sender: UIBarButtonItem) {
+        
+        if timer != nil {
+            timer?.invalidate()
+        }
+        self.performSegueWithIdentifier("serverTypeShareDishesToClientWatchAllDishes", sender: self)
+        
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -184,10 +152,6 @@ class ServerTypeShareDishesViewController: UIViewController, UIScrollViewDelegat
     }
     
     override func viewDidAppear(animated: Bool) {
-       
-//        dispatch_async(dispatch_get_main_queue(), {
-//        self.timer = NSTimer.scheduledTimerWithTimeInterval(2, target: self, selector: Selector("updateMealState"), userInfo: nil, repeats: true)
-//        })
         
         fetchImageFromCloud()
         fetchDishFromCloud()
@@ -219,21 +183,20 @@ class ServerTypeShareDishesViewController: UIViewController, UIScrollViewDelegat
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let newCell = UITableViewCell(style: UITableViewCellStyle.Value1, reuseIdentifier: "Cell")
+        //let newCell = UITableViewCell(style: UITableViewCellStyle.Value1, reuseIdentifier: "Cell")
+        let newCell = tableView.dequeueReusableCellWithIdentifier("DishTableCell", forIndexPath: indexPath) as! DishTableCell
+        
         let idx = sharedDishes.count-1-indexPath.row
-        newCell.textLabel!.text = "\(sharedDishes[idx].name)"
-        newCell.detailTextLabel?.text = "$" + String(NSString(format:"%.2f", sharedDishes[idx].price))
-        newCell.detailTextLabel?.textColor = UIColor.blackColor()
+        newCell.nameLabel.text = "\(sharedDishes[idx].name)"
+        newCell.priceLabel.text = "$" + String(NSString(format:"%.2f", sharedDishes[idx].price))
+        newCell.button.tag = idx
+        newCell.button.addTarget(self, action: Selector("deleteDish:"), forControlEvents: .TouchUpInside)
+        
+        
+        //newCell.textLabel!.text = "\(sharedDishes[idx].name)"
+        //newCell.detailTextLabel?.text = "$" + String(NSString(format:"%.2f", sharedDishes[idx].price))
+        //newCell.detailTextLabel?.textColor = UIColor.blackColor()
         return newCell
     }
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 }

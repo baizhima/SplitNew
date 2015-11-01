@@ -132,31 +132,6 @@ class ClientDetailViewController: UIViewController, UITableViewDelegate {
     {
         let cell = UITableViewCell(style: UITableViewCellStyle.Value1, reuseIdentifier: "Cell")
         
-        
-//        if( indexPath.row >= dishes.count ){
-//            let row = indexPath.row - dishes.count
-//            
-//            if self.meal == nil {
-//                return cell
-//            }
-//            
-//            if row == 0 {
-//                
-//                let myTax = ((User.currentUser?.payment)! / (meal?.total)!) * (meal?.tax)!
-//                
-//                cell.textLabel!.text = "Tax"
-//                cell.detailTextLabel?.text = "$" + String(NSString(format:"%.2f/%.2f", myTax , (meal?.tax)!))
-//                return cell
-//            }
-//            else if row == 1 {
-//                let myTips = ((User.currentUser?.payment)! / (meal?.total)!) * (meal?.tips)!
-//                
-//                cell.textLabel!.text = "Tips"
-//                cell.detailTextLabel?.text = "$" + String(NSString(format:"%.2f/%.2f", myTips , (meal?.tips)!))
-//                return cell
-//            }
-//        }
-        
         let dish: Dish = dishes[indexPath.row]
         
         let myprice = getMyPayment(dish)
@@ -173,15 +148,5 @@ class ClientDetailViewController: UIViewController, UITableViewDelegate {
         
 
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

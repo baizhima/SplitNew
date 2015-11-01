@@ -76,6 +76,30 @@ class TypeOwnDishesViewController: UIViewController, UIScrollViewDelegate, UITex
         }
     }
     
+    func deleteDish(sender: AnyObject?) {
+        print("line number: \(sender?.tag)")
+        
+        let dish = self.dishes.removeAtIndex((sender?.tag)!)
+        dish.deleteInBackground()
+        
+        self.dishTable.reloadData()
+    }
+    
+    func addNewDish() {
+        if dishField!.text != "" && priceField!.text != "" {
+            // TODO:
+            let currDish = Dish(name: dishField.text!, price: Double(priceField.text!)!, isShared: false, meal: Meal.currentMeal!, ownBy: User.currentUser!)
+            
+            dishes.append(currDish)
+            saveDishFromCloud(currDish)
+            
+            dishField.text = ""
+            priceField.text = ""
+            dishTable.reloadData()
+            dishField.becomeFirstResponder()
+        }
+    }
+    
 
     
     @IBAction func nextPressed(sender: UIBarButtonItem) {
@@ -97,27 +121,6 @@ class TypeOwnDishesViewController: UIViewController, UIScrollViewDelegate, UITex
             printErrorAndExit("Fail to get current meal")
         }
 
-    }
-    
-
-   
-    
-    
-    
-    func addNewDish() {
-        if dishField!.text != "" && priceField!.text != "" {
-            // TODO:
-            let currDish = Dish(name: dishField.text!, price: Double(priceField.text!)!, isShared: false, meal: Meal.currentMeal!, ownBy: User.currentUser!)
-            
-            dishes.append(currDish)
-            
-            saveDishFromCloud(currDish)
-            
-            dishField.text = ""
-            priceField.text = ""
-            dishTable.reloadData()
-            dishField.becomeFirstResponder()
-        }
     }
     
     override func viewDidLoad() {
@@ -176,26 +179,16 @@ class TypeOwnDishesViewController: UIViewController, UIScrollViewDelegate, UITex
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let newCell = UITableViewCell(style: UITableViewCellStyle.Value1, reuseIdentifier: "Cell")
-        //newCell.textLabel!.textColor = UIColor.whiteColor()
-        //newCell.detailTextLabel?.textColor = UIColor.whiteColor()
+        //let newCell = UITableViewCell(style: UITableViewCellStyle.Value1, reuseIdentifier: "Cell")
         
+        let newCell = tableView.dequeueReusableCellWithIdentifier("DishTableCell", forIndexPath: indexPath) as! DishTableCell
         
         let idx = dishes.count-1-indexPath.row
-        newCell.textLabel!.text = "\(dishes[idx].name)"
-        newCell.detailTextLabel?.text = "$" + String(NSString(format:"%.2f", dishes[idx].price))
-        newCell.detailTextLabel?.textColor = UIColor.blackColor()
+        newCell.nameLabel.text = "\(dishes[idx].name)"
+        newCell.priceLabel.text = "$" + String(NSString(format:"%.2f", dishes[idx].price))
+        newCell.button.tag = idx
+        newCell.button.addTarget(self, action: Selector("deleteDish:"), forControlEvents: .TouchUpInside)
+        
         return newCell
-    }
-    
-    func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        return true
-    }
-    
-    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if (editingStyle == UITableViewCellEditingStyle.Delete) {
-            dishes.removeAtIndex(indexPath.row)
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
-        }
     }
 }

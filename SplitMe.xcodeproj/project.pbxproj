@@ -132,8 +132,8 @@
 				147B73DE1BDB243D0060B1E0 /* User.swift */,
 				EC62E8F41BD0758E003718C2 /* AppDelegate.swift */,
 				EC62E8F81BD0758E003718C2 /* Main.storyboard */,
-				EC62E9061BD075BD003718C2 /* HomeViewController.swift */,
 				EC62E9081BD0779A003718C2 /* ServerWaitViewController.swift */,
+				EC62E9061BD075BD003718C2 /* HomeViewController.swift */,
 				EC62E90A1BD077B1003718C2 /* ClientJoinViewController.swift */,
 				EC62E90C1BD08CB0003718C2 /* TypeOwnDishesViewController.swift */,
 				EC62E90E1BD095F3003718C2 /* ServerTypeShareDishesViewController.swift */,
@@ -205,7 +205,7 @@
 				TargetAttributes = {
 					EC62E8F01BD0758E003718C2 = {
 						CreatedOnToolsVersion = 7.0.1;
-						DevelopmentTeam = 646W9GX953;
+						DevelopmentTeam = NETDM9649U;
 					};
 				};
 			};
@@ -387,7 +387,7 @@
 				INFOPLIST_FILE = SplitMe/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.baizhima.SplitMe;
+				PRODUCT_BUNDLE_IDENTIFIER = com.seanhu.SplitMe;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
@@ -407,7 +407,7 @@
 				INFOPLIST_FILE = SplitMe/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.baizhima.SplitMe;
+				PRODUCT_BUNDLE_IDENTIFIER = com.seanhu.SplitMe;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};

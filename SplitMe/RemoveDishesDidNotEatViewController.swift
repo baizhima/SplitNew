@@ -16,9 +16,52 @@ class RemoveDishesDidNotEatViewController: UIViewController, UITableViewDelegate
     var sharedDishes : [Dish] = [Dish]()
     var isRemoved : [Bool] = [Bool]()
     
-    @IBOutlet weak var nextButton: UIBarButtonItem!
-    @IBOutlet weak var promptField: UILabel!
+    var minusImage = UIImage(named: "minusIcon")
+    var addImage = UIImage(named: "addIcon")
     
+    //@IBOutlet weak var nextButton: UIBarButtonItem!
+    //@IBOutlet weak var promptField: UILabel!
+    
+    @IBOutlet weak var confirmButton: UIButton!
+    
+    func confirm(){
+        
+        if let meal = Meal.currentMeal {
+            if let user = User.currentUser {
+                //print(sharedDishes)
+                // add users to the dishes
+                for var i=0; i < sharedDishes.count; i++ {
+                    
+                    if isRemoved[i] == false {
+                        sharedDishes[i].addUniqueObject(user, forKey: "sharedWith")
+                    }else{
+                        sharedDishes[i].removeObject(user, forKey: "sharedWith")
+                    }
+                    sharedDishes[i].saveInBackground()
+                }
+                
+                user.state = User.UserSharedDishesRemoved
+                user.saveInBackground()
+                
+                if meal.master.objectId == user.objectId {
+                    self.performSegueWithIdentifier("removeDishesDidNotEatToServerConfirmTotal", sender: self)
+                }
+                else {
+                    //promptField.hidden = false
+                    //nextButton.enabled = false
+                    
+                    confirmButton.setTitle("Waiting for Others", forState: UIControlState.Normal)
+                    confirmButton.backgroundColor = UIColor(red: 195.0/255, green: 195.0/255, blue: 195.0/255, alpha: 1.0)
+                    
+                    dispatch_async(dispatch_get_main_queue(), {
+                        self.timer = NSTimer.scheduledTimerWithTimeInterval(2, target: self, selector: Selector("updateMealState"), userInfo: nil, repeats: true)
+                    })
+                }
+            }
+        }
+    }
+    
+
     
     func updateMealState(){
         
@@ -39,45 +82,20 @@ class RemoveDishesDidNotEatViewController: UIViewController, UITableViewDelegate
             User.currentUser?.fetchInBackgroundWithBlock({ (object, error ) -> Void in
                 let user = object as! User
                 if user.state == User.UserDishesSaved {
-                    self.promptField.hidden = true
-                    self.nextButton.enabled = true
+                    //self.promptField.hidden = true
+                    //self.nextButton.enabled = true
+                    
+                    self.confirmButton.setTitle("confirm", forState: UIControlState.Normal)
+                    self.confirmButton.backgroundColor = UIColor(red: 250.0/255, green: 220.0/255, blue: 145.0/255, alpha: 1.0)
                 }
             })
         }
     }
-    
+    @IBAction func confirmButtonPressed(sender: AnyObject) {
+        confirm()
+    }
     @IBAction func nextPressed(sender: UIBarButtonItem) {
-        
-        if let meal = Meal.currentMeal {
-            if let user = User.currentUser {
-                //print(sharedDishes)
-                // add users to the dishes
-                for var i=0; i < sharedDishes.count; i++ {
-                    
-                    if isRemoved[i] == false {
-                        sharedDishes[i].addUniqueObject(user, forKey: "sharedWith")
-                    }else{
-                        sharedDishes[i].removeObject(user, forKey: "sharedWith")
-                    }
-                    sharedDishes[i].saveInBackground()
-                }
-          
-                user.state = User.UserSharedDishesRemoved
-                user.saveInBackground()
-                
-                if meal.master.objectId == user.objectId {
-                    self.performSegueWithIdentifier("removeDishesDidNotEatToServerConfirmTotal", sender: self)
-                }
-                else {
-                    promptField.hidden = false
-                    nextButton.enabled = false
-                    
-                    dispatch_async(dispatch_get_main_queue(), {
-                        self.timer = NSTimer.scheduledTimerWithTimeInterval(2, target: self, selector: Selector("updateMealState"), userInfo: nil, repeats: true)
-                    })
-                }
-            }
-        }
+        confirm()
     }
     
     func fetchSharedDishes() {
@@ -105,7 +123,7 @@ class RemoveDishesDidNotEatViewController: UIViewController, UITableViewDelegate
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        promptField.hidden = true
+        //promptField.hidden = true
         /*
         let statusBarView = UIView(frame:
             CGRect(x: 0.0, y: 0.0, width: UIScreen.mainScreen().bounds.size.width, height: 20.0)
@@ -152,12 +170,14 @@ class RemoveDishesDidNotEatViewController: UIViewController, UITableViewDelegate
         if isRemoved[sender.tag] == true {
             
             isRemoved[sender.tag] = false
-            sender.setTitle("+", forState: UIControlState.Normal)
+            sender.setImage(addImage, forState: UIControlState.Normal)
+            //sender.setTitle("+", forState: UIControlState.Normal)
             tableView.reloadData()
             
         }else{
             isRemoved[sender.tag] = true
-            sender.setTitle("-", forState: UIControlState.Normal)
+            //sender.setTitle("-", forState: UIControlState.Normal)
+            sender.setImage(minusImage, forState: UIControlState.Normal)
             tableView.reloadData()
         }
 
@@ -181,13 +201,13 @@ class RemoveDishesDidNotEatViewController: UIViewController, UITableViewDelegate
         
         if isRemoved[indexPath.row] == true {
             cell.backgroundColor = UIColor(red:0.49, green:0.71, blue:0.84, alpha:1.0)
-            
-            cell.button.setTitle("+", forState: UIControlState.Normal)
+            cell.button.setImage(addImage, forState: .Normal)
+            //cell.button.setTitle(, forState: UIControlState.Normal)
         }else{
             
             cell.backgroundColor = UIColor(red:1.0, green:1.0, blue: 1.0, alpha:1.0)
-            
-            cell.button.setTitle("-", forState: UIControlState.Normal)
+            cell.button.setImage(minusImage, forState: .Normal)
+            //cell.button.setTitle("-", forState: UIControlState.Normal)
         }
         cell.button.tag = indexPath.row
         cell.button.addTarget(self, action: Selector("actionPressed:"), forControlEvents: .TouchUpInside)
@@ -206,7 +226,7 @@ class RemoveDishesDidNotEatViewController: UIViewController, UITableViewDelegate
         } else {
             cell.nameLabel.textColor = UIColor.whiteColor()
             cell.priceLabel.textColor = UIColor.whiteColor()
-            
+            //cell.backgroundColor = UIColor.init(red: 209.0/255, green: 209.0/255, blue: 209.0/255, alpha: 209.0/255)
         }
     
         return cell
