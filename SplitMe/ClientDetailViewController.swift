@@ -157,8 +157,14 @@ class ClientDetailViewController: UIViewController, UITableViewDelegate {
         
         cell.textLabel!.text = "\(dish.name)"
         cell.detailTextLabel?.text = "$" + String(NSString(format:"%.2f/%.2f", myprice, dish.price))
-        
-        
+        let idx = indexPath.row
+        if idx % 2 == 0 {
+            cell.backgroundColor = UIColor.init(red: 146.0/255, green: 146.0/255, blue: 146.0/255, alpha: 1.0)
+        } else {
+            cell.backgroundColor = UIColor.init(red: 113.0/255, green: 113.0/255, blue: 113.0/255, alpha: 1.0)
+        }
+        cell.textLabel?.textColor = UIColor.whiteColor()
+        cell.detailTextLabel?.textColor = UIColor.whiteColor()
         
         return cell
         
