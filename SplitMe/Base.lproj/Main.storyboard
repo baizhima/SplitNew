@@ -142,7 +142,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <navigationBar contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CBO-1d-BSN">
+                            <navigationBar contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CBO-1d-BSN">
                                 <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                                 <animations/>
                                 <color key="backgroundColor" red="0.49019607843137253" green="0.70588235294117641" blue="0.84313725490196079" alpha="1" colorSpace="calibratedRGB"/>
@@ -158,40 +158,30 @@
                                     </navigationItem>
                                 </items>
                             </navigationBar>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please enter the 4-digit code" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hZK-PT-oXx">
-                                <rect key="frame" x="75" y="121" width="223" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="please enter the 4-digit code" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hZK-PT-oXx">
+                                <rect key="frame" x="42" y="176" width="290" height="38"/>
                                 <animations/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="21" id="xfF-sn-lMf"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" placeholderIntrinsicWidth="153" placeholderIntrinsicHeight="70" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Eg. 5908" textAlignment="center" adjustsFontSizeToFit="NO" minimumFontSize="60" translatesAutoresizingMaskIntoConstraints="NO" id="mmU-EY-833">
-                                <rect key="frame" x="82" y="187" width="209" height="70"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" placeholderIntrinsicWidth="153" placeholderIntrinsicHeight="70" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Eg. 5908" textAlignment="center" adjustsFontSizeToFit="NO" minimumFontSize="60" translatesAutoresizingMaskIntoConstraints="NO" id="mmU-EY-833">
+                                <rect key="frame" x="44" y="251" width="289" height="70"/>
                                 <animations/>
+                                <color key="backgroundColor" red="0.4392156862745098" green="0.4392156862745098" blue="0.4392156862745098" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="70" id="Acg-un-02y"/>
+                                    <constraint firstAttribute="height" constant="70" id="AGQ-Ke-Y9k"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="70" id="yKc-tj-udj"/>
                                 </constraints>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="42"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="numberPad"/>
                             </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Trying to connect..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pSU-32-KLX">
-                                <rect key="frame" x="23" y="442" width="326" height="57"/>
-                                <animations/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uTs-5v-1DO">
-                                <rect key="frame" x="41" y="356" width="290" height="50"/>
+                                <rect key="frame" x="44" y="357" width="289" height="50"/>
                                 <animations/>
                                 <color key="backgroundColor" red="0.97647058819999999" green="0.75686274509999996" blue="0.32549019610000002" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="Oid-ms-fqt"/>
-                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                 <state key="normal" title="confirm">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -206,25 +196,35 @@
                                     <action selector="confirmPressed:" destination="zMg-sx-EcO" eventType="touchUpInside" id="rSt-ka-z3L"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Trying to connect..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pSU-32-KLX">
+                                <rect key="frame" x="42" y="429" width="291" height="57"/>
+                                <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="57" id="8hp-Cr-vOK"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" red="0.30196078430000001" green="0.30196078430000001" blue="0.30196078430000001" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="pSU-32-KLX" firstAttribute="centerX" secondItem="uTs-5v-1DO" secondAttribute="centerX" id="0PD-aX-Kua"/>
-                            <constraint firstItem="CBO-1d-BSN" firstAttribute="leading" secondItem="Q9z-DM-9Sb" secondAttribute="leading" id="2gw-aP-UhL"/>
-                            <constraint firstItem="hZK-PT-oXx" firstAttribute="centerX" secondItem="mmU-EY-833" secondAttribute="centerX" id="4q6-db-VoQ"/>
-                            <constraint firstItem="6a3-b2-ofT" firstAttribute="top" secondItem="pSU-32-KLX" secondAttribute="bottom" constant="168" id="6Wa-V7-c3U"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="uTs-5v-1DO" secondAttribute="trailing" constant="28" id="AOJ-hO-34N"/>
-                            <constraint firstAttribute="bottom" secondItem="uTs-5v-1DO" secondAttribute="bottom" constant="261" id="GCT-mF-Hf7"/>
-                            <constraint firstItem="pSU-32-KLX" firstAttribute="leading" secondItem="Q9z-DM-9Sb" secondAttribute="leadingMargin" constant="7" id="IY9-1G-15j"/>
-                            <constraint firstItem="pSU-32-KLX" firstAttribute="top" secondItem="uTs-5v-1DO" secondAttribute="bottom" constant="36" id="Nfi-8X-RgP"/>
-                            <constraint firstItem="mmU-EY-833" firstAttribute="centerX" secondItem="Q9z-DM-9Sb" secondAttribute="centerX" constant="-1" id="V7T-L4-gsh"/>
-                            <constraint firstAttribute="trailing" secondItem="CBO-1d-BSN" secondAttribute="trailing" id="XsI-DM-K9n"/>
-                            <constraint firstItem="hZK-PT-oXx" firstAttribute="top" secondItem="CBO-1d-BSN" secondAttribute="bottom" constant="57" id="aa7-dG-i1i"/>
-                            <constraint firstItem="CBO-1d-BSN" firstAttribute="top" secondItem="v8I-XY-lfg" secondAttribute="bottom" id="eXS-Uc-kWe"/>
-                            <constraint firstItem="mmU-EY-833" firstAttribute="top" secondItem="hZK-PT-oXx" secondAttribute="bottom" constant="45" id="ltY-UH-viA"/>
-                            <constraint firstItem="uTs-5v-1DO" firstAttribute="centerX" secondItem="mmU-EY-833" secondAttribute="centerX" id="qoM-fS-hMN"/>
-                            <constraint firstItem="uTs-5v-1DO" firstAttribute="leading" secondItem="Q9z-DM-9Sb" secondAttribute="leadingMargin" constant="25" id="uiY-bD-ayt"/>
+                            <constraint firstItem="uTs-5v-1DO" firstAttribute="leading" secondItem="hZK-PT-oXx" secondAttribute="leading" id="4H9-YK-PYd"/>
+                            <constraint firstItem="pSU-32-KLX" firstAttribute="leading" secondItem="hZK-PT-oXx" secondAttribute="leading" id="9Zs-9J-nj4"/>
+                            <constraint firstItem="hZK-PT-oXx" firstAttribute="top" secondItem="CBO-1d-BSN" secondAttribute="bottom" constant="112" id="Fdv-d6-s1V"/>
+                            <constraint firstItem="pSU-32-KLX" firstAttribute="top" secondItem="uTs-5v-1DO" secondAttribute="bottom" constant="22" id="Gyq-ub-3jy"/>
+                            <constraint firstItem="mmU-EY-833" firstAttribute="top" secondItem="Q9z-DM-9Sb" secondAttribute="top" constant="251" id="JlV-tC-6Xx"/>
+                            <constraint firstItem="mmU-EY-833" firstAttribute="trailing" secondItem="pSU-32-KLX" secondAttribute="trailing" id="LSP-Zw-R4d"/>
+                            <constraint firstItem="pSU-32-KLX" firstAttribute="centerX" secondItem="CBO-1d-BSN" secondAttribute="centerX" id="QbS-xz-9TR"/>
+                            <constraint firstItem="mmU-EY-833" firstAttribute="top" secondItem="hZK-PT-oXx" secondAttribute="bottom" constant="37" id="RfR-i6-It2"/>
+                            <constraint firstItem="6a3-b2-ofT" firstAttribute="top" secondItem="pSU-32-KLX" secondAttribute="bottom" constant="181" id="VjA-Ye-5nu"/>
+                            <constraint firstItem="mmU-EY-833" firstAttribute="leading" secondItem="hZK-PT-oXx" secondAttribute="leading" id="WCW-Xb-rv3"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="mmU-EY-833" secondAttribute="trailing" constant="26" id="d6q-t4-Ndi"/>
+                            <constraint firstItem="mmU-EY-833" firstAttribute="leading" secondItem="Q9z-DM-9Sb" secondAttribute="leadingMargin" constant="28" id="eZV-0g-xff"/>
+                            <constraint firstItem="uTs-5v-1DO" firstAttribute="top" secondItem="mmU-EY-833" secondAttribute="bottom" constant="36" id="gnK-fg-LqE"/>
+                            <constraint firstItem="uTs-5v-1DO" firstAttribute="trailing" secondItem="hZK-PT-oXx" secondAttribute="trailing" id="t3k-46-TZu"/>
+                            <constraint firstItem="mmU-EY-833" firstAttribute="trailing" secondItem="hZK-PT-oXx" secondAttribute="trailing" id="uyq-Og-dVt"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="3dX-q8-q64"/>
@@ -517,6 +517,7 @@
                                     </imageView>
                                 </subviews>
                                 <animations/>
+                                <color key="backgroundColor" red="0.5450980392" green="0.5450980392" blue="0.5450980392" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="oJv-0k-FKF" secondAttribute="bottom" constant="25" id="7xe-G2-inW"/>
                                     <constraint firstItem="oJv-0k-FKF" firstAttribute="centerX" secondItem="MIM-tx-g3s" secondAttribute="centerX" id="Q8t-Gf-OvX"/>
@@ -1370,9 +1371,9 @@
         <segue reference="Xbw-4H-gG2"/>
         <segue reference="FEv-Lq-kTi"/>
         <segue reference="vOd-pg-Kca"/>
+        <segue reference="KKg-IW-lmu"/>
         <segue reference="7dO-xX-yeP"/>
         <segue reference="pvz-V4-lo1"/>
-        <segue reference="qaM-UR-PdU"/>
         <segue reference="96H-5m-BCx"/>
         <segue reference="FYX-OB-muc"/>
     </inferredMetricsTieBreakers>
