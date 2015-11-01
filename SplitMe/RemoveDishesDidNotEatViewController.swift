@@ -175,6 +175,10 @@ class RemoveDishesDidNotEatViewController: UIViewController, UITableViewDelegate
         cell.nameLabel.text = "\(dish.name)"
         cell.priceLabel.text = "$" + String(NSString(format:"%.2f", dish.price))
         
+        newCell.backgroundColor = UIColor(red:250.0/255, green:220/255.0, blue:145/255.0, alpha:1.0)
+        newCell.textLabel?.textColor = UIColor.whiteColor()
+        newCell.detailTextLabel?.textColor = UIColor.whiteColor()
+        
         if isRemoved[indexPath.row] == true {
             cell.backgroundColor = UIColor(red:0.49, green:0.71, blue:0.84, alpha:1.0)
             

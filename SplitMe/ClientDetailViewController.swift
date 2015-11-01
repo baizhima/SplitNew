@@ -36,7 +36,7 @@ class ClientDetailViewController: UIViewController, UITableViewDelegate {
 //            total += getMyPayment(dish)
 //        }
         
-        totalLabel.text = String(NSString(format:"$%.2f", (User.currentUser?.payment)!))
+        totalLabel.text = "$ " + String(NSString(format:"%.2f", (User.currentUser?.payment)!))
         
     }
     
@@ -91,15 +91,17 @@ class ClientDetailViewController: UIViewController, UITableViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+/*
         let statusBarView = UIView(frame:
             CGRect(x: 0.0, y: 0.0, width: UIScreen.mainScreen().bounds.size.width, height: 20.0)
         )
         statusBarView.backgroundColor = UIColor(red:0.49, green:0.71, blue:0.84, alpha:1.0)
-        self.view.addSubview(statusBarView)
+        self.view.addSubview(statusBarView)*/
+        
+        
         // Do any additional setup after loading the view.
         
-        //tableView.delegate = self
+        
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -155,6 +157,14 @@ class ClientDetailViewController: UIViewController, UITableViewDelegate {
         
         cell.textLabel!.text = "\(dish.name)"
         cell.detailTextLabel?.text = "$" + String(NSString(format:"%.2f/%.2f", myprice, dish.price))
+        let idx = indexPath.row
+        if idx % 2 == 0 {
+            cell.backgroundColor = UIColor.init(red: 146.0/255, green: 146.0/255, blue: 146.0/255, alpha: 1.0)
+        } else {
+            cell.backgroundColor = UIColor.init(red: 113.0/255, green: 113.0/255, blue: 113.0/255, alpha: 1.0)
+        }
+        cell.textLabel?.textColor = UIColor.whiteColor()
+        cell.detailTextLabel?.textColor = UIColor.whiteColor()
         
         return cell
         

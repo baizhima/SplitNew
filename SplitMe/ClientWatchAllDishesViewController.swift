@@ -135,6 +135,11 @@ class ClientWatchAllDishesViewController: UIViewController, UITableViewDelegate 
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        confirmButton.layer.shadowColor = UIColor.blackColor().CGColor
+        confirmButton.layer.shadowOffset = CGSizeMake(3, 3)
+        confirmButton.layer.shadowOpacity = 0.8
+        confirmButton.layer.shadowRadius = 0.0
+        
         /*
         let statusBarView = UIView(frame:
             CGRect(x: 0.0, y: 0.0, width: UIScreen.mainScreen().bounds.size.width, height: 20.0)
@@ -168,9 +173,18 @@ class ClientWatchAllDishesViewController: UIViewController, UITableViewDelegate 
         let newCell = UITableViewCell(style: UITableViewCellStyle.Value1, reuseIdentifier: "Cell")
         let idx = indexPath.row
         
+        newCell.textLabel!.text = "\(dishes[idx].name)"
+        newCell.detailTextLabel?.text = "$" + String(NSString(format:"%.2f", dishes[idx].price))
         
-            newCell.textLabel!.text = "\(dishes[idx].name)"
-            newCell.detailTextLabel?.text = "$" + String(NSString(format:"%.2f", dishes[idx].price))
+        if !dishes[idx].isShared {
+            newCell.backgroundColor = UIColor.init(red: 113.0/255, green: 113.0/255, blue: 113.0/255, alpha: 1)
+            newCell.textLabel?.textColor = UIColor.whiteColor()
+            newCell.detailTextLabel?.textColor = UIColor.whiteColor()
+        } else {
+            newCell.backgroundColor = UIColor.init(red: 250.0/255, green: 220.0/255, blue: 145.0/255, alpha: 1)
+            newCell.textLabel?.textColor = UIColor.init(red: 26.0/255, green: 26.0/255, blue: 26.0/255, alpha: 1)
+            newCell.detailTextLabel?.textColor = UIColor.init(red: 26.0/255, green: 26.0/255, blue: 26.0/255, alpha: 1)
+        }
         
         
         return newCell

@@ -22,6 +22,7 @@ class ServerTypeShareDishesViewController: UIViewController, UIScrollViewDelegat
     @IBOutlet weak var priceField: UITextField!
     @IBOutlet weak var dishTable: UITableView!
     
+    @IBOutlet weak var addIconImageView: UIImageView!
     
     func printErrorAndExit(message: String){
         
@@ -105,7 +106,7 @@ class ServerTypeShareDishesViewController: UIViewController, UIScrollViewDelegat
         
     }
     
-    @IBAction func addPressed(sender: UIButton) {
+    func addSharedDish() {
         if dishField!.text != "" && priceField!.text != "" {
             
             let price = priceField.text!
@@ -167,12 +168,18 @@ class ServerTypeShareDishesViewController: UIViewController, UIScrollViewDelegat
         imageView.image = nil // currMeal?.receiptImage
         self.scrollView.minimumZoomScale = 1.5
         self.scrollView.maximumZoomScale = 3.0
-//        
-//        let statusBarView = UIView(frame:
-//            CGRect(x: 0.0, y: 0.0, width: UIScreen.mainScreen().bounds.size.width, height: 20.0)
-//        )
-//        statusBarView.backgroundColor = UIColor(red:0.49, green:0.71, blue:0.84, alpha:1.0)
-//        self.view.addSubview(statusBarView)
+
+        let addTap = UITapGestureRecognizer.init(target: self, action: Selector("addSharedDish"))
+        addTap.numberOfTapsRequired = 1
+        addIconImageView.userInteractionEnabled = true
+        addIconImageView.addGestureRecognizer(addTap)
+        
+        
+        let statusBarView = UIView(frame:
+            CGRect(x: 0.0, y: 0.0, width: UIScreen.mainScreen().bounds.size.width, height: 20.0)
+        )
+        statusBarView.backgroundColor = UIColor(red:77/255.0, green:77/255.0, blue:77/255.0, alpha:1.0)
+        self.view.addSubview(statusBarView)
         
     }
     
@@ -196,10 +203,12 @@ class ServerTypeShareDishesViewController: UIViewController, UIScrollViewDelegat
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        print("touchesBegan")
         self.view.endEditing(true)
     }
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
+        print("textFieldShouldReturn")
         dishField.resignFirstResponder()
         priceField.resignFirstResponder()
         return true
@@ -214,6 +223,7 @@ class ServerTypeShareDishesViewController: UIViewController, UIScrollViewDelegat
         let idx = sharedDishes.count-1-indexPath.row
         newCell.textLabel!.text = "\(sharedDishes[idx].name)"
         newCell.detailTextLabel?.text = "$" + String(NSString(format:"%.2f", sharedDishes[idx].price))
+        newCell.detailTextLabel?.textColor = UIColor.blackColor()
         return newCell
     }
 

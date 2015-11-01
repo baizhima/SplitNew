@@ -19,6 +19,7 @@ class TypeOwnDishesViewController: UIViewController, UIScrollViewDelegate, UITex
     @IBOutlet weak var dishField: UITextField!
     @IBOutlet weak var priceField: UITextField!
     @IBOutlet weak var dishTable: UITableView!
+    @IBOutlet weak var addIconImageView: UIImageView!
     
     func printErrorAndExit(message: String){
         
@@ -99,9 +100,7 @@ class TypeOwnDishesViewController: UIViewController, UIScrollViewDelegate, UITex
     }
     
 
-    @IBAction func addPressed(sender: UIButton) {
-        addNewDish()
-    }
+   
     
     
     
@@ -123,12 +122,19 @@ class TypeOwnDishesViewController: UIViewController, UIScrollViewDelegate, UITex
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        /*
+        
+        
+        let addTap = UITapGestureRecognizer.init(target: self, action: Selector("addNewDish"))
+        addTap.numberOfTapsRequired = 1
+        addIconImageView.userInteractionEnabled = true
+        addIconImageView.addGestureRecognizer(addTap)
+        
+        
         let statusBarView = UIView(frame:
             CGRect(x: 0.0, y: 0.0, width: UIScreen.mainScreen().bounds.size.width, height: 20.0)
         )
-        statusBarView.backgroundColor = UIColor(red:0.49, green:0.71, blue:0.84, alpha:1.0)
-        self.view.addSubview(statusBarView)*/
+        statusBarView.backgroundColor = UIColor(red:77/255.0, green:77/255.0, blue:77/255.0, alpha:1.0)
+        self.view.addSubview(statusBarView)
         
         
         imageView.image = nil
@@ -171,13 +177,14 @@ class TypeOwnDishesViewController: UIViewController, UIScrollViewDelegate, UITex
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let newCell = UITableViewCell(style: UITableViewCellStyle.Value1, reuseIdentifier: "Cell")
-        newCell.textLabel!.textColor = UIColor.whiteColor()
-        newCell.detailTextLabel?.textColor = UIColor.whiteColor()
-        newCell.backgroundColor = UIColor.init(red: 139.0/255, green: 139.0/255, blue: 139.0/255, alpha: 1.0)
+        //newCell.textLabel!.textColor = UIColor.whiteColor()
+        //newCell.detailTextLabel?.textColor = UIColor.whiteColor()
+        
         
         let idx = dishes.count-1-indexPath.row
         newCell.textLabel!.text = "\(dishes[idx].name)"
         newCell.detailTextLabel?.text = "$" + String(NSString(format:"%.2f", dishes[idx].price))
+        newCell.detailTextLabel?.textColor = UIColor.blackColor()
         return newCell
     }
     

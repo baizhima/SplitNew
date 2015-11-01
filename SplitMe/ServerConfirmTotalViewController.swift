@@ -219,6 +219,11 @@ class ServerConfirmTotalViewController: UIViewController, UITextFieldDelegate,
         
         pickerVIew.selectRow(0, inComponent: 0, animated: true)
         
+        splitButton.layer.shadowColor = UIColor.blackColor().CGColor
+        splitButton.layer.shadowOffset = CGSizeMake(3, 3)
+        splitButton.layer.shadowOpacity = 0.8
+        splitButton.layer.shadowRadius = 0.0
+        
         
     }
     
@@ -259,7 +264,7 @@ class ServerConfirmTotalViewController: UIViewController, UITextFieldDelegate,
     
     func pickerView(pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
         let string = pickerData[row]
-        let color = UIColor(red:77.0/255, green:77.0/255, blue:77.0/255, alpha:1.0)
+        let color = UIColor.whiteColor()
         return NSAttributedString(string: string, attributes: [NSForegroundColorAttributeName:color])
     }
     

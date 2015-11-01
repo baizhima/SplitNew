@@ -15,10 +15,14 @@ class ClientJoinViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var navBar: UINavigationBar!
     
+    @IBOutlet weak var backButton: UIBarButtonItem!
     @IBOutlet weak var inputCodeField: UITextField!
     @IBOutlet weak var connectInfo: UILabel!
     
     @IBOutlet weak var confirmButton: UIButton!
+    
+    
+    
     @IBAction func backPressed(sender: UIBarButtonItem) {
         self.performSegueWithIdentifier("clientJoinToHome", sender: self)
     }
@@ -49,10 +53,12 @@ class ClientJoinViewController: UIViewController, UITextFieldDelegate {
                     meal.saveInBackgroundWithBlock({
                         (success, error ) -> Void in
                         if(success){
-                            self.connectInfo.text = "joined successfully! Waiting others.."
+                            self.confirmButton.setTitle("Succeed! Waiting others..", forState: UIControlState.Normal)
+                            self.backButton.enabled = false
+                            //self.connectInfo.text = "joined successfully! Waiting others.."
                             //self.inputCodeField.enabled = false
                             //self.confirmButton.enabled = false
-                            //print(meal)
+                            //
                         }
                     })
                     self.confirmButton.backgroundColor = UIColor(red: 195.0/255, green: 195.0/255, blue: 195.0/255, alpha: 1.0)
@@ -60,6 +66,9 @@ class ClientJoinViewController: UIViewController, UITextFieldDelegate {
                     self.confirmButton.enabled = false
                 }else{
                     self.connectInfo.text = "Invalid group code. Try again."
+                    self.connectInfo.hidden = false
+                    self.confirmButton.setTitle("confirm", forState: UIControlState.Normal)
+                    //self.connectInfo.text = "Invalid group code. Try again."
                 }
             }else{
                 print("query meal error: \(error)")
@@ -69,6 +78,8 @@ class ClientJoinViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func confirmPressed(sender: UIButton) {
+        
+        //inputCodeField.resignFirstResponder()
         
         if inputCodeField.text == "" {
             connectInfo.text = "Please input the code..."
@@ -82,10 +93,10 @@ class ClientJoinViewController: UIViewController, UITextFieldDelegate {
             return
         }
         
-        connectInfo.text = "Connecting \(code)..."
-        connectInfo.hidden = false
+        //connectInfo.text = "Connecting \(code)..."
+        confirmButton.setTitle("Connecting \(code)...", forState: UIControlState.Normal)
         
-        
+        connectInfo.hidden = true
         joinMeal(User.currentUser!, code: String(code))
 
     }
@@ -125,6 +136,11 @@ class ClientJoinViewController: UIViewController, UITextFieldDelegate {
         
         statusBarView.backgroundColor = bgColor
         self.view.addSubview(statusBarView)*/
+        
+        confirmButton.layer.shadowColor = UIColor.blackColor().CGColor
+        confirmButton.layer.shadowOffset = CGSizeMake(3, 3)
+        confirmButton.layer.shadowOpacity = 0.8
+        confirmButton.layer.shadowRadius = 0.0
         
         
         timer = NSTimer.scheduledTimerWithTimeInterval(2, target: self, selector: Selector("fetchMeal"), userInfo: nil, repeats: true)
