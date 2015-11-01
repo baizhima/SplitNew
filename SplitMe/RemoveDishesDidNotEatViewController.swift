@@ -118,19 +118,19 @@ class RemoveDishesDidNotEatViewController: UIViewController, UITableViewDelegate
     
     override func viewDidAppear(animated: Bool) {
 
-        let meal = Meal()
-        meal.objectId = "ASTM1ocNga"
-        
-        let user = User()
-        user.objectId = "CLa2Wm2sQY"
-        do{
-            try Meal.currentMeal = meal.fetch()
-            try User.currentUser = user.fetch()
-        }catch _{
-            
-        }
-        print(Meal.currentMeal)
-        print(User.currentUser)
+//        let meal = Meal()
+//        meal.objectId = "ASTM1ocNga"
+//        
+//        let user = User()
+//        user.objectId = "CLa2Wm2sQY"
+//        do{
+//            try Meal.currentMeal = meal.fetch()
+//            try User.currentUser = user.fetch()
+//        }catch _{
+//            
+//        }
+//        print(Meal.currentMeal)
+//        print(User.currentUser)
         fetchSharedDishes()
     }
 
@@ -175,9 +175,9 @@ class RemoveDishesDidNotEatViewController: UIViewController, UITableViewDelegate
         cell.nameLabel.text = "\(dish.name)"
         cell.priceLabel.text = "$" + String(NSString(format:"%.2f", dish.price))
         
-        newCell.backgroundColor = UIColor(red:250.0/255, green:220/255.0, blue:145/255.0, alpha:1.0)
-        newCell.textLabel?.textColor = UIColor.whiteColor()
-        newCell.detailTextLabel?.textColor = UIColor.whiteColor()
+//        newCell.backgroundColor = UIColor(red:250.0/255, green:220/255.0, blue:145/255.0, alpha:1.0)
+//        newCell.textLabel?.textColor = UIColor.whiteColor()
+//        newCell.detailTextLabel?.textColor = UIColor.whiteColor()
         
         if isRemoved[indexPath.row] == true {
             cell.backgroundColor = UIColor(red:0.49, green:0.71, blue:0.84, alpha:1.0)

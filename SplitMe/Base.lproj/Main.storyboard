@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9059" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="noI-Ie-780">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9059" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
@@ -550,6 +550,7 @@
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="addIcon" translatesAutoresizingMaskIntoConstraints="NO" id="FCm-Wj-XwD">
                                 <rect key="frame" x="327" y="330" width="28" height="30"/>
+                                <animations/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="8ao-Yf-dab"/>
                                 </constraints>
@@ -885,6 +886,7 @@
                             </view>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="venmoIcon" translatesAutoresizingMaskIntoConstraints="NO" id="akm-gK-5lh">
                                 <rect key="frame" x="69" y="340" width="25" height="25"/>
+                                <animations/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="25" id="cpB-Bz-Wsa"/>
                                 </constraints>
@@ -1320,6 +1322,7 @@
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="addIcon" translatesAutoresizingMaskIntoConstraints="NO" id="LCR-09-2Z8">
                                 <rect key="frame" x="327" y="330" width="28" height="30"/>
+                                <animations/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="28" id="Nfl-FM-Aep"/>
                                     <constraint firstAttribute="height" constant="30" id="cgC-rf-dqt"/>
@@ -1471,10 +1474,12 @@
         </scene>
     </scenes>
     <resources>
-        <image name="detailIcon" width="183" height="183"/>
-        <image name="dollarSign" width="183" height="183"/>
+        <image name="addIcon" width="217" height="198"/>
+        <image name="detailIconWhite" width="217" height="198"/>
+        <image name="dishIconBlack" width="217" height="198"/>
+        <image name="dollarIconBlack" width="217" height="198"/>
         <image name="logo" width="1667" height="1667"/>
-        <image name="percentSign" width="60" height="52"/>
+        <image name="venmoIcon" width="217" height="198"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="Dn7-Wl-YMU"/>
