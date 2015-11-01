@@ -167,12 +167,12 @@ class ServerTypeShareDishesViewController: UIViewController, UIScrollViewDelegat
         imageView.image = nil // currMeal?.receiptImage
         self.scrollView.minimumZoomScale = 1.5
         self.scrollView.maximumZoomScale = 3.0
-        
-        let statusBarView = UIView(frame:
-            CGRect(x: 0.0, y: 0.0, width: UIScreen.mainScreen().bounds.size.width, height: 20.0)
-        )
-        statusBarView.backgroundColor = UIColor(red:0.49, green:0.71, blue:0.84, alpha:1.0)
-        self.view.addSubview(statusBarView)
+//        
+//        let statusBarView = UIView(frame:
+//            CGRect(x: 0.0, y: 0.0, width: UIScreen.mainScreen().bounds.size.width, height: 20.0)
+//        )
+//        statusBarView.backgroundColor = UIColor(red:0.49, green:0.71, blue:0.84, alpha:1.0)
+//        self.view.addSubview(statusBarView)
         
     }
     

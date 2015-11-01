@@ -88,7 +88,7 @@ class HomeViewController: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        logoView.image = UIImage(named: "logo")
+        logoView.image = UIImage(named: "shadow_logo")
         
         createButton.layer.shadowColor = UIColor.blackColor().CGColor
         createButton.layer.shadowOffset = CGSizeMake(3, 3)

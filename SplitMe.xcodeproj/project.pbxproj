@@ -39,6 +39,7 @@
 		ECF5DB451BE3EB830068BE74 /* icons_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = ECF5DB441BE3EB830068BE74 /* icons_icon.png */; };
 		ECF5DB491BE3F08C0068BE74 /* ClientDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECF5DB481BE3F08C0068BE74 /* ClientDetailViewController.swift */; };
 		ECF5DB8F1BE588430068BE74 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ECF5DB8E1BE588430068BE74 /* Assets.xcassets */; };
+		ECF5DB911BE58E470068BE74 /* shadow_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = ECF5DB901BE58E470068BE74 /* shadow_logo.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -76,6 +77,7 @@
 		ECF5DB441BE3EB830068BE74 /* icons_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icons_icon.png; sourceTree = "<group>"; };
 		ECF5DB481BE3F08C0068BE74 /* ClientDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClientDetailViewController.swift; sourceTree = "<group>"; };
 		ECF5DB8E1BE588430068BE74 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		ECF5DB901BE58E470068BE74 /* shadow_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shadow_logo.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -139,6 +141,7 @@
 				ECD3105A1BE1978300FA1244 /* ServerTollViewController.swift */,
 				ECD310581BE1922900FA1244 /* ClientPayViewController.swift */,
 				ECF5DB8E1BE588430068BE74 /* Assets.xcassets */,
+				ECF5DB901BE58E470068BE74 /* shadow_logo.png */,
 				ECF5DB441BE3EB830068BE74 /* icons_icon.png */,
 				EC62E8FD1BD0758E003718C2 /* LaunchScreen.storyboard */,
 				EC62E9001BD0758E003718C2 /* Info.plist */,
@@ -196,7 +199,7 @@
 				TargetAttributes = {
 					EC62E8F01BD0758E003718C2 = {
 						CreatedOnToolsVersion = 7.0.1;
-						DevelopmentTeam = NETDM9649U;
+						DevelopmentTeam = 646W9GX953;
 					};
 				};
 			};
@@ -223,6 +226,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ECF5DB911BE58E470068BE74 /* shadow_logo.png in Resources */,
 				EC62E8FF1BD0758E003718C2 /* LaunchScreen.storyboard in Resources */,
 				ECF5DB451BE3EB830068BE74 /* icons_icon.png in Resources */,
 				EC62E8FA1BD0758E003718C2 /* Main.storyboard in Resources */,
@@ -375,7 +379,7 @@
 				INFOPLIST_FILE = SplitMe/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.seanhu.SplitMe;
+				PRODUCT_BUNDLE_IDENTIFIER = com.baizhima.SplitMe;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
@@ -395,7 +399,7 @@
 				INFOPLIST_FILE = SplitMe/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.seanhu.SplitMe;
+				PRODUCT_BUNDLE_IDENTIFIER = com.baizhima.SplitMe;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};

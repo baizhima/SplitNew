@@ -123,12 +123,12 @@ class TypeOwnDishesViewController: UIViewController, UIScrollViewDelegate, UITex
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        /*
         let statusBarView = UIView(frame:
             CGRect(x: 0.0, y: 0.0, width: UIScreen.mainScreen().bounds.size.width, height: 20.0)
         )
         statusBarView.backgroundColor = UIColor(red:0.49, green:0.71, blue:0.84, alpha:1.0)
-        self.view.addSubview(statusBarView)
+        self.view.addSubview(statusBarView)*/
         
         
         imageView.image = nil
@@ -171,6 +171,10 @@ class TypeOwnDishesViewController: UIViewController, UIScrollViewDelegate, UITex
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let newCell = UITableViewCell(style: UITableViewCellStyle.Value1, reuseIdentifier: "Cell")
+        newCell.textLabel!.textColor = UIColor.whiteColor()
+        newCell.detailTextLabel?.textColor = UIColor.whiteColor()
+        newCell.backgroundColor = UIColor.init(red: 139.0/255, green: 139.0/255, blue: 139.0/255, alpha: 1.0)
+        
         let idx = dishes.count-1-indexPath.row
         newCell.textLabel!.text = "\(dishes[idx].name)"
         newCell.detailTextLabel?.text = "$" + String(NSString(format:"%.2f", dishes[idx].price))

@@ -211,11 +211,11 @@ class ServerConfirmTotalViewController: UIViewController, UITextFieldDelegate,
         super.viewDidLoad()
         //splitButton.enabled = false
         
-        let statusBarView = UIView(frame:
-            CGRect(x: 0.0, y: 0.0, width: UIScreen.mainScreen().bounds.size.width, height: 20.0)
-        )
-        statusBarView.backgroundColor = UIColor(red:0.49, green:0.71, blue:0.84, alpha:1.0)
-        self.view.addSubview(statusBarView)
+//        let statusBarView = UIView(frame:
+//            CGRect(x: 0.0, y: 0.0, width: UIScreen.mainScreen().bounds.size.width, height: 20.0)
+//        )
+//        statusBarView.backgroundColor = UIColor(red:0.49, green:0.71, blue:0.84, alpha:1.0)
+//        self.view.addSubview(statusBarView)
         
         pickerVIew.selectRow(0, inComponent: 0, animated: true)
         
@@ -259,7 +259,7 @@ class ServerConfirmTotalViewController: UIViewController, UITextFieldDelegate,
     
     func pickerView(pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
         let string = pickerData[row]
-        let color = UIColor(red:0.49, green:0.71, blue:0.84, alpha:1.0)
+        let color = UIColor(red:77.0/255, green:77.0/255, blue:77.0/255, alpha:1.0)
         return NSAttributedString(string: string, attributes: [NSForegroundColorAttributeName:color])
     }
     

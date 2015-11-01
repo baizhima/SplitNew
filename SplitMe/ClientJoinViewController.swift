@@ -115,7 +115,7 @@ class ClientJoinViewController: UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
         connectInfo.hidden = true
         
-        
+        /*
         let bgColor = UIColor(red:0.49, green:0.71, blue:0.84, alpha:1)
         
         
@@ -124,7 +124,7 @@ class ClientJoinViewController: UIViewController, UITextFieldDelegate {
         )
         
         statusBarView.backgroundColor = bgColor
-        self.view.addSubview(statusBarView)
+        self.view.addSubview(statusBarView)*/
         
         
         timer = NSTimer.scheduledTimerWithTimeInterval(2, target: self, selector: Selector("fetchMeal"), userInfo: nil, repeats: true)
