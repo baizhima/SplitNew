@@ -16,7 +16,13 @@ class ClientDetailViewController: UIViewController, UITableViewDelegate {
     var totalPayment : Double = 0.0
     var meal : Meal?
     
+    
+    
     @IBOutlet weak var tableView: UITableView!
+    
+    @IBOutlet weak var taxLabel: UILabel!
+    
+    @IBOutlet weak var tipsLabel: UILabel!
     @IBOutlet weak var totalLabel: UILabel!
     
     func getMyPayment(dish: Dish) -> Double{
@@ -99,8 +105,6 @@ class ClientDetailViewController: UIViewController, UITableViewDelegate {
         self.view.addSubview(statusBarView)*/
         
         
-        // Do any additional setup after loading the view.
-        
         
     }
     
@@ -108,6 +112,13 @@ class ClientDetailViewController: UIViewController, UITableViewDelegate {
         setTotalLabel()
         fetchMeal()
         fetchDishes()
+        /*
+        let myTax = ((User.currentUser?.payment)! / (meal?.total)!) * (meal?.tax)!
+        // Do any additional setup after loading the view.
+        let myTips = ((User.currentUser?.payment)! / (meal?.total)!) * (meal?.tips)!
+        taxLabel.text = "$ " + String(NSString(format:"%.2f", myTax))
+        tipsLabel.text = "$ " + String(NSString(format:"%.2f", myTips))
+*/
     }
 
     override func didReceiveMemoryWarning() {
@@ -119,7 +130,7 @@ class ClientDetailViewController: UIViewController, UITableViewDelegate {
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         //print("Client Detail: dish count: \(self.dishes.count)")
-        return self.dishes.count + 2;
+        return self.dishes.count + 2
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
