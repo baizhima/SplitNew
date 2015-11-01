@@ -19,6 +19,9 @@ class ClientJoinViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var connectInfo: UILabel!
     
     @IBOutlet weak var confirmButton: UIButton!
+    
+    
+    
     @IBAction func backPressed(sender: UIBarButtonItem) {
         self.performSegueWithIdentifier("clientJoinToHome", sender: self)
     }
@@ -125,6 +128,11 @@ class ClientJoinViewController: UIViewController, UITextFieldDelegate {
         
         statusBarView.backgroundColor = bgColor
         self.view.addSubview(statusBarView)*/
+        
+        confirmButton.layer.shadowColor = UIColor.blackColor().CGColor
+        confirmButton.layer.shadowOffset = CGSizeMake(3, 3)
+        confirmButton.layer.shadowOpacity = 0.8
+        confirmButton.layer.shadowRadius = 0.0
         
         
         timer = NSTimer.scheduledTimerWithTimeInterval(2, target: self, selector: Selector("fetchMeal"), userInfo: nil, repeats: true)
