@@ -203,10 +203,12 @@ class ServerTypeShareDishesViewController: UIViewController, UIScrollViewDelegat
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        print("touchesBegan")
         self.view.endEditing(true)
     }
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
+        print("textFieldShouldReturn")
         dishField.resignFirstResponder()
         priceField.resignFirstResponder()
         return true
