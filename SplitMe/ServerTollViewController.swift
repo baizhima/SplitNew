@@ -13,14 +13,29 @@ class ServerTollViewController: UIViewController, UITableViewDelegate {
     
     var users: [User]?
     
+    
+    
 
     @IBOutlet weak var userView: UITableView!
+    
+    @IBOutlet weak var detailIconImageView: UIImageView!
+    
+    @IBAction func detailPressed(sender: UIButton) {
+        performSegueWithIdentifier("serverTollToClientDetail", sender: self)
+    }
+    
+    
+    
     @IBAction func donePressed(sender: UIBarButtonItem) {
         
         Meal.currentMeal = nil
         User.currentUser = nil
         
         performSegueWithIdentifier("serverTollToHome", sender: self)
+    }
+    
+    func detailImageTouched() {
+        performSegueWithIdentifier("serverTollToClientDetail", sender: self)
     }
     
     
@@ -33,6 +48,10 @@ class ServerTollViewController: UIViewController, UITableViewDelegate {
 //        )
 //        statusBarView.backgroundColor = UIColor(red:0.49, green:0.71, blue:0.84, alpha:1.0)
 //        self.view.addSubview(statusBarView)
+        
+        let newTap = UITapGestureRecognizer.init(target: self, action: Selector("detailImageTouched"))
+        detailIconImageView.addGestureRecognizer(newTap)
+        
     }
     override func viewDidAppear(animated: Bool) {
         if let meal = Meal.currentMeal {

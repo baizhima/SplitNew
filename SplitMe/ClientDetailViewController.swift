@@ -40,8 +40,8 @@ class ClientDetailViewController: UIViewController, UITableViewDelegate {
         let myTax = ((User.currentUser?.payment)! / (meal?.total)!) * (meal?.tax)!
         let myTips = ((User.currentUser?.payment)! / (meal?.total)!) * (meal?.tips)!
         
-        self.taxLabel.text = "$" + String(NSString(format:"%.2f/%.2f", myTax , (meal?.tax)!))
-        self.tipsLabel.text = "$" + String(NSString(format:"%.2f/%.2f", myTips , (meal?.tips)!))
+        self.taxLabel.text = "$" + String(NSString(format:"%.2f", myTax))
+        self.tipsLabel.text = "$" + String(NSString(format:"%.2f", myTips))
 
     }
     
@@ -90,7 +90,13 @@ class ClientDetailViewController: UIViewController, UITableViewDelegate {
     }
 
     @IBAction func backPressed(sender: UIBarButtonItem) {
-        performSegueWithIdentifier("clientDetailToClientPay", sender: self)
+        
+        if User.currentUser?.objectId == Meal.currentMeal!.master.objectId {
+            performSegueWithIdentifier("clientDetailToServerToll", sender: self)
+        } else {
+            performSegueWithIdentifier("clientDetailToClientPay", sender: self)
+        }
+        
         
     }
     
@@ -108,13 +114,7 @@ class ClientDetailViewController: UIViewController, UITableViewDelegate {
         setTotalLabel()
         fetchMeal()
         fetchDishes()
-        /*
-        let myTax = ((User.currentUser?.payment)! / (meal?.total)!) * (meal?.tax)!
-        // Do any additional setup after loading the view.
-        let myTips = ((User.currentUser?.payment)! / (meal?.total)!) * (meal?.tips)!
-        taxLabel.text = "$ " + String(NSString(format:"%.2f", myTax))
-        tipsLabel.text = "$ " + String(NSString(format:"%.2f", myTips))
-*/
+ 
     }
 
     override func didReceiveMemoryWarning() {
@@ -162,13 +162,10 @@ class ClientDetailViewController: UIViewController, UITableViewDelegate {
         let myprice = getMyPayment(dish)
         
         cell.textLabel!.text = "\(dish.name)"
-        cell.detailTextLabel?.text = "$" + String(NSString(format:"%.2f/%.2f", myprice, dish.price))
-        let idx = indexPath.row
-        if idx % 2 == 0 {
-            cell.backgroundColor = UIColor.init(red: 146.0/255, green: 146.0/255, blue: 146.0/255, alpha: 1.0)
-        } else {
-            cell.backgroundColor = UIColor.init(red: 113.0/255, green: 113.0/255, blue: 113.0/255, alpha: 1.0)
-        }
+        cell.detailTextLabel?.text = "$" + String(NSString(format:"%.2f", myprice))
+        cell.backgroundColor = UIColor(red: 77.0/255, green: 77.0/255, blue: 77.0/255, alpha: 1.0)
+        //let idx = indexPath.row
+        
         cell.textLabel?.textColor = UIColor.whiteColor()
         cell.detailTextLabel?.textColor = UIColor.whiteColor()
         
