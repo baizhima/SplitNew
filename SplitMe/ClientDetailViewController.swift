@@ -36,7 +36,7 @@ class ClientDetailViewController: UIViewController, UITableViewDelegate {
 //            total += getMyPayment(dish)
 //        }
         
-        totalLabel.text = String(NSString(format:"$%.2f", (User.currentUser?.payment)!))
+        totalLabel.text = "$ " + String(NSString(format:"$%.2f", (User.currentUser?.payment)!))
         
     }
     
