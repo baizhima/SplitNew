@@ -192,8 +192,22 @@ class RemoveDishesDidNotEatViewController: UIViewController, UITableViewDelegate
         cell.button.tag = indexPath.row
         cell.button.addTarget(self, action: Selector("actionPressed:"), forControlEvents: .TouchUpInside)
         
-//        cell.actionImage.tag = indexPath.row
-//        cell.actionImage.addGestureRecognizer(UIGestureRecognizer(target: self, action: Selector("actionPressed")))
+        let idx = indexPath.row
+        if idx % 2 == 0 {
+            cell.backgroundColor = UIColor.init(red: 146.0/255, green: 146.0/255, blue: 146.0/255, alpha: 1.0)
+        } else {
+            cell.backgroundColor = UIColor.init(red: 113.0/255, green: 113.0/255, blue: 113.0/255, alpha: 1.0)
+        }
+        
+        if isRemoved[idx] {
+            cell.nameLabel.textColor = UIColor.init(red: 169.0/255, green: 169.0/255, blue: 169.0/255, alpha: 169.0/255)
+            cell.priceLabel.textColor = UIColor.init(red: 169.0/255, green: 169.0/255, blue: 169.0/255, alpha: 169.0/255)
+            cell.backgroundColor = UIColor.init(red: 209.0/255, green: 209.0/255, blue: 209.0/255, alpha: 209.0/255)
+        } else {
+            cell.nameLabel.textColor = UIColor.whiteColor()
+            cell.priceLabel.textColor = UIColor.whiteColor()
+            
+        }
     
         return cell
     }
