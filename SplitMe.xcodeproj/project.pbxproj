@@ -205,7 +205,7 @@
 				TargetAttributes = {
 					EC62E8F01BD0758E003718C2 = {
 						CreatedOnToolsVersion = 7.0.1;
-						DevelopmentTeam = 646W9GX953;
+						DevelopmentTeam = NETDM9649U;
 					};
 				};
 			};
@@ -387,7 +387,7 @@
 				INFOPLIST_FILE = SplitMe/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.baizhima.SplitMe;
+				PRODUCT_BUNDLE_IDENTIFIER = com.seanhu.SplitMe;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
@@ -407,7 +407,7 @@
 				INFOPLIST_FILE = SplitMe/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.baizhima.SplitMe;
+				PRODUCT_BUNDLE_IDENTIFIER = com.seanhu.SplitMe;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};

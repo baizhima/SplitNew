@@ -16,12 +16,8 @@ class ClientDetailViewController: UIViewController, UITableViewDelegate {
     var totalPayment : Double = 0.0
     var meal : Meal?
     
-    
-    
     @IBOutlet weak var tableView: UITableView!
-    
     @IBOutlet weak var taxLabel: UILabel!
-    
     @IBOutlet weak var tipsLabel: UILabel!
     @IBOutlet weak var totalLabel: UILabel!
     
@@ -35,23 +31,26 @@ class ClientDetailViewController: UIViewController, UITableViewDelegate {
     
     func setTotalLabel(){
         
-
-    
-//        var total : Double = 0.0
-//        for dish : Dish in dishes {
-//            total += getMyPayment(dish)
-//        }
-        
         totalLabel.text = "$ " + String(NSString(format:"%.2f", (User.currentUser?.payment)!))
         
+    }
+    
+    func setTipsAndTax(){
+        
+        let myTax = ((User.currentUser?.payment)! / (meal?.total)!) * (meal?.tax)!
+        let myTips = ((User.currentUser?.payment)! / (meal?.total)!) * (meal?.tips)!
+        
+        self.taxLabel.text = "$" + String(NSString(format:"%.2f/%.2f", myTax , (meal?.tax)!))
+        self.tipsLabel.text = "$" + String(NSString(format:"%.2f/%.2f", myTips , (meal?.tips)!))
+
     }
     
     func fetchMeal(){
         Meal.currentMeal?.fetchInBackgroundWithBlock({ (object, error) -> Void in
             
             self.meal = object as? Meal
-            
-            self.tableView.reloadData()
+            self.setTipsAndTax()
+            //self.tableView.reloadData()
         })
     }
     
@@ -103,9 +102,6 @@ class ClientDetailViewController: UIViewController, UITableViewDelegate {
         )
         statusBarView.backgroundColor = UIColor(red:0.49, green:0.71, blue:0.84, alpha:1.0)
         self.view.addSubview(statusBarView)*/
-        
-        
-        
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -123,14 +119,13 @@ class ClientDetailViewController: UIViewController, UITableViewDelegate {
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         //print("Client Detail: dish count: \(self.dishes.count)")
-        return self.dishes.count + 2
+        return self.dishes.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
@@ -138,29 +133,29 @@ class ClientDetailViewController: UIViewController, UITableViewDelegate {
         let cell = UITableViewCell(style: UITableViewCellStyle.Value1, reuseIdentifier: "Cell")
         
         
-        if( indexPath.row >= dishes.count ){
-            let row = indexPath.row - dishes.count
-            
-            if self.meal == nil {
-                return cell
-            }
-            
-            if row == 0 {
-                
-                let myTax = ((User.currentUser?.payment)! / (meal?.total)!) * (meal?.tax)!
-                
-                cell.textLabel!.text = "Tax"
-                cell.detailTextLabel?.text = "$" + String(NSString(format:"%.2f/%.2f", myTax , (meal?.tax)!))
-                return cell
-            }
-            else if row == 1 {
-                let myTips = ((User.currentUser?.payment)! / (meal?.total)!) * (meal?.tips)!
-                
-                cell.textLabel!.text = "Tips"
-                cell.detailTextLabel?.text = "$" + String(NSString(format:"%.2f/%.2f", myTips , (meal?.tips)!))
-                return cell
-            }
-        }
+//        if( indexPath.row >= dishes.count ){
+//            let row = indexPath.row - dishes.count
+//            
+//            if self.meal == nil {
+//                return cell
+//            }
+//            
+//            if row == 0 {
+//                
+//                let myTax = ((User.currentUser?.payment)! / (meal?.total)!) * (meal?.tax)!
+//                
+//                cell.textLabel!.text = "Tax"
+//                cell.detailTextLabel?.text = "$" + String(NSString(format:"%.2f/%.2f", myTax , (meal?.tax)!))
+//                return cell
+//            }
+//            else if row == 1 {
+//                let myTips = ((User.currentUser?.payment)! / (meal?.total)!) * (meal?.tips)!
+//                
+//                cell.textLabel!.text = "Tips"
+//                cell.detailTextLabel?.text = "$" + String(NSString(format:"%.2f/%.2f", myTips , (meal?.tips)!))
+//                return cell
+//            }
+//        }
         
         let dish: Dish = dishes[indexPath.row]
         
