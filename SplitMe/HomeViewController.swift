@@ -17,6 +17,8 @@ class HomeViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var nameField: UITextField!
     
+    var animationOffset : CGFloat = 100.0
+    
     @IBOutlet weak var logoView: UIImageView!
     
     @IBOutlet weak var spliterLabel: UILabel!
@@ -80,8 +82,6 @@ class HomeViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
-    
-    
     func navigationController(navigationController: UINavigationController, willShowViewController viewController: UIViewController, animated: Bool) {
         viewController.viewWillAppear(animated)
     }
@@ -101,58 +101,51 @@ class HomeViewController: UIViewController, UITextFieldDelegate {
         joinButton.layer.shadowRadius = 0.0
         
 
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillShow:"), name:UIKeyboardWillShowNotification, object: nil);
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillHide:"), name:UIKeyboardWillHideNotification, object: nil);
         
     }
     
     
     
-    override func viewDidLayoutSubviews() {
-        
-        if uiState < 2 {
-            self.spliterLabel.center.y -= self.view.bounds.height
-            self.logoView.center.y -= self.view.bounds.height
-            
-            nameField.center.x -= view.bounds.width
-            createButton.center.x -= view.bounds.width
-            joinButton.center.x -= view.bounds.width
-            uiState += 1
-        }
-        
-        //print("triggered")
-    }
+//    override func viewDidLayoutSubviews() {
+//        
+//        if uiState < 2 {
+//            self.spliterLabel.center.y -= self.view.bounds.height
+//            self.logoView.center.y -= self.view.bounds.height
+//            
+//            nameField.center.y -= view.bounds.height
+//            createButton.center.y -= view.bounds.height
+//            joinButton.center.y -= view.bounds.height
+//            uiState += 1
+//        }
+//    }
     
     
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
-        UIView.animateWithDuration(1, animations: {
-            self.spliterLabel.center.y += self.view.bounds.height
-            self.logoView.center.y += self.view.bounds.height
-            
-        })
+        animationOffset = logoView.center.y - logoView.frame.height/2 - 20.0
         
-        UIView.animateWithDuration(0.5, delay: 1, options: [], animations: {
-            self.nameField.center.x += self.view.bounds.width
-            self.createButton.center.x += self.view.bounds.width
-            self.joinButton.center.x += self.view.bounds.width
-            }, completion: nil)
-        //print(nameField.center.x)
+        
+//        UIView.animateWithDuration(1, animations: {
+//            self.spliterLabel.center.y += self.view.bounds.height
+//            self.logoView.center.y += self.view.bounds.height
+//            self.nameField.center.y += self.view.bounds.height
+//            self.createButton.center.y += self.view.bounds.height
+//            self.joinButton.center.y += self.view.bounds.height
+//            
+//        })
+        
+        
     }
     
-    
-    
-    
-    
-    
-
+   
     override func didReceiveMemoryWarning() {
         //print("hokadnfkoasdnfkldsankofsodn")
         super.didReceiveMemoryWarning()
     }
-    
-    
-    
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         self.view.endEditing(true)
@@ -161,13 +154,17 @@ class HomeViewController: UIViewController, UITextFieldDelegate {
     func textFieldDidBeginEditing(textField: UITextField) {
         
         self.nameField.frame = CGRect(x: 107,y: 131, width: 100, height: 50)
-        
     }
-    
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         nameField.resignFirstResponder()
-        
         return true
+    }
+    
+    func keyboardWillShow(sender: NSNotification) {
+        self.view.frame.origin.y -= animationOffset
+    }
+    func keyboardWillHide(sender: NSNotification) {
+        self.view.frame.origin.y += animationOffset
     }
 }

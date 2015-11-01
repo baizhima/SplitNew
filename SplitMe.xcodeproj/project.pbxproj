@@ -10,6 +10,7 @@
 		147B73DF1BDB243D0060B1E0 /* Meal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147B73DD1BDB243D0060B1E0 /* Meal.swift */; };
 		147B73E01BDB243D0060B1E0 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147B73DE1BDB243D0060B1E0 /* User.swift */; };
 		147B73E21BDB24450060B1E0 /* Dish.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147B73E11BDB24450060B1E0 /* Dish.swift */; };
+		14DA3ED61BE5F77300594A37 /* DishTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14DA3ED51BE5F77300594A37 /* DishTableCell.swift */; };
 		EC62E8F51BD0758E003718C2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC62E8F41BD0758E003718C2 /* AppDelegate.swift */; };
 		EC62E8FA1BD0758E003718C2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EC62E8F81BD0758E003718C2 /* Main.storyboard */; };
 		EC62E8FF1BD0758E003718C2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EC62E8FD1BD0758E003718C2 /* LaunchScreen.storyboard */; };
@@ -46,6 +47,7 @@
 		147B73DD1BDB243D0060B1E0 /* Meal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Meal.swift; sourceTree = "<group>"; };
 		147B73DE1BDB243D0060B1E0 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		147B73E11BDB24450060B1E0 /* Dish.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dish.swift; sourceTree = "<group>"; };
+		14DA3ED51BE5F77300594A37 /* DishTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DishTableCell.swift; sourceTree = "<group>"; };
 		EC62E8F11BD0758E003718C2 /* SplitMe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SplitMe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EC62E8F41BD0758E003718C2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EC62E8F91BD0758E003718C2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -145,6 +147,7 @@
 				ECF5DB441BE3EB830068BE74 /* icons_icon.png */,
 				EC62E8FD1BD0758E003718C2 /* LaunchScreen.storyboard */,
 				EC62E9001BD0758E003718C2 /* Info.plist */,
+				14DA3ED51BE5F77300594A37 /* DishTableCell.swift */,
 			);
 			path = SplitMe;
 			sourceTree = "<group>";
@@ -253,6 +256,7 @@
 				EC62E9071BD075BD003718C2 /* HomeViewController.swift in Sources */,
 				147B73E01BDB243D0060B1E0 /* User.swift in Sources */,
 				ECD3105B1BE1978300FA1244 /* ServerTollViewController.swift in Sources */,
+				14DA3ED61BE5F77300594A37 /* DishTableCell.swift in Sources */,
 				EC62E9171BD188B0003718C2 /* ServerConfirmTotalViewController.swift in Sources */,
 				EC62E90B1BD077B1003718C2 /* ClientJoinViewController.swift in Sources */,
 				147B73E21BDB24450060B1E0 /* Dish.swift in Sources */,

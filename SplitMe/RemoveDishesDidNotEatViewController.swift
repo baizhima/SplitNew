@@ -41,17 +41,8 @@ class RemoveDishesDidNotEatViewController: UIViewController, UITableViewDelegate
                 if user.state == User.UserDishesSaved {
                     self.promptField.hidden = true
                     self.nextButton.enabled = true
-                    //User.currentUser?.state = User.UserDishesSaved
-                    //user.saveInBackground()
                 }
             })
-            
-//            if meal.state == Meal.TotalCancelled {
-//                promptField.hidden = true
-//                nextButton.enabled = true
-//                User.currentUser?.state = User.UserDishesSaved
-//                User.currentUser?.saveInBackground()
-//            }
         }
     }
     
@@ -81,20 +72,6 @@ class RemoveDishesDidNotEatViewController: UIViewController, UITableViewDelegate
                     promptField.hidden = false
                     nextButton.enabled = false
                     
-//                    meal.fetchInBackgroundWithBlock({ (object, error) -> Void in
-//                        if error != nil {
-//                            print(error)
-//                        }else{
-//                            let meal = object as! Meal
-//                            if meal.state == Meal.TotalConfirmed {
-//                                self.performSegueWithIdentifier("removeDishesDidNotEatToClientPay", sender: self)
-//                            }else{
-//                                self.promptField.hidden = false
-//                                self.promptField.text = "Wait for others ..."
-//                            }
-//                        }
-//                    })
-                    
                     dispatch_async(dispatch_get_main_queue(), {
                         self.timer = NSTimer.scheduledTimerWithTimeInterval(2, target: self, selector: Selector("updateMealState"), userInfo: nil, repeats: true)
                     })
@@ -120,12 +97,7 @@ class RemoveDishesDidNotEatViewController: UIViewController, UITableViewDelegate
                     self.tableView.reloadData()
                 }
             })
-//            do{
-//                try self.sharedDishes = query?.findObjects() as? [Dish]
-//                //return sharedDishes
-//            }catch _{
-//                debugPrint("Error in fetching dishes")
-//            }
+
         }else{
             debugPrint("Error: current meal is nil")
         }
@@ -145,13 +117,20 @@ class RemoveDishesDidNotEatViewController: UIViewController, UITableViewDelegate
     }
     
     override func viewDidAppear(animated: Bool) {
-//        if Meal.currentMeal!.master.objectId != User.currentUser?.objectId {
-//            
-//            dispatch_async(dispatch_get_main_queue(), {
-//                self.timer = NSTimer.scheduledTimerWithTimeInterval(2, target: self, selector: Selector("updateMealState"), userInfo: nil, repeats: true)
-//            })
-//        }
+
+        let meal = Meal()
+        meal.objectId = "ASTM1ocNga"
         
+        let user = User()
+        user.objectId = "CLa2Wm2sQY"
+        do{
+            try Meal.currentMeal = meal.fetch()
+            try User.currentUser = user.fetch()
+        }catch _{
+            
+        }
+        print(Meal.currentMeal)
+        print(User.currentUser)
         fetchSharedDishes()
     }
 
@@ -162,29 +141,57 @@ class RemoveDishesDidNotEatViewController: UIViewController, UITableViewDelegate
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-//        if let dishes = self.sharedDishes{
-//            return dishes.count
-//        }
-//        else{
-//            return 0;
-//        }
         return self.sharedDishes.count
+    }
+    
+    func actionPressed(sender: UIButton!){
+        print("action pressed")
+        print(sender)
+        
+        
+        if isRemoved[sender.tag] == true {
+            
+            isRemoved[sender.tag] = false
+            sender.setTitle("+", forState: UIControlState.Normal)
+            tableView.reloadData()
+            
+        }else{
+            isRemoved[sender.tag] = true
+            sender.setTitle("-", forState: UIControlState.Normal)
+            tableView.reloadData()
+        }
+
+        //tableView.reloadData()
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        let newCell = UITableViewCell(style: UITableViewCellStyle.Value1, reuseIdentifier: "Cell")
+        let cell = tableView.dequeueReusableCellWithIdentifier("DishTableCell", forIndexPath: indexPath) as! DishTableCell
+        
+        //let newCell = UITableViewCell(style: UITableViewCellStyle.Value1, reuseIdentifier: "Cell")
         
         let dish: Dish = self.sharedDishes[indexPath.row]
-            
-        newCell.textLabel!.text = "\(dish.name)"
-        newCell.detailTextLabel?.text = "$" + String(NSString(format:"%.2f", dish.price))
+        
+        cell.nameLabel.text = "\(dish.name)"
+        cell.priceLabel.text = "$" + String(NSString(format:"%.2f", dish.price))
         
         if isRemoved[indexPath.row] == true {
-            newCell.backgroundColor = UIColor(red:0.49, green:0.71, blue:0.84, alpha:1.0)
+            cell.backgroundColor = UIColor(red:0.49, green:0.71, blue:0.84, alpha:1.0)
+            
+            cell.button.setTitle("+", forState: UIControlState.Normal)
+        }else{
+            
+            cell.backgroundColor = UIColor(red:1.0, green:1.0, blue: 1.0, alpha:1.0)
+            
+            cell.button.setTitle("-", forState: UIControlState.Normal)
         }
+        cell.button.tag = indexPath.row
+        cell.button.addTarget(self, action: Selector("actionPressed:"), forControlEvents: .TouchUpInside)
         
-        return newCell
+//        cell.actionImage.tag = indexPath.row
+//        cell.actionImage.addGestureRecognizer(UIGestureRecognizer(target: self, action: Selector("actionPressed")))
+    
+        return cell
     }
     
     
@@ -202,15 +209,5 @@ class RemoveDishesDidNotEatViewController: UIViewController, UITableViewDelegate
             //tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
         }
     }
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
