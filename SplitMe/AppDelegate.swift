@@ -61,6 +61,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UINavigationBarDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
         print("terminated")
     }
+    
+    func applicationDidFinishLaunching(application: UIApplication) {
+        print("did finish launching")
+    }
 
 
 }
