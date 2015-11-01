@@ -108,22 +108,15 @@ class ServerWaitViewController: UIViewController, UINavigationControllerDelegate
     
     override func viewDidLoad() {
         super.viewDidLoad()
-       /*
-        let bgColor = UIColor(red:0.49, green:0.71, blue:0.84, alpha:1.0)
-        
-        let statusBarView = UIView(frame:
-            CGRect(x: 0.0, y: 0.0, width: UIScreen.mainScreen().bounds.size.width, height: 19.8)
-        )
-        
-        statusBarView.backgroundColor = bgColor
-        self.view.addSubview(statusBarView)*/
-        
-        
+       
         
         let uploadSubviewTap = UITapGestureRecognizer.init(target: self, action: Selector("getImage"))
         uploadPromptView.addGestureRecognizer(uploadSubviewTap)
         
-        
+        startButton.layer.shadowColor = UIColor.blackColor().CGColor
+        startButton.layer.shadowOffset = CGSizeMake(3, 3)
+        startButton.layer.shadowOpacity = 0.8
+        startButton.layer.shadowRadius = 0.0
         
         retakeButton.hidden = true
         startButton.enabled = false
