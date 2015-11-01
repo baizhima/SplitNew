@@ -55,11 +55,25 @@ class ClientDetailViewController: UIViewController, UITableViewDelegate {
             
             let query = Dish.query()
             query?.whereKey("meal", equalTo: meal)
+
+            //query?.whereKey("shared", containedIn: <#T##[AnyObject]#>)
             query?.findObjectsInBackgroundWithBlock({ (objects, error) -> Void in
                 if error == nil{
                     
-                    self.dishes = objects as! [Dish]
-                    //self.setTotalLabel()
+                    for d : Dish in objects as! [Dish] {
+                        if d.isShared == true {
+                            for u : User in d.sharedWith {
+                                if u.objectId == User.currentUser?.objectId{
+                                    self.dishes.append(d)
+                                    break
+                                }
+                            }
+                        }
+                        else if d.ownBy.objectId == User.currentUser?.objectId {
+                            self.dishes.append(d)
+                        }
+                    }
+                
                     self.tableView.reloadData()
                     
                 }
@@ -90,7 +104,7 @@ class ClientDetailViewController: UIViewController, UITableViewDelegate {
     
     override func viewDidAppear(animated: Bool) {
         setTotalLabel()
-        fetchDishes()
+        fetchMeal()
         fetchDishes()
     }
 
